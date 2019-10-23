@@ -5,7 +5,7 @@ import RecipientSelector from './RecipientSelector.js';
 import PersonalDetails from './PersonalDetails.js'
 import BankDetails from './BankDetails.js'
 import { Provider, Translate, Translator } from 'react-translated';
-import UserContext from "../userContext.js";
+import UserContext, { ConfigProvider} from "../userContext.js";
 import translation from '../translation.js';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,7 +14,6 @@ import Paper from '@material-ui/core/Paper';
 import LanguageSelector from './LanguageSelector.js'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import UserContext, { ConfigProvider}  from "./configContext.jsx";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -31,9 +30,10 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function BankDeetsConfig(props){
-  <ConfigProvider>
-    <BankDeetsCotainer />
+  return (<ConfigProvider>
+    <BankDeetsContainer />
   </ConfigProvider>
+  )
 }
 
 class BankDeetsContainer extends React.Component {
