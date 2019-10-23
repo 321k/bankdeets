@@ -27,8 +27,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3),
     width: '100%',
     overflowX: 'auto',
-    margin: 20,
-    padding: 20,
+    padding: theme.spacing(3, 2),
     display: 'flex',
     flexDirection: 'column'
   },
@@ -207,7 +206,7 @@ function BankDeets(props){
       <Container maxWidth="sm">
         <Paper className={classes.paper}>
           <Grid container spacing={3} alignItems="center" justify="flex-end">
-            <Grid item xs={4}>
+            <Grid item>
               <LanguageSelector language={props.language} setLanguage={props.setLanguage}/>
             </Grid>
           </Grid>
