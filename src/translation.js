@@ -137,7 +137,7 @@ export default {
         no: 'BIC (valgfritt)',
         dk: 'BIC (valgfritt)',
         fi: 'BIC (valinnainen)',
-        fr: 'BIC code (optionnel)'
+        fr: 'BIC code (facultatif)'
     },
     'Sort code': {
         se: 'Sort code',
