@@ -87,8 +87,8 @@ class BankDeetsContainer extends React.Component {
     this.delayState = this.delayState.bind(this);
   }
 
-  handleReactSelectChange (newVal, actionMeta) {
-    let name = actionMeta.name
+  handleCountryChange (newVal, actionMeta) {
+    let name = 'country'
     let payload = this.state.payload;
     payload[name] = newVal.value;
     this.setState({
@@ -177,7 +177,7 @@ class BankDeetsContainer extends React.Component {
         setLanguage={this.context.setLanguage}
         translation={translation}
         handleChange={this.handleChange}
-        handleReactSelectChange={this.handleReactSelectChange}
+        handleCountryChange={this.handleCountryChange}
         handleBankDetailsChange={this.handleBankDetailsChange}
         country={this.state.payload.country}
         countryHelper={this.state.countryHelper}
@@ -219,7 +219,7 @@ function BankDeets(props){
             <Grid item xs={10} >
               <h2><Translate text="Country and currency"/></h2>
                 <CountrySelector
-                  onChange={props.handleReactSelectChange}
+                  onChange={props.handleCountryChange}
                   value={props.countryHelper}
                   language={props.language}
                 />
@@ -271,8 +271,6 @@ function SubmitButton(props){
   const buttonClassname = clsx({
     [classes.buttonSuccess]: props.success,
   });
-
-
 
   return (
     <div className={classes.wrapper}>
