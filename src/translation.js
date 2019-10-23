@@ -25,7 +25,7 @@ export default {
         no: 'Firmanavn',
         dk: 'Firmaets navn',
         fi: 'Yrityksen nimi',
-        fr: 'Nom de l'entreprise'
+        fr: 'Nom de l\'entreprise'
     },
     'Submit': {
         se: 'Skicka',
@@ -88,7 +88,7 @@ export default {
         no: 'Hvis dette er en bedriftsbetaling, vennligst skriv inn firmaets navn',
         dk: 'Hvis dette er en virksomhedsbetaling, skal du indtaste dit firmanavn',
         fi: 'Jos kyseessä on yrityksen maksu, kirjoita yrityksesi nimi',
-        fr: 'Si vous recevez le paiement sur un compte professionnel, veuillez entrer le nom de l'entreprise'
+        fr: 'Si vous recevez le paiement sur un compte professionnel, veuillez entrer le nom de l\'entreprise'
     },
     'Country where you live': {
         se: 'Land var du bor',
@@ -307,7 +307,7 @@ export default {
         se: 'Kontonummer',
         no: 'Kontonummer',
         dk: 'Kontonummer',
-        fi: 'Tilinumero,
+        fi: 'Tilinumero',
         fr: 'Numéro de compte'
     },
     'clearingNUmber': {
@@ -315,23 +315,23 @@ export default {
         se: 'Clearingnummer',
         no: 'Clearingnummer',
         dk: 'Clearingnummer',
-        fi: 'Clearingnumero,
-        fr: 'Code d'effacement'
+        fi: 'Clearingnumero',
+        fr: 'Code d\'effacement'
     },
     'businessNumber': {
         en: 'Business number',
         se: 'Företagsnummer',
         no: 'Organisasjonsnummer',
         dk: 'Virksomhedsnummer',
-        fi: 'Liikenumero,
-        fr: 'Numéro d'entreprise'
+        fi: 'Liikenumero',
+        fr: 'Numéro d\'entreprise'
     },
     'cardNumber': {
         en: 'Card number',
         se: 'Kortnummer',
         no: 'Kortnummer',
         dk: 'Kortnummer',
-        fi: 'Korttinumero,
+        fi: 'Korttinumero',
         fr: 'Numéro de la carte'
     },
     'bic': {
@@ -339,7 +339,7 @@ export default {
         se: 'BIC',
         no: 'BIC',
         dk: 'BIC',
-        fi: 'BIC,
+        fi: 'BIC',
         fr: 'BIC'
     },
     'transitNumber': {
@@ -347,7 +347,7 @@ export default {
         se: 'Transitnummer',
         no: 'Transittnummer',
         dk: 'Transitnummer',
-        fi: 'Transitnumero,
+        fi: 'Transitnumero',
         fr: 'Numéro de transit'
     },
     'swift_code': {
@@ -355,7 +355,7 @@ export default {
         se: 'SWIFT-kod',
         no: 'SWIFT-kod',
         dk: 'SWIFT-kod',
-        fi: 'SWIFT-koodi,
+        fi: 'SWIFT-koodi',
         fr: 'Code SWIFT'
     },
     'institutionNumber': {
@@ -380,14 +380,14 @@ export default {
         no: 'ABA routing transit-nummer',
         dk: 'ABA routing transit-nummer',
         fi: 'ABA routing transit-nummero',
-        fr: 'Numéro de transit de l'acheminement ABA'
+        fr: 'Numéro de transit de l\'acheminement ABA'
     },
     'bsbCode': {
         en: 'BSB code',
         se: 'BSB-kod',
         no: 'BSB-kod',
         dk: 'BSB-kod',
-        fi: 'BSB-koodi,
+        fi: 'BSB-koodi',
         fr: 'BSB Code'
     },
     'sortCode': {
@@ -419,7 +419,7 @@ export default {
         se: 'Bankkontorskod',
         no: 'Bankavdelingskode',
         dk: 'Bankavdelingskode',
-        fi: 'Pankkitoimiston tunnus,
+        fi: 'Pankkitoimiston tunnus',
         fr: 'Code de la succursale'
     },
     'Sweden': {
@@ -427,7 +427,7 @@ export default {
         se: 'Sverige',
         no: 'Sverige',
         dk: 'Sverige',
-        fi: 'Ruotsi,
+        fi: 'Ruotsi',
         fr: 'Suède'
     },
     'Norway': {
@@ -451,7 +451,7 @@ export default {
         se: 'Finland',
         no: 'Finland',
         dk: 'Finland',
-        fi: 'Suomi,
+        fi: 'Suomi',
         fr: 'Finlande'
     },
     'Swedish krona': {
@@ -483,7 +483,7 @@ export default {
         se: 'Euro',
         no: 'Euro',
         dk: 'Euro',
-        fi: 'Euro,
+        fi: 'Euro',
         fr: 'Euro'
     },
     'United States dollar': {
@@ -500,7 +500,7 @@ export default {
         no: 'Bekreft at informasjonen nedenfor er korrekt',
         dk: 'Bekræft, at nedenstående oplysninger er korrekte',
         fi: 'Vahvista, että alla olevat tiedot ovat oikein',
-        fr: 'Veuillez vérifier vos coordonnées bancaires et confirmer qu'elles sont correctes.'
+        fr: 'Veuillez vérifier vos coordonnées bancaires et confirmer qu\'elles sont correctes.'
     },
     'Confirm bank details.': {
         en: 'Confirm bank details.',
