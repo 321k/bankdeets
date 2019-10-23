@@ -272,7 +272,7 @@ function SubmitButton(props){
       >
         <Translate text="Submit"/>
       </Button>
-      (props.isLoading ? <CircularProgress size={24} className={classes.buttonProgress}/> : '')
+      {props.isLoading ? <CircularProgress size={24} className={classes.buttonProgress}/> : ''}
     </div>
   )
 }
