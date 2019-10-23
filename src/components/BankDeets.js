@@ -14,8 +14,14 @@ import Paper from '@material-ui/core/Paper';
 import LanguageSelector from './LanguageSelector.js'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+  },
   paper: {
     marginTop: theme.spacing(3),
     width: '100%',
@@ -24,14 +30,37 @@ const useStyles = makeStyles(theme => ({
     padding: 20,
     display: 'flex',
     flexDirection: 'column'
-  }
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  buttonSuccess: {
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700],
+    },
+  },
+  fabProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: -6,
+    left: -6,
+    zIndex: 1,
+  },
+  buttonProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
 }));
-
-
 
 export default function BankDeetsConfig(props){
   return (<ConfigProvider>
-    <BankDeetsContainer />
+    <BankDeetsContainer {...props}/>
   </ConfigProvider>
   )
 }
@@ -42,13 +71,16 @@ class BankDeetsContainer extends React.Component {
     this.state = {
       payload: {country: 'USA', currency: 'USD', recipientType: 'ABA'},
       bankDetails: {test: 'test'},
-      countryHelper: {value: 'USA', label: 'United States of America'}
+      countryHelper: {value: 'USA', label: 'United States of America'},
+      isLoading: false,
+      success: false
     }
     this.handleReactSelectChange = this.handleReactSelectChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleBankDetailsChange = this.handleBankDetailsChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearBankDetails = this.clearBankDetails.bind(this);
+    this.delayState = this.delayState.bind(this);
   }
 
   handleReactSelectChange (newVal, actionMeta) {
@@ -87,10 +119,51 @@ class BankDeetsContainer extends React.Component {
     })
   }
 
-  handleSubmit(){
-    console.log('submitting')
-    const x = {...this.state.payload, ...this.state.bankDetails}
-    console.log(x)
+  delayState() {
+    setTimeout(() => {
+        this.setState({
+        loading: false
+      });
+    }, 500);
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
+    this.setState({loading: true})
+
+    if(this.props.submitURL !== undefined){
+      fetch(this.props.submitURL, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          payload: this.state.payload,
+          bankDetails: this.state.bankDetails,
+          language: this.context.language
+        })
+      })
+      .then(
+        res => {
+          if(res.ok){
+            var section = {currentTarget: {value: 'success'}};
+            this.setState({success: true});
+            return res;
+          } else {
+            this.setState({success: false});
+            return res;
+          }
+        }
+      )
+      .then(res => res.json())
+      .then(this.delayState())
+    } else {
+      const payload = {...this.state}
+      this.delayState()
+      this.setState({success: true});
+      console.log(payload)
+    }
   }
 
   render () {
@@ -109,6 +182,8 @@ class BankDeetsContainer extends React.Component {
         bankDetails={this.state.bankDetails}
         clearBankDetails={this.clearBankDetails}
         handleSubmit={this.handleSubmit}
+        isLoading={this.state.isLoading}
+        success={this.state.success}
       />
     );
   }
@@ -169,14 +244,35 @@ function BankDeets(props){
                 {...props.bankDetails}
               />
             </Grid>
-
             
             <Grid item xs={12}>
-              <Button variant="contained" onClick={props.handleSubmit}><Translate text="Submit"/></Button>
+              <SubmitButton
+                handleSubmit={props.handleSubmit}
+                isLoading={props.isLoading}
+                success={props.success}
+              />
             </Grid>
           </Grid>
         </Paper>
       </Container>
   </Provider>
+  )
+}
+
+function SubmitButton(props){
+  const classes = useStyles();
+
+  return (
+    <div className={classes.wrapper}>
+      <Button
+        variant="contained"
+        onClick={props.handleSubmit}
+        color={props.success ? 'success' : 'primary'}
+        disabled={props.isLoading}
+      >
+        <Translate text="Submit"/>
+      </Button>
+      (props.isLoading ? <CircularProgress size={24} className={classes.buttonProgress}/> : '')
+    </div>
   )
 }
