@@ -72,7 +72,15 @@ class BankDeetsContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      payload: {country: 'USA', currency: 'USD', recipientType: 'ABA'},
+      payload: {
+        country: 'USA',
+        currency: 'USD',
+        recipientType: 'ABA',
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: ''
+      },
       bankDetails: {test: 'test'},
       countryHelper: {value: 'USA', label: 'United States of America'},
       loading: false,
@@ -92,7 +100,7 @@ class BankDeetsContainer extends React.Component {
     payload[name] = newVal.value;
     this.setState({
       payload: payload,
-      [name]: newVal
+      countryHelper: newVal
     });
   }
 
@@ -178,6 +186,10 @@ class BankDeetsContainer extends React.Component {
         handleChange={this.handleChange}
         handleCountryChange={this.handleCountryChange}
         handleBankDetailsChange={this.handleBankDetailsChange}
+        firstName={this.state.payload.firstName}
+        lastName={this.state.payload.lastName}
+        email={this.state.payload.email}
+        phoneNumber={this.state.payload.phoneNumber}
         country={this.state.payload.country}
         countryHelper={this.state.countryHelper}
         currency={this.state.payload.currency}
@@ -213,7 +225,13 @@ function BankDeets(props){
           <Grid container spacing={3} alignItems="center" justify="center">
             <Grid item xs={12}>
               <h2><Translate text="Personal details"/></h2>
-              <PersonalDetails onChange={props.handleChange} />
+              <PersonalDetails
+                onChange={props.handleChange} 
+                firstName={props.firstName}
+                lastName={props.lastName}
+                email={props.email}
+                phoneNumber={props.phoneNumber}
+              />
             </Grid>
             <Grid item xs={10} >
               <h2><Translate text="Country and currency"/></h2>

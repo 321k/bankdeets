@@ -301,8 +301,8 @@ class SwiftRecipient extends React.Component{
     }
 
     render(){
-      const iban = this.props.iban ? this.props.iban : 'AB123565767'
-      const swift_code = this.props.swift_code ? this.props.swift_code : 'AB123565767'
+      const iban = this.props.iban ? this.props.iban : ''
+      const swift_code = this.props.swift_code ? this.props.swift_code : ''
       return(
           <div>
               <FormInput default={this.props.default} 
