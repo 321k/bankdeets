@@ -14,7 +14,7 @@ import Paper from '@material-ui/core/Paper';
 import LanguageSelector from './LanguageSelector.js'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-
+import UserContext, { ConfigProvider}  from "./configContext.jsx";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -89,6 +89,7 @@ export default class BankDeetsContainer extends React.Component {
 
   render () {
     return (
+      <ConfigProvider>
         <BankDeets
           language={this.context.language}
           setLanguage={this.context.setLanguage}
@@ -104,6 +105,7 @@ export default class BankDeetsContainer extends React.Component {
           clearBankDetails={this.clearBankDetails}
           handleSubmit={this.handleSubmit}
         />
+      </ConfigProvider>
     );
   }
 }
