@@ -30,7 +30,13 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default class BankDeetsContainer extends React.Component {
+export default function BankDeetsConfig(props){
+  <ConfigProvider>
+    <BankDeetsCotainer />
+  </ConfigProvider>
+}
+
+class BankDeetsContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -89,23 +95,21 @@ export default class BankDeetsContainer extends React.Component {
 
   render () {
     return (
-      <ConfigProvider>
-        <BankDeets
-          language={this.context.language}
-          setLanguage={this.context.setLanguage}
-          translation={translation}
-          handleChange={this.handleChange}
-          handleReactSelectChange={this.handleReactSelectChange}
-          handleBankDetailsChange={this.handleBankDetailsChange}
-          country={this.state.payload.country}
-          countryHelper={this.state.countryHelper}
-          currency={this.state.payload.currency}
-          recipientType={this.state.payload.recipientType}
-          bankDetails={this.state.bankDetails}
-          clearBankDetails={this.clearBankDetails}
-          handleSubmit={this.handleSubmit}
-        />
-      </ConfigProvider>
+      <BankDeets
+        language={this.context.language}
+        setLanguage={this.context.setLanguage}
+        translation={translation}
+        handleChange={this.handleChange}
+        handleReactSelectChange={this.handleReactSelectChange}
+        handleBankDetailsChange={this.handleBankDetailsChange}
+        country={this.state.payload.country}
+        countryHelper={this.state.countryHelper}
+        currency={this.state.payload.currency}
+        recipientType={this.state.payload.recipientType}
+        bankDetails={this.state.bankDetails}
+        clearBankDetails={this.clearBankDetails}
+        handleSubmit={this.handleSubmit}
+      />
     );
   }
 }
