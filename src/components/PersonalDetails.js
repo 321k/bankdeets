@@ -59,7 +59,7 @@ export default function PersonalDetails(props) {
         id="phoneNumber"
         label={<Translate text='Phone number'/>}
         className={classes.textField}
-        value={props.firstName}
+        value={props.phoneNumber}
         onChange={props.onChange} 
         margin="normal"
       />
