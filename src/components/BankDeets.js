@@ -79,7 +79,7 @@ class BankDeetsContainer extends React.Component {
       loading: false,
       success: false
     }
-    this.handleReactSelectChange = this.handleReactSelectChange.bind(this);
+    this.handleCountryChange = this.handleCountryChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleBankDetailsChange = this.handleBankDetailsChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
