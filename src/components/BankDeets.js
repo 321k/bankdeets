@@ -16,7 +16,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
-
+import clsx from 'clsx'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,6 +59,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
+
 export default function BankDeetsConfig(props){
   return (
     <ConfigProvider>
@@ -74,7 +76,7 @@ class BankDeetsContainer extends React.Component {
       payload: {country: 'USA', currency: 'USD', recipientType: 'ABA'},
       bankDetails: {test: 'test'},
       countryHelper: {value: 'USA', label: 'United States of America'},
-      isLoading: false,
+      loading: false,
       success: false
     }
     this.handleReactSelectChange = this.handleReactSelectChange.bind(this);
@@ -124,9 +126,10 @@ class BankDeetsContainer extends React.Component {
   delayState() {
     setTimeout(() => {
         this.setState({
-        loading: false
+        loading: false,
+        success: true
       });
-    }, 500);
+    }, 1000);
   }
 
   handleSubmit(event){
@@ -163,7 +166,6 @@ class BankDeetsContainer extends React.Component {
     } else {
       const payload = {...this.state}
       this.delayState()
-      this.setState({success: true});
       console.log(payload)
     }
   }
@@ -184,7 +186,7 @@ class BankDeetsContainer extends React.Component {
         bankDetails={this.state.bankDetails}
         clearBankDetails={this.clearBankDetails}
         handleSubmit={this.handleSubmit}
-        isLoading={this.state.isLoading}
+        loading={this.state.loading}
         success={this.state.success}
       />
     );
@@ -252,7 +254,7 @@ function BankDeets(props){
             <Grid item xs={12}>
               <SubmitButton
                 handleSubmit={props.handleSubmit}
-                isLoading={props.isLoading}
+                loading={props.loading}
                 success={props.success}
               />
             </Grid>
@@ -266,17 +268,24 @@ function BankDeets(props){
 function SubmitButton(props){
   const classes = useStyles();
 
+  const buttonClassname = clsx({
+    [classes.buttonSuccess]: props.success,
+  });
+
+
+
   return (
     <div className={classes.wrapper}>
       <Button
         variant="contained"
+        className={buttonClassname}
         onClick={props.handleSubmit}
-        color={props.success ? 'success' : 'primary'}
-        disabled={props.isLoading}
+        color="primary"
+        disabled={props.loading}
       >
-        <Translate text="Submit"/>
+        {props.success ? <Translate text="Thank you"/> : <Translate text="Submit"/>}
       </Button>
-      {props.isLoading ? <CircularProgress size={24} className={classes.buttonProgress}/> : ''}
+      {props.loading ? <CircularProgress size={24} className={classes.buttonProgress}/> : ''}
     </div>
   )
 }
