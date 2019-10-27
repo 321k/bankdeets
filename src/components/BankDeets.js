@@ -216,67 +216,65 @@ function BankDeets(props){
     <Provider language={props.language} translation={props.translation}>
       <CssBaseline />
       <Container maxWidth="sm">
-        <Paper className={classes.paper}>
           <Grid container spacing={3} alignItems="center" justify="flex-end">
             <Grid item>
               <LanguageSelector language={props.language} setLanguage={props.setLanguage}/>
             </Grid>
           </Grid>
-          <Grid container spacing={3} alignItems="center" justify="center">
-            <Grid item xs={12}>
-              <h2><Translate text="Personal details"/></h2>
-              <PersonalDetails
-                onChange={props.handleChange} 
-                firstName={props.firstName}
-                lastName={props.lastName}
-                email={props.email}
-                phoneNumber={props.phoneNumber}
-              />
-            </Grid>
-            <Grid item xs={10} >
-              <h2><Translate text="Country and currency"/></h2>
-                <CountrySelector
-                  onChange={props.handleCountryChange}
-                  value={props.countryHelper}
-                  language={props.language}
-                />
-            </Grid>
-            <Grid item xs={12}>
-              <CurrencySelector
-                onChange={props.handleChange}
-                value={props.currency}
-                country={props.country}
-              />
-              </Grid>
-            <Grid item xs={12}>
-        
-              <RecipientSelector 
-                onChange={props.handleChange}
-                value={props.recipientType}
-                country={props.country}
-                currency={props.currency}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <h2><Translate text="Bank details"/></h2>
-              <BankDetails
-                recipientType={props.recipientType}
-                onChange={props.handleBankDetailsChange}
-                clearBankDetails={props.clearBankDetails}
-                {...props.bankDetails}
-              />
-            </Grid>
-            
-            <Grid item xs={12}>
-              <SubmitButton
-                handleSubmit={props.handleSubmit}
-                loading={props.loading}
-                success={props.success}
-              />
-            </Grid>
+        <Grid container spacing={3} alignItems="center" justify="center">
+          <Grid item xs={12}>
+            <h2><Translate text="Personal details"/></h2>
+            <PersonalDetails
+              onChange={props.handleChange} 
+              firstName={props.firstName}
+              lastName={props.lastName}
+              email={props.email}
+              phoneNumber={props.phoneNumber}
+            />
           </Grid>
-        </Paper>
+          <Grid item xs={10} >
+            <h2><Translate text="Country and currency"/></h2>
+              <CountrySelector
+                onChange={props.handleCountryChange}
+                value={props.countryHelper}
+                language={props.language}
+              />
+          </Grid>
+          <Grid item xs={12}>
+            <CurrencySelector
+              onChange={props.handleChange}
+              value={props.currency}
+              country={props.country}
+            />
+            </Grid>
+          <Grid item xs={12}>
+      
+            <RecipientSelector 
+              onChange={props.handleChange}
+              value={props.recipientType}
+              country={props.country}
+              currency={props.currency}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <h2><Translate text="Bank details"/></h2>
+            <BankDetails
+              recipientType={props.recipientType}
+              onChange={props.handleBankDetailsChange}
+              clearBankDetails={props.clearBankDetails}
+              {...props.bankDetails}
+            />
+          </Grid>
+          
+          <Grid item xs={12}>
+            <SubmitButton
+              handleSubmit={props.handleSubmit}
+              loading={props.loading}
+              success={props.success}
+            />
+          </Grid>
+        </Grid>
       </Container>
   </Provider>
   )
