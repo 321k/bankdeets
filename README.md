@@ -4,18 +4,19 @@ A react component for collecting bank details in any country and currency.
 # Example
 bankdeets.co
 
-#API
+# API
 submitURL="where to post the form data to"
 Example: <BankDeets submitURL="bankdeets.co/bankdeets" />
 
-#Supported languages
+# Supported languages
 English
 Swedish
 Norwegian
 Danish
 Finnish
+French
 
-#Supported currencies
+# Supported currencies
 Eurozone
 USD SWIFT
 EUR SWIFT
@@ -39,3 +40,6 @@ Bangladesh
 Vietnam
 Switzerland
 Malaysia
+Turkey
+Israel
+Pakistan
