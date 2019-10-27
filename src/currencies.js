@@ -956,8 +956,8 @@ const currencies = [
         "un_m49": 586,
         "currency_iso_3_char_code": "PKR",
         "currency_name": "Pakistani rupee",
-        "recipient_type": "PAKISTAN",
-        "recipient_name": "Pakistan local"
+        "recipient_type": "IBAN",
+        "recipient_name": "IBAN"
     },
     {
         "country": "Poland",

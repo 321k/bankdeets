@@ -105,6 +105,12 @@ export default class BankDetails extends React.Component{
             case 'MALAYSIAN':
                 return <MalaysianLocalRecipient accountNumber={this.props.accountNumber} bankCode={this.props.bankCode} onChange={this.props.onChange} default={this.props.default}/>;
                 break;
+            case 'ISRAELI_LOCAL':
+                return <IbanRecipient iban={this.props.iban} onChange={this.props.onChange} default={this.props.default}/>;
+                break;
+            case 'TURKISH_EARTHPORT':
+                return <IbanRecipient iban={this.props.iban} onChange={this.props.onChange} default={this.props.default}/>;
+                break;
             default:  
                 return <NotAvaialableRecipient  onChange={this.props.onChange} default={this.props.default}/>  ;
         }

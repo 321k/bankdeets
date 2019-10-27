@@ -10,7 +10,6 @@ import translation from '../translation.js';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
 import LanguageSelector from './LanguageSelector.js'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
