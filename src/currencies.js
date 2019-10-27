@@ -686,16 +686,6 @@ const currencies = [
         "un_m49": 376,
         "currency_iso_3_char_code": "ILS",
         "currency_name": "Israeli new shekel",
-        "recipient_type": "ISRAELI_BANK_CODE",
-        "recipient_name": "Local Format"
-    },
-    {
-        "country": "Israel",
-        "country_iso_2_char_code": "IL",
-        "country_iso_3_char_code": "ISR",
-        "un_m49": 376,
-        "currency_iso_3_char_code": "ILS",
-        "currency_name": "Israeli new shekel",
         "recipient_type": "ISRAELI_LOCAL",
         "recipient_name": "IBAN Format"
     },
