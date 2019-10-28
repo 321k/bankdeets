@@ -30,4 +30,4 @@ export default class BankDeetsApp extends React.Component{
   }
 }
 
-export BankDeetsContainer
+export {BankDeets}
