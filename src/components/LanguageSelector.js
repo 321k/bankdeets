@@ -1,11 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import {Translate} from 'react-translated';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,11 +11,15 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 100
+    minWidth: 50
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  select: {
+    iconOutlined: false,
+    disabled: true
+  }
 }));
 
 export default function LanguageSelector (props){
@@ -43,12 +44,12 @@ export default function LanguageSelector (props){
   ]
   return (
     <FormControl component="fieldset" className={classes.formControl} variant="outlined">
-      <InputLabel htmlFor="language"><Translate text='Language'/></InputLabel>
       <Select
+        disableUnderline
         value={props.language}
         name='language'
         onChange={props.setLanguage}
-        labelWidth={70}
+        variant="standard"
         inputProps={{
           name: 'language',
           id: 'Language',

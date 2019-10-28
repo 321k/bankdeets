@@ -1,5 +1,5 @@
 import React from 'react';
-import { Translate, Translator } from 'react-translated';
+import { Translate } from 'react-translated';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -48,6 +48,7 @@ export default function PersonalDetails(props) {
 
       <TextField
         id="email"
+        type="email"
         label={<Translate text='Email'/>}
         className={classes.textField}
         value={props.email}
