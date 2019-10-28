@@ -3,7 +3,7 @@ import BankDeets from './components/BankDeets.js'
 import LanguageSelector from './components/LanguageSelector.js'
 import Grid from '@material-ui/core/Grid';
 
-export default class BankDeetsApp extends React.Component{
+class BankDeetsWrapper extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -30,4 +30,5 @@ export default class BankDeetsApp extends React.Component{
   }
 }
 
+export default BankDeetsWrapper
 export {BankDeets}
