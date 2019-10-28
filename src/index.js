@@ -24,8 +24,10 @@ export default class BankDeetsApp extends React.Component{
         <Grid container direction="row" justify="flex-end">
           <LanguageSelector language={this.state.language} setLanguage={this.setLanguage} />
         </Grid>
-      <BankDeets language={this.state.language} />
+        <BankDeets language={this.state.language}/>
       </div>
     )
   }
 }
+
+export BankDeetsContainer
