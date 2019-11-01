@@ -553,6 +553,30 @@ export default {
         fi: 'Maa',
         fr: 'Pays'
     },
+    'Validate': {
+        en: 'Validate',
+        se: 'Validera',
+        no: 'Validere',
+        dk: 'Validere',
+        fi: 'Vahvistaa',
+        fr: 'Valider'
+    },
+    'Next': {
+        en: 'Next',
+        se: 'Nästa',
+        no: 'Neste',
+        dk: 'Næste',
+        fi: 'Seuraava',
+        fr: 'Suivant'
+    },
+    'Previous': {
+        en: 'Previous',
+        se: 'Föregående',
+        no: 'Forrige',
+        dk: 'Forrige',
+        fi: 'Edellinen',
+        fr: 'Précédent'
+    },
 }
 
 

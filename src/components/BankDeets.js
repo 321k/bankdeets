@@ -413,7 +413,7 @@ function Footer(props){
               onClick={props.handleNext}
               color="primary"
             >
-            Next
+            <Translate text="Next"/>
             </Button>
       )
       break;
@@ -426,7 +426,7 @@ function Footer(props){
               onClick={props.handleBack}
               color="primary"
             >
-            Previous
+            <Translate text="Previous"/>
             </Button>
             <Button
               className={classes.button}
@@ -434,7 +434,7 @@ function Footer(props){
               onClick={props.handleNext}
               color="primary"
             >
-            Next
+            <Translate text="Next"/>
             </Button>
         </React.Fragment>
       )
@@ -448,7 +448,7 @@ function Footer(props){
             onClick={props.handleBack}
             color="primary"
           >
-          Previous
+          <Translate text="Previous"/>
           </Button>
           <Button
             className={classes.button}
@@ -456,7 +456,7 @@ function Footer(props){
             onClick={props.handleNext}
             color="primary"
           >
-          Validate
+          <Translate text="Validate"/>
           </Button>
         </React.Fragment>
       )
