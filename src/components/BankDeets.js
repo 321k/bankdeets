@@ -3,6 +3,7 @@ import CountrySelector from './CountrySelector.js'
 import CurrencySelector from './CurrencySelector.js'
 import RecipientSelector from './RecipientSelector.js';
 import PersonalDetails from './PersonalDetails.js'
+import BusinessDetails from './BusinessDetails.js'
 import BankDetails from './BankDetails.js'
 import { Provider, Translate } from 'react-translated';
 import translation from '../translation.js';
@@ -16,6 +17,14 @@ import { green } from '@material-ui/core/colors';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
+
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -66,7 +75,9 @@ export default class BankDeetsContainer extends React.Component {
         firstName: '',
         lastName: '',
         email: '',
-        phoneNumber: ''
+        phoneNumber: '',
+        businessName: '',
+        beneficiaryType: 'PRIVATE',
       },
       bankDetails: {test: 'test'},
       loading: false,
@@ -101,7 +112,7 @@ export default class BankDeetsContainer extends React.Component {
   }
 
   handleBankDetailsChange(event){
-    const target = event.target ? event.target : event.currentTarget
+    const target = event.currentTarget ? event.currentTarget : event.target
     const name = target.name ? target.name : target.id
     let bankDetails = this.state.bankDetails
     bankDetails[name] = target.value
@@ -223,7 +234,7 @@ class BankDeetsStepper extends React.Component{
   };
 
   render(){
-    const steps = ['Personal details', 'Country and currency', 'Bank details'];
+    const steps = ['Beneficiary', 'Country and currency', 'Bank details'];
     return(
       <div>
         <CssBaseline />
@@ -269,13 +280,7 @@ function Body(props){
     case(0):
       return (
           <Grid item xs={12}>
-            <PersonalDetails
-              onChange={props.handleChange} 
-              firstName={props.firstName}
-              lastName={props.lastName}
-              email={props.email}
-              phoneNumber={props.phoneNumber}
-            />
+            <PersonalOrBusiness {...props}/>
           </Grid>
       )
       break;
@@ -325,6 +330,96 @@ function Body(props){
       return <div></div>
   }
 }
+
+
+
+class PersonalOrBusiness extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      value: 0
+    }
+    this.handleTabChange = this.handleTabChange.bind(this);
+    this.a11yProps = this.a11yProps.bind(this);
+  }
+
+  handleTabChange(event, newValue){
+    this.setState({value: newValue})
+    this.props.handleChange(
+      {target: {name: 'beneficiaryType', value: newValue === 0 ? 'PRIVATE' : 'BUSINESS' }}
+    )
+  }
+
+  a11yProps(index) {
+    return {
+      id: `beneficiary-tab-${index}`,
+      'aria-controls': `beneficiary-tabpanel-${index}`,
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <AppBar position="static" elevation={0}>
+          <Box style={{backgroundColor: 'white', dropShadow: 0}}>
+            <Tabs 
+              value={this.state.value} 
+              onChange={this.handleTabChange} 
+              aria-label="Beneficiary type"
+              indicatorColor="primary"
+              textColor="primary" 
+              variant="fullWidth"
+            >
+              <Tab label={<Translate text="Personal"/>} {...this.a11yProps(0)} />
+              <Tab label={<Translate text="Business"/>} {...this.a11yProps(1)} />
+            </Tabs>
+          </Box>
+        </AppBar>
+        <TabPanel name="personalDetails" value={this.state.value} index={0}>
+          <PersonalDetails
+              onChange={this.props.handleChange} 
+              firstName={this.props.firstName}
+              lastName={this.props.lastName}
+              email={this.props.email}
+              phoneNumber={this.props.phoneNumber}
+            />
+        </TabPanel>
+        <TabPanel name="businessDetails" value={this.state.value} index={1}>
+          <BusinessDetails
+              onChange={this.props.handleChange} 
+              businessName={this.props.businessName}
+              email={this.props.email}
+              phoneNumber={this.props.phoneNumber}
+            />
+        </TabPanel>
+      </div>
+    );
+  } 
+}
+
+
+class TabPanel extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+  render () {
+    return (
+      <Typography
+        component="div"
+        role="tabpanel"
+        hidden={this.props.value !== this.props.index}
+        id={`beneficiary-tabpanel-${this.props.index}`}
+        aria-labelledby={`beneficiary-tab-${this.props.index}`}
+      >
+        <Box p={3}>{this.props.children}</Box>
+      </Typography>
+    );
+  }
+}
+
+
+
 
 function Footer(props){
   const classes = useStyles();

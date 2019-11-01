@@ -174,12 +174,26 @@ export default {
         fi: 'Maa ja valuutta',
         fr: 'Pays et devise'
     },
-    'Personal details': {
+    'Beneficiary': {
         se: 'Mottagare',
         no: 'Mottaker',
         dk: 'Modtager',
         fi: 'Vastaanotin',
-        fr: 'Données personnelles'
+        fr: 'Bénéficiaire'
+    },
+    'Personal': {
+        se: 'Person',
+        no: 'Person',
+        dk: 'Person',
+        fi: 'Henkilö',
+        fr: 'Personne'
+    },
+    'Business': {
+        se: 'Företag',
+        no: 'Selskaper',
+        dk: 'Virksomheder',
+        fi: 'Yritys',
+        fr: 'Entreprises'
     },
     'Select your bank account currency': {
         se: 'Bankkontovaluta',
