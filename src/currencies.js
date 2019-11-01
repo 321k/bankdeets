@@ -1016,7 +1016,7 @@ const currencies = [
         "un_m49": 752,
         "currency_iso_3_char_code": "SEK",
         "currency_name": "Swedish krona",
-        "recipient_type": "BANKGIRO",
+        "recipient_type": "SWEDEN_LOCAL",
         "recipient_name": "Bankgiro"
     },
     {

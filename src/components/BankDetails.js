@@ -52,7 +52,7 @@ export default class BankDetails extends React.Component{
             case 'SORT_CODE':
                 return <SortCodeRecipient sortCode={this.props.sortCode} accountNumber={this.props.accountNumber} onChange={this.props.onChange}/>;
                 break;
-            case 'BANKGIRO':
+            case 'SWEDEN_LOCAL':
                 return <SwedishLocalRecipient clearingNumber={this.props.clearingNumber} accountNumber={this.props.accountNumber} onChange={this.props.onChange}/>;
                 break;
             case 'ABA':

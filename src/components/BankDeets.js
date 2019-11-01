@@ -2,8 +2,6 @@ import React from 'react';
 import CountrySelector from './CountrySelector.js'
 import CurrencySelector from './CurrencySelector.js'
 import RecipientSelector from './RecipientSelector.js';
-import PersonalDetails from './PersonalDetails.js'
-import BusinessDetails from './BusinessDetails.js'
 import BankDetails from './BankDetails.js'
 import { Provider, Translate } from 'react-translated';
 import translation from '../translation.js';
@@ -17,15 +15,8 @@ import { green } from '@material-ui/core/colors';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
-
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-
-
+import PersonalOrBusiness from './PersonalOrBusiness.js'
+import Success from './Success.js'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -79,9 +70,12 @@ export default class BankDeetsContainer extends React.Component {
         businessName: '',
         beneficiaryType: 'PRIVATE',
       },
-      bankDetails: {test: 'test'},
+      bankDetails: {},
+      response: '',
       loading: false,
-      success: false
+      success: false,
+      error: false,
+      validated: false
     }
     this.handleCountryChange = this.handleCountryChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -89,6 +83,7 @@ export default class BankDeetsContainer extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearBankDetails = this.clearBankDetails.bind(this);
     this.delayState = this.delayState.bind(this);
+    this.sendToTransferWise = this.sendToTransferWise.bind(this);
   }
 
   handleCountryChange (newVal, actionMeta) {
@@ -165,13 +160,61 @@ export default class BankDeetsContainer extends React.Component {
           }
         }
       )
-      .then(res => res.json())
+      .then(res => res.json)
       .then(this.delayState())
     } else {
       const payload = {...this.state}
       this.delayState()
       console.log(payload)
     }
+  }
+
+
+  sendToTransferWise(){
+    let details = this.state.bankDetails
+    details['legalType'] = this.state.payload.beneficiaryType
+
+    let accountHolderName = ''
+    if(this.state.payload.beneficiaryType === 'PRIVATE'){
+      accountHolderName = this.state.payload.firstName + ' ' + this.state.payload.lastName
+    } else {
+      accountHolderName = this.state.payload.businessName
+    } 
+    const payload = {
+      currency: this.state.payload.currency,
+      type: this.state.payload.recipientType,
+      profile: 194,
+      accountHolderName: accountHolderName,
+      details: details
+    }
+
+    const sanboxApiToken = '49026f93-83d8-4e07-8ec0-9e3153b17e1c'
+    this.setState({loading: true})
+    fetch('https://api.sandbox.transferwise.tech/v1/accounts', {
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + sanboxApiToken
+      },
+      body: JSON.stringify(payload)
+    })
+ 
+    .then(res => {
+      this.setState({validated: res.ok, loading: false, error: !res.ok}) ;
+      return res;
+    })
+    .then(res => res.json())
+    .then(
+      (res) => {
+        this.setState({response: res});
+        return res
+      },
+      (error) => {
+        this.setState({error: error});
+        return error
+      }
+    )
   }
 
   render () {
@@ -181,6 +224,7 @@ export default class BankDeetsContainer extends React.Component {
           handleChange={this.handleChange}
           handleCountryChange={this.handleCountryChange}
           handleBankDetailsChange={this.handleBankDetailsChange}
+          sendToTransferWise={this.sendToTransferWise}
           firstName={this.state.payload.firstName}
           lastName={this.state.payload.lastName}
           email={this.state.payload.email}
@@ -190,10 +234,14 @@ export default class BankDeetsContainer extends React.Component {
           currency={this.state.payload.currency}
           recipientType={this.state.payload.recipientType}
           bankDetails={this.state.bankDetails}
+          payload={this.state.payload}
           clearBankDetails={this.clearBankDetails}
           handleSubmit={this.handleSubmit}
           loading={this.state.loading}
           success={this.state.success}
+          error={this.state.error}
+          response={this.state.response}
+          validated={this.state.validated}
         />
       </Provider>
     );
@@ -326,97 +374,30 @@ function Body(props){
         </React.Fragment>
       )
       break;
+    case(3):
+      return (
+        <React.Fragment>
+          <Grid item xs={12}>
+            <Success
+              loading={props.loading}
+              error={props.error}
+              validated={props.validated}
+              success={props.success}
+              response={props.response}
+              bankDetails={props.bankDetails}
+              payload={props.payload}
+              sendToTransferWise={props.sendToTransferWise}
+            />
+          </Grid>
+        </React.Fragment>
+      )
+      break;
     default:
       return <div></div>
   }
 }
 
 
-
-class PersonalOrBusiness extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      value: 0
-    }
-    this.handleTabChange = this.handleTabChange.bind(this);
-    this.a11yProps = this.a11yProps.bind(this);
-  }
-
-  handleTabChange(event, newValue){
-    this.setState({value: newValue})
-    this.props.handleChange(
-      {target: {name: 'beneficiaryType', value: newValue === 0 ? 'PRIVATE' : 'BUSINESS' }}
-    )
-  }
-
-  a11yProps(index) {
-    return {
-      id: `beneficiary-tab-${index}`,
-      'aria-controls': `beneficiary-tabpanel-${index}`,
-    };
-  }
-
-  render() {
-    return (
-      <div>
-        <AppBar position="static" elevation={0}>
-          <Box style={{backgroundColor: 'white', dropShadow: 0}}>
-            <Tabs 
-              value={this.state.value} 
-              onChange={this.handleTabChange} 
-              aria-label="Beneficiary type"
-              indicatorColor="primary"
-              textColor="primary" 
-              variant="fullWidth"
-            >
-              <Tab label={<Translate text="Personal"/>} {...this.a11yProps(0)} />
-              <Tab label={<Translate text="Business"/>} {...this.a11yProps(1)} />
-            </Tabs>
-          </Box>
-        </AppBar>
-        <TabPanel name="personalDetails" value={this.state.value} index={0}>
-          <PersonalDetails
-              onChange={this.props.handleChange} 
-              firstName={this.props.firstName}
-              lastName={this.props.lastName}
-              email={this.props.email}
-              phoneNumber={this.props.phoneNumber}
-            />
-        </TabPanel>
-        <TabPanel name="businessDetails" value={this.state.value} index={1}>
-          <BusinessDetails
-              onChange={this.props.handleChange} 
-              businessName={this.props.businessName}
-              email={this.props.email}
-              phoneNumber={this.props.phoneNumber}
-            />
-        </TabPanel>
-      </div>
-    );
-  } 
-}
-
-
-class TabPanel extends React.Component {
-  constructor(props){
-    super(props);
-  }
-
-  render () {
-    return (
-      <Typography
-        component="div"
-        role="tabpanel"
-        hidden={this.props.value !== this.props.index}
-        id={`beneficiary-tabpanel-${this.props.index}`}
-        aria-labelledby={`beneficiary-tab-${this.props.index}`}
-      >
-        <Box p={3}>{this.props.children}</Box>
-      </Typography>
-    );
-  }
-}
 
 
 
@@ -460,10 +441,34 @@ function Footer(props){
       break;
     case(2):
       return (
+        <React.Fragment>
+          <Button
+            className={classes.button}
+            variant="outlined"
+            onClick={props.handleBack}
+            color="primary"
+          >
+          Previous
+          </Button>
+          <Button
+            className={classes.button}
+            variant="contained"
+            onClick={props.handleNext}
+            color="primary"
+          >
+          Validate
+          </Button>
+        </React.Fragment>
+      )
+      break;
+    case(3):
+      return (
             <SubmitButton
+              sendToTransferWise={props.sendToTransferWise}
               handleSubmit={props.handleSubmit}
               loading={props.loading}
               success={props.success}
+              error={props.error}
               handleBack={props.handleBack}
               handleReset={props.handleReset}
             />
@@ -514,6 +519,27 @@ function SubmitButton(props){
           <Translate text="Add another"/>
         </Button>
       </React.Fragment>
+    )
+  } else if (props.error){
+    return (
+      <React.Fragment>
+          <Button
+            className={classes.button}
+            variant="outlined"
+            onClick={props.handleBack}
+            color="primary"
+          >
+            <Translate text="Previous"/>
+          </Button>
+          <Button
+            className={classes.button}
+            variant="outlined"
+            onClick={props.handleReset}
+            color="primary"
+          >
+            <Translate text="Start over"/>
+          </Button>
+        </React.Fragment>
     )
   } else {
     return(
