@@ -17,6 +17,8 @@ import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
 import PersonalOrBusiness from './PersonalOrBusiness.js'
 import Success from './Success.js'
+import StepLabel from '@material-ui/core/StepLabel';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -75,7 +77,7 @@ export default class BankDeetsContainer extends React.Component {
       loading: false,
       success: false,
       error: false,
-      validated: false
+      validated: null
     }
     this.handleCountryChange = this.handleCountryChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -278,6 +280,7 @@ class BankDeetsStepper extends React.Component{
   };
 
   setStep(event) {
+    console.log(event.currentTarget.value)
     this.setState({activeStep: parseInt(event.currentTarget.value)})
   };
 
@@ -289,9 +292,11 @@ class BankDeetsStepper extends React.Component{
         <Container maxWidth="sm" style={{minHeight: 400}}>
           <Stepper alternativeLabel activeStep={this.state.activeStep}>
             {steps.map((label, index) => (
-              <Step key={label}>
+              <Step key={label}>  
                 <StepButton value={index} onClick={this.setStep}>
-                  <Translate text={label}/>
+                  <StepLabel value={index} error={(this.state.activeStep===3 && index===2) ? this.props.error : false}>
+                    <Translate text={label}/>
+                  </StepLabel>
                 </StepButton>
               </Step>
             ))}
