@@ -60,24 +60,35 @@ const useStyles = makeStyles(theme => ({
 export default class BankDeetsContainer extends React.Component {
   constructor(props){
     super(props)
+    let home = window.location.href
+    if(home.includes("home")){
+      home = home.split('home')
+      home = home[home.length-1]
+      home = home.substring(1, home.length)
+    } else {
+      home = undefined
+    }
+    
+    
     this.state = {
-      payload: {
+      beneficiaryDetails: {
         country: 'USA',
         currency: 'USD',
-        recipientType: 'ABA',
+        bankDetailsType: 'ABA',
         firstName: '',
         lastName: '',
         email: '',
         phoneNumber: '',
         businessName: '',
-        beneficiaryType: 'PRIVATE',
+        legalType: 'PRIVATE',
       },
       bankDetails: {},
       response: '',
       loading: false,
       success: false,
       error: false,
-      validated: null
+      validated: null,
+      home: home
     }
     this.handleCountryChange = this.handleCountryChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -90,10 +101,10 @@ export default class BankDeetsContainer extends React.Component {
 
   handleCountryChange (newVal, actionMeta) {
     let name = 'country'
-    let payload = this.state.payload;
-    payload[name] = newVal.value;
+    let beneficiaryDetails = this.state.beneficiaryDetails;
+    beneficiaryDetails[name] = newVal.value;
     this.setState({
-      payload: payload,
+      beneficiaryDetails: beneficiaryDetails,
       countryHelper: newVal
     });
   }
@@ -101,10 +112,10 @@ export default class BankDeetsContainer extends React.Component {
   handleChange(event){
     const target = event.target ? event.target : event.currentTarget
     const name = target.name ? target.name : target.id
-    let payload = this.state.payload
-    payload[name] = target.value
+    let beneficiaryDetails = this.state.beneficiaryDetails
+    beneficiaryDetails[name] = target.value
     this.setState({
-      payload: payload
+      beneficiaryDetails: beneficiaryDetails
     })
   }
 
@@ -137,18 +148,18 @@ export default class BankDeetsContainer extends React.Component {
   handleSubmit(event){
     event.preventDefault();
     this.setState({loading: true})
-
     if(this.props.submitURL !== undefined){
       fetch(this.props.submitURL, {
+        mode: 'cors',
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'text/plain'
         },
         body: JSON.stringify({
-          payload: this.state.payload,
+          beneficiaryDetails: this.state.beneficiaryDetails,
           bankDetails: this.state.bankDetails,
-          language: this.props.language
+          language: this.props.language,
+          home: this.state.home
         })
       })
       .then(
@@ -174,17 +185,17 @@ export default class BankDeetsContainer extends React.Component {
 
   sendToTransferWise(){
     let details = this.state.bankDetails
-    details['legalType'] = this.state.payload.beneficiaryType
+    details['legalType'] = this.state.beneficiaryDetails.legalType
 
     let accountHolderName = ''
-    if(this.state.payload.beneficiaryType === 'PRIVATE'){
-      accountHolderName = this.state.payload.firstName + ' ' + this.state.payload.lastName
+    if(this.state.beneficiaryDetails.legalType === 'PRIVATE'){
+      accountHolderName = this.state.beneficiaryDetails.firstName + ' ' + this.state.beneficiaryDetails.lastName
     } else {
-      accountHolderName = this.state.payload.businessName
+      accountHolderName = this.state.beneficiaryDetails.businessName
     } 
     const payload = {
-      currency: this.state.payload.currency,
-      type: this.state.payload.recipientType,
+      currency: this.state.beneficiaryDetails.currency,
+      type: this.state.beneficiaryDetails.bankDetailsType,
       profile: 194,
       accountHolderName: accountHolderName,
       details: details
@@ -227,16 +238,16 @@ export default class BankDeetsContainer extends React.Component {
           handleCountryChange={this.handleCountryChange}
           handleBankDetailsChange={this.handleBankDetailsChange}
           sendToTransferWise={this.sendToTransferWise}
-          firstName={this.state.payload.firstName}
-          lastName={this.state.payload.lastName}
-          email={this.state.payload.email}
-          phoneNumber={this.state.payload.phoneNumber}
-          country={this.state.payload.country}
+          firstName={this.state.beneficiaryDetails.firstName}
+          lastName={this.state.beneficiaryDetails.lastName}
+          email={this.state.beneficiaryDetails.email}
+          phoneNumber={this.state.beneficiaryDetails.phoneNumber}
+          country={this.state.beneficiaryDetails.country}
           countryHelper={this.state.countryHelper}
-          currency={this.state.payload.currency}
-          recipientType={this.state.payload.recipientType}
+          currency={this.state.beneficiaryDetails.currency}
+          bankDetailsType={this.state.beneficiaryDetails.bankDetailsType}
           bankDetails={this.state.bankDetails}
-          payload={this.state.payload}
+          beneficiaryDetails={this.state.beneficiaryDetails}
           clearBankDetails={this.clearBankDetails}
           handleSubmit={this.handleSubmit}
           loading={this.state.loading}
@@ -363,12 +374,12 @@ function Body(props){
             />
             <RecipientSelector 
               onChange={props.handleChange}
-              value={props.recipientType}
+              value={props.bankDetailsType}
               country={props.country}
               currency={props.currency}
             />
             <BankDetails
-              recipientType={props.recipientType}
+              bankDetailsType={props.bankDetailsType}
               onChange={props.handleBankDetailsChange}
               clearBankDetails={props.clearBankDetails}
               {...props.bankDetails}
@@ -386,7 +397,7 @@ function Body(props){
               success={props.success}
               response={props.response}
               bankDetails={props.bankDetails}
-              payload={props.payload}
+              beneficiaryDetails={props.beneficiaryDetails}
               sendToTransferWise={props.sendToTransferWise}
             />
         </React.Fragment>

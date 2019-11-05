@@ -1,5 +1,4 @@
 import React from "react";
-import Cleave from "cleave.js/react";
 import { Translate } from 'react-translated';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import { makeStyles } from '@material-ui/core/styles';
@@ -35,7 +34,7 @@ export default class BankDetailsContainer extends React.Component{
     }
 
     componentDidUpdate(prevProps){
-      if(prevProps.recipientType !== this.props.recipientType){
+      if(prevProps.bankDetailsType !== this.props.bankDetailsType){
         this.props.clearBankDetails()
       }
     }
@@ -57,7 +56,7 @@ function BankDetailsStyling(props){
 }
 
 function BankDetails(props){
- switch(props.recipientType){
+ switch(props.bankDetailsType){
     case 'IBAN':
         return <IbanRecipient iban={props.iban} onChange={props.onChange}/>;
         break;

@@ -24,7 +24,7 @@ export default class PersonalOrBusiness extends React.Component {
   handleTabChange(event, newValue){
     this.setState({value: newValue})
     this.props.handleChange(
-      {target: {name: 'beneficiaryType', value: newValue === 0 ? 'PRIVATE' : 'BUSINESS' }}
+      {target: {name: 'legalType', value: newValue === 0 ? 'PRIVATE' : 'BUSINESS' }}
     )
   }
 

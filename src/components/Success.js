@@ -72,18 +72,18 @@ function Success (props) {
 }
 
 function Default (props){
-  const payload = props.payload
+  const beneficiaryDetails = props.beneficiaryDetails
   const bankDetails = props.bankDetails
   return(
     <div>
     <h2>Beneficiary</h2>
     {
-      Object.keys(payload).map((key, i) => (
-        payload[key] !== '' ?
+      Object.keys(beneficiaryDetails).map((key, i) => (
+        beneficiaryDetails[key] !== '' ?
         <TextField
           id={key}
           label={key}
-          value={payload[key]}
+          value={beneficiaryDetails[key]}
           margin="normal"
         /> : ''
       ))

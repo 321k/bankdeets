@@ -54,7 +54,7 @@ export default class RecipientSelector extends React.Component{
         }
     }
     const value = result[0] ? result[0].key : ''
-    this.props.onChange({currentTarget: {name: 'recipientType', value: value}})
+    this.props.onChange({currentTarget: {name: 'bankDetailsType', value: value}})
     this.setState({recipients: result})
   }
 
@@ -62,7 +62,7 @@ export default class RecipientSelector extends React.Component{
     return(
       <FormControl component="fieldset" className={useStyles.formControl}>
         <FormLabel component="legend"><Translate text="Recipient type"/></FormLabel>
-        <RadioGroup aria-label="recipient type" name="recipientType" value={this.props.value} onChange={this.props.onChange}>
+        <RadioGroup aria-label="Bank details type" name="bankDetailsType" value={this.props.value} onChange={this.props.onChange}>
           {
             this.state.recipients.map(recipient => 
               <FormControlLabel
