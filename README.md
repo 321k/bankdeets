@@ -43,3 +43,6 @@ bankdeets.co
 * Turkey
 * Israel
 * Pakistan
+* Brazil
+* Chile
+* Argentina
