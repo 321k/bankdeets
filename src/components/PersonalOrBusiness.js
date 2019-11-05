@@ -37,7 +37,7 @@ export default class PersonalOrBusiness extends React.Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <AppBar position="static" elevation={0}>
           <Box style={{backgroundColor: 'white', dropShadow: 0}}>
             <Tabs 
@@ -70,7 +70,7 @@ export default class PersonalOrBusiness extends React.Component {
               phoneNumber={this.props.phoneNumber}
             />
         </TabPanel>
-      </div>
+      </React.Fragment>
     );
   } 
 }

@@ -8,31 +8,30 @@ import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 
+
 const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
   },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+    width: `80%`,
   },
-  dense: {
-    marginTop: 19,
-  },
-  menu: {
-    width: 200,
+  formInput: {
+    padding: theme.spacing(1),
+    minWidth: 200,
+    width: `100%`,
   },
 }));
 
 
 const sanboxApiToken = '157bca0a-e206-4593-af98-eb816d6eca11'
 
-export default class BankDetails extends React.Component{
+export default class BankDetailsContainer extends React.Component{
     constructor(props){
         super(props);
-        this.renderBankDetails = this.renderBankDetails.bind(this);
     }
 
     componentDidUpdate(prevProps){
@@ -41,98 +40,106 @@ export default class BankDetails extends React.Component{
       }
     }
 
-    renderBankDetails(recipientType){
-        switch(recipientType){
-            case 'IBAN':
-                return <IbanRecipient iban={this.props.iban} onChange={this.props.onChange}/>;
-                break;
-            case 'SWIFT_CODE':
-                return <SwiftRecipient iban={this.props.iban}  swift_code={this.props.swift_code} onChange={this.props.onChange}/>;
-                break;
-            case 'SORT_CODE':
-                return <SortCodeRecipient sortCode={this.props.sortCode} accountNumber={this.props.accountNumber} onChange={this.props.onChange}/>;
-                break;
-            case 'SWEDEN_LOCAL':
-                return <SwedishLocalRecipient clearingNumber={this.props.clearingNumber} accountNumber={this.props.accountNumber} onChange={this.props.onChange}/>;
-                break;
-            case 'ABA':
-                return <AbaRecipient accountType={this.props.accountType} abartn={this.props.abartn} accountNumber={this.props.accountNumber} onChange={this.props.onChange}/>;
-                break;
-            case 'AUSTRALIAN':
-                return <AustralianLocalRecipient bsbCode={this.props.bsbCode} accountNumber={this.props.accountNumber} onChange={this.props.onChange}/>;
-                break;
-            case 'AUSTRALIAN_BUSINESS':
-                return <AustralianBusinessRecipient bsbCode={this.props.bsbCode} accountNumber={this.props.accountNumber} businessNumber={this.props.businessNumber} onChange={this.props.onChange}/>;
-                break;
-            case 'CANADIAN':
-                return <CanadianRecipient institutionNumber={this.props.institutionNumber} transitNumber={this.props.transitNumber} accountNumber={this.props.accountNumber} accountType={this.props.accountType} onChange={this.props.onChange}/>;
-                break;
-            case 'POLISH':
-                return <PolishLocalRecipient accountNumber={this.props.accountNumber} bic={this.props.bic} onChange={this.props.onChange}/>;
-                break;
-            case 'HUNGARIAN':
-                return <HungarianLocalRecipient accountNumber={this.props.accountNumber} onChange={this.props.onChange}/>;
-                break;
-            case 'INDIAN':
-                return <IndianRecipient ifscCode={this.props.ifscCode} accountNumber={this.props.accountNumber} onChange={this.props.onChange}/>;
-                break;
-            case 'SINGAPORE':
-                return <SingaporeanRecipient accountNumber={this.props.accountNumber} bankCode={this.props.bankCode} onChange={this.props.onChange}/>;
-                break;
-            case 'HONGKONG':
-                return <HongkongRecipient accountNumber={this.props.accountNumber} bankCode={this.props.bankCode} onChange={this.props.onChange}/>;
-                break;
-            case 'NEWZEALAND':
-                return <NewzealandRecipient accountNumber={this.props.accountNumber} onChange={this.props.onChange}/>;
-                break;
-            case 'CZECH':
-                return <CzechLocalRecipient accountNumber={this.props.accountNumber} bankCode={this.props.bankCode} onChange={this.props.onChange}/>;
-                break;
-            case 'BANGLADESH':
-                return <BangladeshRecipient accountNumber={this.props.accountNumber} bankCode={this.props.bankCode} branchCode={this.props.branchCode} onChange={this.props.onChange} />;
-                break;
-            case 'CHINESE_CARD':
-                return <ChineseCardRecipient cardNumber={this.props.cardNumber} onChange={this.props.onChange}/>;
-                break;
-            case 'VIETNAME_EARTHPORT':
-                return <VietnamEarthportRecipient accountNumber={this.props.accountNumber} bankCode={this.props.bankCode} branchCode={this.props.branchCode} onChange={this.props.onChange}/>;
-                break;
-            case 'SWISS':
-                return <SwissLocalRecipient accountNumber={this.props.accountNumber} branchCode={this.props.branchCode} onChange={this.props.onChange}/>;
-                break;
-            case 'MALAYSIAN':
-                return <MalaysianLocalRecipient accountNumber={this.props.accountNumber} bankCode={this.props.bankCode} onChange={this.props.onChange}/>;
-                break;
-            case 'ISRAELI_LOCAL':
-                return <IbanRecipient iban={this.props.iban} onChange={this.props.onChange}/>;
-                break;
-            case 'TURKISH_EARTHPORT':
-                return <IbanRecipient iban={this.props.iban} onChange={this.props.onChange}/>;
-                break;
-            case 'EMIRATES':
-                return <IbanRecipient iban={this.props.iban} onChange={this.props.onChange}/>;
-                break;
-            case 'ARGENTINA':
-                return <ArgentinaRecipient accountNumber={this.props.accountNumber} taxId={this.props.taxId} onChange={this.props.onChange}/>;
-                break;
-            case 'BRAZIL':
-                return <BrazilRecipient accountNumber={this.props.accountNumber} cpf={this.props.cpf} accountType={this.props.accountType} bankCode={this.props.bankCode} branchCode={this.props.branchCode} onChange={this.props.onChange}/>;
-                break;
-            case 'CHILE':
-                return <ChileRecipient accountNumber={this.props.accountNumber} rut={this.props.rut} accountType={this.props.accountType} bankCode={this.props.bankCode} branchCode={this.props.branchCode} onChange={this.props.onChange}/>;
-                break;
-            default:  
-                return <NotAvaialableRecipient  onChange={this.props.onChange}/>  ;
-        }
-    }
-
     render(){
         return (
-            this.renderBankDetails(this.props.recipientType)
+          <BankDetailsStyling {...this.props} />
         );
     }
 }
 
+function BankDetailsStyling(props){
+  const classes = useStyles()
+  return (
+    <form>
+      <BankDetails {...props}/>
+    </form>
+  )
+}
+
+function BankDetails(props){
+ switch(props.recipientType){
+    case 'IBAN':
+        return <IbanRecipient iban={props.iban} onChange={props.onChange}/>;
+        break;
+    case 'SWIFT_CODE':
+        return <SwiftRecipient iban={props.iban}  swift_code={props.swift_code} onChange={props.onChange}/>;
+        break;
+    case 'SORT_CODE':
+        return <SortCodeRecipient sortCode={props.sortCode} accountNumber={props.accountNumber} onChange={props.onChange}/>;
+        break;
+    case 'SWEDEN_LOCAL':
+        return <SwedishLocalRecipient clearingNumber={props.clearingNumber} accountNumber={props.accountNumber} onChange={props.onChange}/>;
+        break;
+    case 'ABA':
+        return <AbaRecipient accountType={props.accountType} abartn={props.abartn} accountNumber={props.accountNumber} onChange={props.onChange}/>;
+        break;
+    case 'AUSTRALIAN':
+        return <AustralianLocalRecipient bsbCode={props.bsbCode} accountNumber={props.accountNumber} onChange={props.onChange}/>;
+        break;
+    case 'AUSTRALIAN_BUSINESS':
+        return <AustralianBusinessRecipient bsbCode={props.bsbCode} accountNumber={props.accountNumber} businessNumber={props.businessNumber} onChange={props.onChange}/>;
+        break;
+    case 'CANADIAN':
+        return <CanadianRecipient institutionNumber={props.institutionNumber} transitNumber={props.transitNumber} accountNumber={props.accountNumber} accountType={props.accountType} onChange={props.onChange}/>;
+        break;
+    case 'POLISH':
+        return <PolishLocalRecipient accountNumber={props.accountNumber} bic={props.bic} onChange={props.onChange}/>;
+        break;
+    case 'HUNGARIAN':
+        return <HungarianLocalRecipient accountNumber={props.accountNumber} onChange={props.onChange}/>;
+        break;
+    case 'INDIAN':
+        return <IndianRecipient ifscCode={props.ifscCode} accountNumber={props.accountNumber} onChange={props.onChange}/>;
+        break;
+    case 'SINGAPORE':
+        return <SingaporeanRecipient accountNumber={props.accountNumber} bankCode={props.bankCode} onChange={props.onChange}/>;
+        break;
+    case 'HONGKONG':
+        return <HongkongRecipient accountNumber={props.accountNumber} bankCode={props.bankCode} onChange={props.onChange}/>;
+        break;
+    case 'NEWZEALAND':
+        return <NewzealandRecipient accountNumber={props.accountNumber} onChange={props.onChange}/>;
+        break;
+    case 'CZECH':
+        return <CzechLocalRecipient accountNumber={props.accountNumber} bankCode={props.bankCode} onChange={props.onChange}/>;
+        break;
+    case 'BANGLADESH':
+        return <BangladeshRecipient accountNumber={props.accountNumber} bankCode={props.bankCode} branchCode={props.branchCode} onChange={props.onChange} />;
+        break;
+    case 'CHINESE_CARD':
+        return <ChineseCardRecipient cardNumber={props.cardNumber} onChange={props.onChange}/>;
+        break;
+    case 'VIETNAME_EARTHPORT':
+        return <VietnamEarthportRecipient accountNumber={props.accountNumber} bankCode={props.bankCode} branchCode={props.branchCode} onChange={props.onChange}/>;
+        break;
+    case 'SWISS':
+        return <SwissLocalRecipient accountNumber={props.accountNumber} branchCode={props.branchCode} onChange={props.onChange}/>;
+        break;
+    case 'MALAYSIAN':
+        return <MalaysianLocalRecipient accountNumber={props.accountNumber} bankCode={props.bankCode} onChange={props.onChange}/>;
+        break;
+    case 'ISRAELI_LOCAL':
+        return <IbanRecipient iban={props.iban} onChange={props.onChange}/>;
+        break;
+    case 'TURKISH_EARTHPORT':
+        return <IbanRecipient iban={props.iban} onChange={props.onChange}/>;
+        break;
+    case 'EMIRATES':
+        return <IbanRecipient iban={props.iban} onChange={props.onChange}/>;
+        break;
+    case 'ARGENTINA':
+        return <ArgentinaRecipient accountNumber={props.accountNumber} taxId={props.taxId} onChange={props.onChange}/>;
+        break;
+    case 'BRAZIL':
+        return <BrazilRecipient accountNumber={props.accountNumber} cpf={props.cpf} accountType={props.accountType} bankCode={props.bankCode} branchCode={props.branchCode} onChange={props.onChange}/>;
+        break;
+    case 'CHILE':
+        return <ChileRecipient accountNumber={props.accountNumber} rut={props.rut} accountType={props.accountType} bankCode={props.bankCode} branchCode={props.branchCode} onChange={props.onChange}/>;
+        break;
+    default:  
+        return <NotAvaialableRecipient  onChange={props.onChange}/>  ;
+  }
+}
 
 class GetBankCode extends React.Component{
   constructor(props){
@@ -170,13 +177,16 @@ class GetBankCode extends React.Component{
   render(){
     const bankCodes = Array.isArray(this.state.result) ? this.state.result : []
     return(
-      <NativeSelect name={this.props.name} onChange={this.props.onChange} value={this.props.value}>
-        {
-          bankCodes.map((item) => 
-            <option value={item.code} key={item.code}>{item.title}</option>
-          )
-        }
-      </NativeSelect>
+      <React.Fragment>
+        <InputLabel shrink={true} htmlFor={this.props.name}>{this.props.description}</InputLabel>
+        <NativeSelect name={this.props.name} onChange={this.props.onChange} value={this.props.value}>
+          {
+            bankCodes.map((item) => 
+              <option value={item.code} key={item.code}>{item.title}</option>
+            )
+          }
+        </NativeSelect>
+      </React.Fragment>
     )
   }
 }
@@ -233,13 +243,16 @@ class GetBranchCode extends React.Component{
 
     if(branchCode.length > 0){
       return(
-        <NativeSelect name={this.props.name} onChange={this.props.onChange} value={this.props.value}>
-          {
-            branchCode.map((item) => 
-              <option value={item.code} key={item.code}>{item.title}</option>
-            )
-          }
-        </NativeSelect>
+        <React.Fragment>
+          <InputLabel shrink={true} htmlFor={this.props.name}>{this.props.description}</InputLabel>
+          <NativeSelect name={this.props.name} onChange={this.props.onChange} value={this.props.value}>
+            {
+              branchCode.map((item) => 
+                <option value={item.code} key={item.code}>{item.title}</option>
+              )
+            }
+          </NativeSelect>
+        </React.Fragment>
       )  
     } else {
       return (
@@ -358,8 +371,8 @@ export class OldDynamicDropdown extends React.Component{
         } else if (items.length>=1) {
             return (
               <div>
-                <label htmlFor={this.props.id}>{this.props.description}</label>
                 <FormDropdown
+                  description={this.props.description}
                   name={this.props.description}
                   items={this.props.items}
                   value={this.props.value}
@@ -400,13 +413,16 @@ class FormDropdown extends React.Component {
 
   render(){
     return(
-      <NativeSelect name={this.props.name} onChange={this.props.onChange} value={this.props.value}>
-        {
-          this.props.items.map((item) => 
-            <option value={item.key} key={item.key}>{item.value}</option>
-          )
-        }
-      </NativeSelect>
+      <React.Fragment>
+        <InputLabel shrink={true} htmlFor={this.props.name}>{this.props.description}</InputLabel>
+        <NativeSelect id={this.props.name} name={this.props.name} onChange={this.props.onChange} value={this.props.value}>
+          {
+            this.props.items.map((item) => 
+              <option value={item.key} key={item.key}>{item.value}</option>
+            )
+          }
+        </NativeSelect>
+      </React.Fragment>
     );
   }
 }
@@ -415,256 +431,320 @@ class FormDropdown extends React.Component {
 function IbanRecipient (props){
   const iban = props.iban ? props.iban : ''
   return(
-    <div>
       <FormInput
           name="iban" value={iban} 
           description="IBAN" 
           onChange={props.onChange} 
 
       />
-    </div>
   );
 }
 
 function SwiftRecipient (props){
+  const classes = useStyles();
   const iban = props.iban ? props.iban : ''
   const swift_code = props.swift_code ? props.swift_code : ''
   return(
-      <div>
+      <React.Fragment>
+        <FormControl className={classes.formControl}>
           <FormInput 
               name="iban" value={iban} 
               description="IBAN" 
               onChange={props.onChange} 
 
           />
+        </FormControl>
+        <FormControl className={classes.formControl}>
           <FormInput
               name="swift_code" value={swift_code} 
               description="SWIFT Code" 
               onChange={props.onChange} 
           />
-      </div>
+        </FormControl>
+      </React.Fragment>
   );
 }
 
 function SortCodeRecipient (props){
+  const classes = useStyles();
   const sortCode = props.sortCode ? props.sortCode : '';
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   return(
-      <div>
-          <div className="form-group">
-              <label htmlFor="sortCode">{<Translate text="Sort code"/>}</label>
-              <Cleave
-                  placeholder="20-20-20"
-                  options={{blocks: [2,2,2], delimiter: '-', numericOnly: true}}
-                  name="sortCode" value={sortCode}
-                  onChange={props.onChange}
-                  className="form-control"
-              />
-          </div>
-
-          <div className="form-group">
-              <label htmlFor="accountNumber"><Translate text="Account number"/></label>
-              <Cleave
-                  placeholder="12345678"
-                  options={{numericOnly: true, stripLeadingZeroes: false}}
-                  name="accountNumber" value={accountNumber}
-                  onChange={props.onChange}
-                  className="form-control"
-              />
-          </div>
-      </div>
+      <React.Fragment>
+        <FormControl className={classes.formControl}>
+          <FormInput
+              name="sortCode"
+              placeholder="202020"
+              value={sortCode}
+              description={<Translate text="Sort code"/>}
+              onChange={props.onChange}
+          />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <FormInput
+              placeholder="12345678"
+              description={<Translate text="Account number"/>}
+              name="accountNumber"
+              value={accountNumber}
+              onChange={props.onChange}
+          />
+        </FormControl>
+      </React.Fragment>
   );
 }
 
 function SwedishLocalRecipient (props){
+  const classes = useStyles();
   const clearingNumber = props.clearingNumber ? props.clearingNumber : '';
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   return(
-    <div>
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
         <FormInput 
-            name="clearingNumber" value={clearingNumber}
-            description={<Translate text="Swedish clearing number" />}
+            name="clearingNumber" 
+            value={clearingNumber}
+            description={<Translate text="Clearing number" />}
             onChange={props.onChange}  
             placeholder="1234"
         />
+      </FormControl>
+      <FormControl className={classes.formControl}>
         <FormInput
-            name="accountNumber" value={accountNumber}
+            name="accountNumber" 
+            value={accountNumber}
             description={<Translate text="Account number"/>}
             onChange={props.onChange}  
             placeholder="1234567"
         />
-    </div>
+      </FormControl>
+    </React.Fragment> 
   );
 }
 
 function AbaRecipient (props){
+  const classes = useStyles();
   const abartn = props.abartn ? props.abartn : ''
   const accountNumber = props.accountNumber ? props.accountNumber : ''
   const accountType = props.accountType ? props.accountType : ''
   return(
-    <Grid container>
-      <Grid item xs={12}>
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
         <FormInput 
-            name="abartn" value={abartn} 
-            description="ACH routing number" 
-            onChange={props.onChange}
-            placeholder="111000025"
+          className={classes.formInput}
+          name="abartn" 
+          value={abartn} 
+          description="ACH routing number" 
+          onChange={props.onChange}
+          placeholder="111000025"
         />
-      </Grid>
-      <Grid item xs={12}>
+      </FormControl>
+      <FormControl className={classes.formControl}>
         <FormInput 
-            name="accountNumber" value={accountNumber}
-            description={<Translate text="Account number"/>}
-            onChange={props.onChange}  
-            placeholder="12345678"
+          className={classes.formInput}
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange}  
+          placeholder="12345678"
         />
-      </Grid>
-      <Grid item xs={12}>
+      </FormControl>
+      <FormControl className={classes.formControl}>
         <FormDropdown 
+          className={classes.formInput}
           name="accountType"
           value={accountType}
           description="Account type"
           onChange={props.onChange}
           items={[{'key': 'CHECKING', 'value': 'Checking account'}, {'key': 'SAVINGS', 'value': 'Savings account'}]} 
         />
-      </Grid>
-    </Grid>
+      </FormControl>
+    </React.Fragment>
   );
 }
 
 function AustralianLocalRecipient (props){
+  const classes = useStyles();
   const bsbCode = props.abartn ? props.abartn : ''
   const accountNumber = props.accountNumber ? props.accountNumber : ''
   return(
-      <Grid container>
-        <Grid item xs={12}>
+      <React.Fragment>
+        <FormControl className={classes.formControl}>
           <FormInput name="bsbCode" value={bsbCode} description="BSB code" onChange={props.onChange}  />
-        </Grid>
-        <Grid item xs={12}>
+        </FormControl>
+        <FormControl className={classes.formControl}>
           <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-        </Grid>
-      </Grid>
+        </FormControl>
+      </React.Fragment>
   );
 }
 
 function AustralianBusinessRecipient (props){
+  const classes = useStyles();
   const bsbCode = props.abartn ? props.abartn : '';
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const businessNumber = props.businessNumber ? props.businessNumber : '';
     
   return(
-    <Grid container>
-      <Grid item xs={12}>
-        <FormInput name="bsbCode" value={bsbCode} description="BSB code"  />
-      </Grid>
-      <Grid item xs={12}>
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput name="bsbCode" value={bsbCode} description="BSB code" onChange={props.onChange}  />
+      </FormControl>
+      <FormControl className={classes.formControl}>
         <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-      </Grid>
-      <Grid item xs={12}>
+      </FormControl>
+      <FormControl className={classes.formControl}>
         <FormInput name="businessNumber" value={businessNumber} description="Business number" onChange={props.onChange}  />
-      </Grid>
-    </Grid>
+      </FormControl>
+    </React.Fragment>
   );
 }
 
 function CanadianRecipient (props){
+  const classes = useStyles();
   const institutionNumber = props.institutionNumber ? props.institutionNumber : '';
   const transitNumber = props.transitNumber ? props.transitNumber : '';
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const accountType = props.accountType ? props.accountType : '';
     
   return(
-      <Grid container>
-        <Grid item xs={12}>
-          <FormInput name="institutionNumber" value={institutionNumber} description={<Translate text="Institution number"/>} onChange={props.onChange}  />
-        </Grid>
-        <Grid item xs={12}>
-          <FormInput name="transitNumber" value={transitNumber} description={<Translate text="Transit number"/>} onChange={props.onChange}  />
-        </Grid>
-        <Grid item xs={12}>
-          <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-        </Grid>
-        <Grid item xs={12}>
-          <FormDropdown name="accountType" value={accountType} description={<Translate text="Account type"/>} onChange={props.onChange} items={[{'key': 'CHECKING', 'value': 'Checking account'}, {'key': 'SAVINGS', 'value': 'Savings account'}]} />
-        </Grid>
-      </Grid>
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="institutionNumber"
+          value={institutionNumber}
+          description={<Translate text="Institution number"/>} 
+          onChange={props.onChange}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="transitNumber"
+          value={transitNumber}
+          description={<Translate text="Transit number"/>}
+          onChange={props.onChange}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <FormDropdown
+          name="accountType"
+          value={accountType}
+          description={<Translate text="Account type"/>}
+          onChange={props.onChange}
+          items={[{'key': 'CHECKING', 'value': 'Checking account'}, {'key': 'SAVINGS', 'value': 'Savings account'}]} 
+        />
+      </FormControl>
+    </React.Fragment>
   );
 }
 
 function PolishLocalRecipient (props){
-  const accountNumber = props.accountNumber ? props.accountNumber : '';
+  const classes = useStyles();  const accountNumber = props.accountNumber ? props.accountNumber : '';
   const bic = props.bic ? props.bic : '';
   return(
-      <div>
+      <React.Fragment>
           <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
           <FormInput name="bic" value={bic} description={<Translate text="BIC (optional)"/>} onChange={props.onChange}  />
-      </div>
+      </React.Fragment>
   );
 }
 
 
 function HungarianLocalRecipient (props){
+  const classes = useStyles();
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   return(
-    <div>
-      <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-    </div>
+    <FormControl className={classes.formControl}>
+      <FormInput
+        name="accountNumber"
+        value={accountNumber}
+        description={<Translate text="Account number"/>}
+        onChange={props.onChange}  
+      />
+    </FormControl>
   );
 }
 
 
 function IndianRecipient (props){
+  const classes = useStyles();
   const ifscCode = props.ifscCode ? props.ifscCode : '';
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   return(
-      <div>
-          <FormInput name="ifscCode" value={ifscCode} description="IFSC code" onChange={props.onChange}  />
-          <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-      </div>
+      <React.Fragment>
+          <FormInput
+            name="ifscCode"
+            value={ifscCode}
+            description="IFSC code"
+            onChange={props.onChange}  />
+          <FormInput
+            name="accountNumber"
+            value={accountNumber}
+            description={<Translate text="Account number"/>}
+            onChange={props.onChange}  />
+      </React.Fragment>
   );
 }
 
 function SingaporeanRecipient (props){
+  const classes = useStyles();
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const bankCode = props.bankCode ? props.bankCode : '';
   return(
-      <div>
+      <React.Fragment>
           <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
           <GetBankCode country="SG" name="bankCode" onChange={props.onChange} value={bankCode}/>
-      </div>
+      </React.Fragment>
   );
 }
 
 
 function HongkongRecipient (props){
+  const classes = useStyles();
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const bankCode = props.bankCode ? props.bankCode : '';
   return(
-      <div>
-        <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
+      <React.Fragment>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange}  />
         <GetBankCode country="HK" name="bankCode" onChange={props.onChange} value={bankCode}/>
-      </div>
+      </React.Fragment>
   );
 }
 
 
 function NewzealandRecipient (props) {
+  const classes = useStyles();
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   return(
-    <div>
-      <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-    </div>
+      <FormInput
+        name="accountNumber"
+        value={accountNumber}
+        description={<Translate text="Account number"/>}
+        onChange={props.onChange}
+      />
   );
 }
 
 function CzechLocalRecipient (props){
+  const classes = useStyles();
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const bankCode = props.bankCode ? props.bankCode : '';
   return(
-      <div>
+      <React.Fragment>
           <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
           <FormInput name="bankCode" value={bankCode} description="Bank code" onChange={props.onChange}  />
-      </div>
+      </React.Fragment>
   );
 }
 
@@ -674,84 +754,164 @@ function BangladeshRecipient (props){
   const branchCode = props.branchCode ? props.branchCode : '';
 
   return(
-      <Grid container>
-        <Grid item xs={12}>
-          <FormControl className={classes.formControl}>
-            <FormInput default={props.default} name="accountNumber" value={props.accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <GetBankCode country="BD" name="bankCode" onChange={props.onChange} value={bankCode}/>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <GetBranchCode country="BD" name="branchCode" onChange={props.onChange} value={branchCode} bankCode={bankCode}/>
-          </FormControl>
-        </Grid>
-      </Grid>
+      <React.Fragment>
+        <FormControl className={classes.formControl}>
+          <FormInput
+            default={props.default}
+            name="accountNumber"
+            value={props.accountNumber}
+            description={<Translate text="Account number"/>}
+            onChange={props.onChange} 
+          />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <GetBankCode
+            country="BD"
+            name="bankCode"
+            description={<Translate text="Bank code"/>}
+            onChange={props.onChange}
+            value={bankCode}
+          />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <GetBranchCode
+            country="BD"
+            name="branchCode"
+            description={<Translate text="Branch code"/>}
+            onChange={props.onChange}
+            value={branchCode}
+            bankCode={bankCode}
+          />
+        </FormControl>
+      </React.Fragment>
   );
 }
 
 function ChineseCardRecipient (props){
+  const classes = useStyles();
   const cardNumber = props.cardNumber ? props.cardNumber : '';
   return(
-      <div>
-          <FormInput name="cardNumber" value={cardNumber} description="UnionPay card number" onChange={props.onChange}  />
-      </div>
+    <FormControl className={classes.formControl}>
+      <FormInput name="cardNumber" value={cardNumber} description="UnionPay card number" onChange={props.onChange}  />
+    </FormControl>
   );
 }
 
 function VietnamEarthportRecipient (props){
+  const classes = useStyles();
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const bankCode = props.bankCode ? props.bankCode : '';
   const branchCode = props.branchCode ? props.branchCode : '';
 
   return(
-      <div>
-          <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-          <GetBankCode country="VN" name="bankCode" onChange={props.onChange} value={bankCode}/>
-          <GetBranchCode country="VN" name="branchCode" onChange={props.onChange} value={branchCode} bankCode={bankCode}/>
-      </div>
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBankCode
+          country="VN"
+          name="bankCode"
+          description={<Translate text="Bank code"/>}
+          onChange={props.onChange}
+          value={bankCode}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBranchCode
+          country="VN"
+          name="branchCode"
+          description={<Translate text="Branch code"/>}
+          onChange={props.onChange}
+          value={branchCode}
+          bankCode={bankCode}
+        />
+      </FormControl>
+    </React.Fragment>
   );
 }
 
 function SwissLocalRecipient (props){
+  const classes = useStyles();
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const branchCode = props.branchCode ? props.branchCode : '';
   return(
-      <div>
-          <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-          <FormInput name="branchCode" value={branchCode} description={<Translate text="Branch code"/>} onChange={props.onChange}  />
-      </div>
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="branchCode"
+          value={branchCode}
+          description={<Translate text="Branch code"/>}
+          onChange={props.onChange}  
+        />
+      </FormControl>
+    </React.Fragment>
   );
 }
 
 
 function MalaysianLocalRecipient (props){
+  const classes = useStyles();
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const bankCode = props.bankCode ? props.bankCode : '';
   
   return(
-      <div>
-          <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-          <GetBankCode country="MY" name="bankCode" onChange={props.onChange} value={bankCode}/>
-      </div>
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange} 
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBankCode
+          country="MY"
+          name="bankCode"
+          description={<Translate text="Bank code"/>}
+          onChange={props.onChange}
+          value={bankCode}
+        />
+      </FormControl>
+    </React.Fragment>
   );
 }
 
 
 function ArgentinaRecipient (props){
+  const classes = useStyles();
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const taxId = props.taxId ? props.taxId : '';
   
   return(
-      <div>
-          <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-          <FormInput name="taxId" value={taxId} description={<Translate text="Tax ID"/>} onChange={props.onChange}  />
-      </div>
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <FormInput name="taxId" value={taxId} description={<Translate text="Tax ID"/>} onChange={props.onChange}  />
+      </FormControl>
+    </React.Fragment>
   );
 }
 
 
 function BrazilRecipient (props){
+  const classes = useStyles();
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const bankCode = props.bankCode ? props.bankCode : '';
   const branchCode = props.branchCode ? props.branchCode : '';
@@ -759,20 +919,33 @@ function BrazilRecipient (props){
   const cpf = props.cpf ? props.cpf : '';
   
   return(
-      <Grid container>
-        <Grid item xs={12}>
+      <React.Fragment>
+        <FormControl className={classes.formControl}>
           <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-        </Grid>
-        <Grid item xs={12}>
+        </FormControl>
+        <FormControl className={classes.formControl}>
           <FormInput name="cpf" value={cpf} description={<Translate text="Tax registration number"/>} onChange={props.onChange}  />
-        </Grid>
-        <Grid item xs={12}>
-          <GetBankCode country="BR" name="bankCode" onChange={props.onChange} value={bankCode}/>
-        </Grid>
-        <Grid item xs={12}>
-          <GetBranchCode country="BR" name="branchCode" onChange={props.onChange} value={branchCode} bankCode={bankCode}/>
-        </Grid>
-        <Grid item xs={12}>
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <GetBankCode
+            country="BR"
+            name="bankCode"
+            onChange={props.onChange}
+            value={bankCode}
+            description={<Translate text="Bank code"/>}
+          />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <GetBranchCode
+            country="BR"
+            name="branchCode"
+            onChange={props.onChange}
+            value={branchCode}
+            bankCode={bankCode}
+            description={<Translate text="Branch code"/>}
+          />
+        </FormControl>
+        <FormControl className={classes.formControl}>
           <FormDropdown 
             name="accountType"
             value={accountType}
@@ -780,13 +953,14 @@ function BrazilRecipient (props){
             onChange={props.onChange}
             items={[{'key': 'CHECKING', 'value': 'Checking account'}, {'key': 'SAVINGS', 'value': 'Savings account'}]} 
           />
-        </Grid>
-      </Grid>
+        </FormControl>
+      </React.Fragment>
   );
 }
 
 
 function ChileRecipient (props){
+  const classes = useStyles();
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const bankCode = props.bankCode ? props.bankCode : '';
   const branchCode = props.branchCode ? props.branchCode : '';
@@ -794,38 +968,62 @@ function ChileRecipient (props){
   const rut = props.rut ? props.rut : '';
   
   return(
-      <Grid container>
-        <Grid item xs={12}>
-          <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-        </Grid>
-        <Grid item xs={12}>
-          <FormInput name="rut" value={rut} description={<Translate text="Rol Único Tributario"/>} onChange={props.onChange}  />
-        </Grid>
-        <Grid item xs={12}>
-          <GetBankCode country="CL" name="bankCode" onChange={props.onChange} value={bankCode}/>
-        </Grid>
-        <Grid item xs={12}>
-          <GetBranchCode country="CL" name="branchCode" onChange={props.onChange} value={branchCode} bankCode={bankCode}/>
-        </Grid>
-        <Grid item xs={12}>
-          <FormDropdown 
-            name="accountType"
-            value={accountType}
-            description={<Translate text="Account type"/>}
-            onChange={props.onChange}
-            items={[{'key': 'CHECKING', 'value': 'Checking account'}, {'key': 'SAVINGS', 'value': 'Savings account'}, {'key': 'CUENTA_VISTA', 'value': 'Cuenta vista'}]} 
-          />
-        </Grid>
-      </Grid>
+    <React.Fragment>  
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="rut"
+          value={rut}
+          description={<Translate text="Rol Único Tributario"/>}
+          onChange={props.onChange}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBankCode
+          country="CL"
+          name="bankCode"
+          onChange={props.onChange}
+          value={bankCode}
+          description={<Translate text="Bank code"/>}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBranchCode
+          country="CL"
+          name="branchCode"
+          onChange={props.onChange}
+          value={branchCode}
+          bankCode={bankCode}
+          description={<Translate text="Branch code"/>}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <FormDropdown 
+          name="accountType"
+          value={accountType}
+          description={<Translate text="Account type"/>}
+          onChange={props.onChange}
+          items={[{'key': 'CHECKING', 'value': 'Checking account'}, {'key': 'SAVINGS', 'value': 'Savings account'}, {'key': 'CUENTA_VISTA', 'value': 'Cuenta vista'}]} 
+        />
+      </FormControl>
+    </React.Fragment>
   );
 }
 
 
 function NotAvaialableRecipient(props){
-    return(
-        <div>
-            This recipient type is not yet avaialble.
-        </div>
-    );
+  const classes = useStyles();
+  return(
+    <FormControl className={classes.formControl}>
+      This recipient type is not yet avaialble.
+    </FormControl>
+  );
 }
 

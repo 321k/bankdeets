@@ -4,12 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Translate } from 'react-translated';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
-
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(2),
-    minWidth: 120,
+    margin: theme.spacing(1),
+    minWidth: 200,
+    width: `80%`,
   },
   root: {
     flexGrow: 1,
@@ -57,20 +58,20 @@ function CountriesDropdown(props){
   const classes = useStyles();
 
   return(
-    <FormControl className={classes.formControl}>
-      <InputLabel shrink={true} htmlFor="age-native-simple"><Translate text="Country"/></InputLabel>
-      <NativeSelect
-        value={props.value}
-        onChange={props.onChange}
-        inputProps={{
-          name: 'country',
-          id: 'country'
-        }}
-      >
-        {
-          props.items.map((item) => <option key={item.alpha3Code} value={item.alpha3Code}>{item.name}</option>)
-        }
-      </NativeSelect>
-    </FormControl>
+      <FormControl className={classes.formControl}>
+        <InputLabel shrink={true} htmlFor="age-native-simple"><Translate text="Country"/></InputLabel>
+        <NativeSelect
+          value={props.value} 
+          onChange={props.onChange}
+          inputProps={{
+            name: 'country',
+            id: 'country'
+          }}
+        >
+          {
+            props.items.map((item) => <option key={item.alpha3Code} value={item.alpha3Code}>{item.name}</option>)
+          }
+        </NativeSelect>
+      </FormControl>
   )
 }

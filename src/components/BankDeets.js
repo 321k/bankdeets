@@ -18,7 +18,7 @@ import StepButton from '@material-ui/core/StepButton';
 import PersonalOrBusiness from './PersonalOrBusiness.js'
 import Success from './Success.js'
 import StepLabel from '@material-ui/core/StepLabel';
-
+import Address from './Address.js'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -332,57 +332,53 @@ function Body(props){
   switch(props.activeStep){
     case(0):
       return (
-          <Grid item xs={12}>
             <PersonalOrBusiness {...props}/>
-          </Grid>
       )
       break;
     case(1):
       return (
         <React.Fragment>
-          <Grid item xs={12}>
-            <CountrySelector
-              onChange={props.handleChange}
-              value={props.country}
-              language={props.language}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <CurrencySelector
-              onChange={props.handleChange}
-              value={props.currency}
-              country={props.country}
-            />
-          </Grid>
+          <CountrySelector
+            onChange={props.handleChange}
+            value={props.country}
+            language={props.language}
+          />
+          <Address
+            onChange={props.handleChange}
+            cisty={props.city}
+            postCode={props.postCode}
+            addressLine1={props.addressLine1}
+            addressLine2={props.addressLine2}
+          />
         </React.Fragment>
       )
       break;
     case(2):
       return (
         <React.Fragment>
-          <Grid item xs={12}>
+            <CurrencySelector
+              onChange={props.handleChange}
+              value={props.currency}
+              country={props.country}
+            />
             <RecipientSelector 
               onChange={props.handleChange}
               value={props.recipientType}
               country={props.country}
               currency={props.currency}
             />
-          </Grid>
-          <Grid item xs={12}>
             <BankDetails
               recipientType={props.recipientType}
               onChange={props.handleBankDetailsChange}
               clearBankDetails={props.clearBankDetails}
               {...props.bankDetails}
             />
-          </Grid>
         </React.Fragment>
       )
       break;
     case(3):
       return (
         <React.Fragment>
-          <Grid item xs={12}>
             <Success
               loading={props.loading}
               error={props.error}
@@ -393,7 +389,6 @@ function Body(props){
               payload={props.payload}
               sendToTransferWise={props.sendToTransferWise}
             />
-          </Grid>
         </React.Fragment>
       )
       break;

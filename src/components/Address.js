@@ -2,6 +2,7 @@ import React from 'react';
 import { Translate } from 'react-translated';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles(theme => ({
@@ -11,67 +12,62 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
     marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
-  },
-  menu: {
-    width: 200,
+    marginRight: theme.spacing(1)
   },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 200,
     width: `80%`,
-    }
-  }
-));
+  },
+}));
 
 
-export default function PersonalDetails(props) {
+
+export default function Address (props){
   const classes = useStyles();
 
   return (
     <React.Fragment>
       <FormControl className={classes.formControl}>
         <TextField
-          id="firstName"
-          label={<Translate text='First name'/>}
+          id="city"
+          label={<Translate text='City'/>}
           className={classes.textField}
-          value={props.firstName}
+          value={props.city}
           onChange={props.onChange} 
           margin="normal"
         />
       </FormControl>
       <FormControl className={classes.formControl}>
         <TextField
-          id="lastName"
-          label={<Translate text='Last name'/>}
+          id="postCode"
+          label={<Translate text='Post code'/>}
           className={classes.textField}
-          value={props.lastName}
+          value={props.city}
           onChange={props.onChange} 
           margin="normal"
         />
       </FormControl>
       <FormControl className={classes.formControl}>
         <TextField
-          id="email"
-          type="email"
-          label={<Translate text='Email'/>}
+          id="addressLine1"
+          label={<Translate text='Address (line 1)'/>}
           className={classes.textField}
-          value={props.email}
+          value={props.city}
           onChange={props.onChange} 
           margin="normal"
         />
       </FormControl>
       <FormControl className={classes.formControl}>
         <TextField
-          id="phoneNumber"
-          label={<Translate text='Phone number'/>}
+          id="addressLine1"
+          label={<Translate text='Address (line 2)'/>}
           className={classes.textField}
-          value={props.phoneNumber}
+          value={props.city}
           onChange={props.onChange} 
           margin="normal"
         />
       </FormControl>
     </React.Fragment>
-  );
-    }    
+  )
+}
