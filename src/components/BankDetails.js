@@ -153,14 +153,7 @@ class GetBankCode extends React.Component{
 
   componentDidMount(){
     this.setState({loading: true})
-    fetch('https://api.sandbox.transferwise.tech/v1/banks?country=' + this.props.country, {
-      mode: 'cors',
-      method: 'GET',
-      headers: {
-        'Content-Type': 'text/plain',
-        'Authorization': 'Bearer ' + sanboxApiToken
-      }
-    })
+    fetch('http://payspresso.io/api/v1/bank-codes?country=' + this.props.country)
     .then(res => res.json())
     .then(
       (res) => {
@@ -215,14 +208,7 @@ class GetBranchCode extends React.Component{
 
   fetchData(){
     this.setState({loading: true})
-      fetch('https://api.sandbox.transferwise.tech/v1/bank-branches?country=' + this.props.country + '&bankCode=' + this.props.bankCode, {
-        mode: 'cors',
-        method: 'GET',
-        headers: {
-          'Content-Type': 'text/plain',
-          'Authorization': 'Bearer ' + sanboxApiToken
-        }
-    })
+    fetch('http://payspresso.io/api/v1/bank-codes?country=' + this.props.country + '&bankCode=' + this.props.bankCode)
     .then(res => res.json())
     .then(
       (res) => {
