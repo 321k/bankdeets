@@ -596,7 +596,7 @@ const currencies = [
         "un_m49": 288,
         "currency_iso_3_char_code": "GHS",
         "currency_name": "Ghanaian cedi",
-        "recipient_type": "GHANA",
+        "recipient_type": "GHANA_LOCAL",
         "recipient_name": "Ghana local"
     },
     {
