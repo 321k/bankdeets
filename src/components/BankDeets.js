@@ -177,7 +177,6 @@ export default class BankDeetsContainer extends React.Component {
       .then(this.delayState())
     } else {
       const payload = {...this.state}
-      this.delayState()
       console.log(payload)
     }
   }
