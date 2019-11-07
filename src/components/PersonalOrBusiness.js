@@ -9,9 +9,22 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import { Translate } from 'react-translated';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  tabPanel: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+    width: `100%`,
+    }
+  }
+));
 
 
-export default class PersonalOrBusiness extends React.Component {
+
+
+
+export default class PersonalOrBusinessContainer extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -37,42 +50,57 @@ export default class PersonalOrBusiness extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <PersonalOrBusiness
+        value={this.state.value}
+        handleTabChange={this.handleTabChange}
+        a11yProps={this.a11yProps}
+        {...this.props}
+
+      />
+    );
+  } 
+}
+
+
+function PersonalOrBusiness (props){
+  const classes = useStyles();
+
+  return(
+    <React.Fragment>
         <AppBar position="static" elevation={0}>
           <Box style={{backgroundColor: 'white', dropShadow: 0}}>
             <Tabs 
-              value={this.state.value} 
-              onChange={this.handleTabChange} 
+              value={props.value} 
+              onChange={props.handleTabChange} 
               aria-label="Beneficiary type"
               indicatorColor="primary"
               textColor="primary" 
               variant="fullWidth"
             >
-              <Tab label={<Translate text="Personal"/>} {...this.a11yProps(0)} />
-              <Tab label={<Translate text="Business"/>} {...this.a11yProps(1)} />
+              <Tab label={<Translate text="Personal"/>} {...props.a11yProps(0)} />
+              <Tab label={<Translate text="Business"/>} {...props.a11yProps(1)} />
             </Tabs>
           </Box>
         </AppBar>
-        <TabPanel name="personalDetails" value={this.state.value} index={0}>
+        <TabPanel name="personalDetails" value={props.value} index={0} className={classes.tabPanel}>
           <PersonalDetails
-              onChange={this.props.handleChange} 
-              firstName={this.props.firstName}
-              lastName={this.props.lastName}
-              email={this.props.email}
-              phoneNumber={this.props.phoneNumber}
+              onChange={props.handleChange} 
+              firstName={props.firstName}
+              lastName={props.lastName}
+              email={props.email}
+              phoneNumber={props.phoneNumber}
             />
         </TabPanel>
-        <TabPanel name="businessDetails" value={this.state.value} index={1}>
+        <TabPanel name="businessDetails" value={props.value} index={1} className={classes.tabPanel}>
           <BusinessDetails
-              onChange={this.props.handleChange} 
-              businessName={this.props.businessName}
-              email={this.props.email}
-              phoneNumber={this.props.phoneNumber}
+              onChange={props.handleChange} 
+              businessName={props.businessName}
+              email={props.email}
+              phoneNumber={props.phoneNumber}
             />
         </TabPanel>
       </React.Fragment>
-    );
-  } 
+  )
 }
 
 
