@@ -50,18 +50,8 @@ export default function Address (props){
       </FormControl>
       <FormControl className={classes.formControl}>
         <TextField
-          id="addressLine1"
-          label={<Translate text='Address (line 1)'/>}
-          className={classes.textField}
-          value={props.city}
-          onChange={props.onChange} 
-          margin="normal"
-        />
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <TextField
-          id="addressLine1"
-          label={<Translate text='Address (line 2)'/>}
+          id="addressLine"
+          label={<Translate text='Address'/>}
           className={classes.textField}
           value={props.city}
           onChange={props.onChange} 

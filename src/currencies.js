@@ -800,16 +800,6 @@ const currencies = [
         "recipient_name": "Mexican Local"
     },
     {
-        "country": "Mexico",
-        "country_iso_2_char_code": "MX",
-        "country_iso_3_char_code": "MEX",
-        "un_m49": 484,
-        "currency_iso_3_char_code": "MXN",
-        "currency_name": "Mexican peso",
-        "recipient_type": "MEXICAN _WP",
-        "recipient_name": "#N/A"
-    },
-    {
         "country": "Malaysia",
         "country_iso_2_char_code": "MY",
         "country_iso_3_char_code": "MYS",

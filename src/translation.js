@@ -104,7 +104,7 @@ export default {
         fi: 'Kaupunki',
         fr: 'Ville'
     },
-    'Post code or zip code': {
+    'Post code': {
         se: 'Poskod',
         no: 'Poskod',
         dk: 'Poskod',
