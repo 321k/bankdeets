@@ -345,6 +345,7 @@ function BankDetails(props){
           <IndonesianRecipient 
             bankCode={props.bankCode} 
             accountNumber={props.accountNumber}
+            onChange={props.onChange}
           />
         );
     case 'JAPANESE':
