@@ -73,7 +73,7 @@ You will need to provide your own backend to store the data. If you're intereste
 * Poland 🇵🇱
 * Hungary 🇭🇺
 * India 🇮🇳
-* Singaproe 🇸🇬
+* Singapore 🇸🇬
 * Hong Kong 🇭🇰
 * New Zealand 🇳🇿
 * Czechia 🇨🇿
