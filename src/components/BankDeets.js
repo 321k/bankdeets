@@ -19,6 +19,7 @@ import PersonalOrBusiness from './PersonalOrBusiness.js'
 import Success from './Success.js'
 import StepLabel from '@material-ui/core/StepLabel';
 import Address from './Address.js'
+import currencies from '../currencies.js'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -84,19 +85,21 @@ export default class BankDeetsContainer extends React.Component {
       },
       bankDetails: {},
       response: '',
-      loading: false,
-      success: false,
+      validationSuccess: false,
+      validationError: false,
+      submitSuccess: false,
+      submitError: false,
       error: false,
-      validated: null,
+      loading: false,
       home: home
     }
+
     this.handleCountryChange = this.handleCountryChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleBankDetailsChange = this.handleBankDetailsChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.clearBankDetails = this.clearBankDetails.bind(this);
-    this.delayState = this.delayState.bind(this);
-    this.sendToTransferWise = this.sendToTransferWise.bind(this);
+    this.validateBankDetails = this.validateBankDetails.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleCountryChange (newVal, actionMeta) {
@@ -136,55 +139,24 @@ export default class BankDeetsContainer extends React.Component {
     })
   }
 
-  delayState() {
-    setTimeout(() => {
-        this.setState({
-        loading: false,
-        success: true
-      });
-    }, 1000);
-  }
 
-  handleSubmit(event){
-    event.preventDefault();
+  validateBankDetails(){
     this.setState({loading: true})
-    if(this.props.submitURL !== undefined){
-      fetch(this.props.submitURL, {
-        mode: 'cors',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/plain'
-        },
-        body: JSON.stringify({
-          beneficiaryDetails: this.state.beneficiaryDetails,
-          bankDetails: this.state.bankDetails,
-          language: this.props.language,
-          home: this.state.home
-        })
-      })
-      .then(
-        res => {
-          if(res.ok){
-            this.setState({success: true});
-            return res;
-          } else {
-            this.setState({success: false});
-            return res;
-          }
-        }
-      )
-      .then(res => res.json)
-    } else {
-      const payload = {...this.state}
-      this.delayState()
-      console.log(payload)
-    }
-  }
-
-
-  sendToTransferWise(){
     let details = this.state.bankDetails
+    const alpha3Country = this.state.beneficiaryDetails.country
+    const alpha2Country = currencies.filter(country => (
+      country.country_iso_3_char_code === alpha3Country
+    ))[0].country_iso_2_char_code
+
+    console.log(alpha2Country)
+
     details['legalType'] = this.state.beneficiaryDetails.legalType
+    details['address'] = {
+      country: alpha2Country,
+      city: this.state.beneficiaryDetails.city,
+      postCode: this.state.beneficiaryDetails.postCode,
+      firstLine: this.state.beneficiaryDetails.addressLine
+    }
 
     let accountHolderName = ''
     if(this.state.beneficiaryDetails.legalType === 'PRIVATE'){
@@ -196,7 +168,7 @@ export default class BankDeetsContainer extends React.Component {
       currency: this.state.beneficiaryDetails.currency,
       type: this.state.beneficiaryDetails.bankDetailsType,
       accountHolderName: accountHolderName,
-      details: details
+      details: details,
     }
 
     this.setState({loading: true})
@@ -210,20 +182,58 @@ export default class BankDeetsContainer extends React.Component {
     })
  
     .then(res => {
-      this.setState({validated: res.ok, loading: false, error: !res.ok}) ;
+      this.setState({
+        validationSuccess: res.ok,
+        loading: false,
+        validationError: !res.ok
+      });
       return res;
     })
     .then(res => res.json())
     .then(
       (res) => {
         this.setState({response: res});
-        return res
       },
       (error) => {
-        this.setState({error: error});
-        return error
+        console.log(error)
       }
     )
+  }
+
+  handleSubmit(){
+    this.setState({loading: true})
+
+    const payload = {
+      beneficiaryDetails: this.state.beneficiaryDetails,
+      bankDetails: this.state.bankDetails,
+      language: this.props.language,
+      home: this.state.home
+    }
+
+    if(this.props.submitURL !== undefined){
+      fetch(this.props.submitURL, {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(
+        res => {
+          if(res.ok){
+            this.setState({submitSuccess: true, loading: false, submitError: false});
+          } else {
+            this.setState({submitSuccess: false, loading: false, submitError: true});
+          }
+        }
+      )
+    } else {
+      console.log(payload);
+      this.setState({submitSuccess: true, loading: false, submitError: false});
+    }
+    
+      
   }
 
   render () {
@@ -233,7 +243,7 @@ export default class BankDeetsContainer extends React.Component {
           handleChange={this.handleChange}
           handleCountryChange={this.handleCountryChange}
           handleBankDetailsChange={this.handleBankDetailsChange}
-          sendToTransferWise={this.sendToTransferWise}
+          validateBankDetails={this.validateBankDetails}
           firstName={this.state.beneficiaryDetails.firstName}
           lastName={this.state.beneficiaryDetails.lastName}
           email={this.state.beneficiaryDetails.email}
@@ -246,11 +256,12 @@ export default class BankDeetsContainer extends React.Component {
           beneficiaryDetails={this.state.beneficiaryDetails}
           clearBankDetails={this.clearBankDetails}
           handleSubmit={this.handleSubmit}
-          loading={this.state.loading}
-          success={this.state.success}
-          error={this.state.error}
           response={this.state.response}
-          validated={this.state.validated}
+          validationSuccess={this.state.validationSuccess}
+          validationError={this.state.validationError}
+          submitSuccess={this.state.submitSuccess}
+          submitError={this.state.submitError}
+          loading={this.state.loading}
         />
       </Provider>
     );
@@ -387,14 +398,16 @@ function Body(props){
       return (
         <React.Fragment>
             <Success
+              submitSuccess={props.submitSuccess}
+              validationSuccess={props.validationSuccess}
+              submitError={props.submitError}
+              validationError={props.validationError}
               loading={props.loading}
-              error={props.error}
-              validated={props.validated}
-              success={props.success}
               response={props.response}
               bankDetails={props.bankDetails}
               beneficiaryDetails={props.beneficiaryDetails}
-              sendToTransferWise={props.sendToTransferWise}
+              validateBankDetails={props.validateBankDetails}
+              handleSubmit={props.handleSubmit}
             />
         </React.Fragment>
       )
@@ -463,7 +476,7 @@ function Footer(props){
             onClick={props.handleNext}
             color="primary"
           >
-          <Translate text="Validate"/>
+          <Translate text="Submit"/>
           </Button>
         </React.Fragment>
       )
@@ -471,11 +484,10 @@ function Footer(props){
     case(3):
       return (
             <SubmitButton
-              sendToTransferWise={props.sendToTransferWise}
-              handleSubmit={props.handleSubmit}
+              submitSuccess={props.submitSuccess}
               loading={props.loading}
-              success={props.success}
-              error={props.error}
+              validationError={props.validationError}
+              submitError={props.submitError}
               handleBack={props.handleBack}
               handleReset={props.handleReset}
             />
@@ -513,7 +525,7 @@ function SubmitButton(props){
         </Button>
       </React.Fragment>
     )
-  } else if (props.success){
+  } else if (props.submitSuccess){
     return(
       <React.Fragment>
         <Button
@@ -527,7 +539,28 @@ function SubmitButton(props){
         </Button>
       </React.Fragment>
     )
-  } else if (props.error){
+  } else if (props.submitError){
+    return (
+      <React.Fragment>
+          <Button
+            className={classes.button}
+            variant="outlined"
+            onClick={props.handleBack}
+            color="primary"
+          >
+            <Translate text="Previous"/>
+          </Button>
+          <Button
+            className={classes.button}
+            variant="outlined"
+            onClick={props.handleReset}
+            color="primary"
+          >
+            <Translate text="Start over"/>
+          </Button>
+        </React.Fragment>
+    )
+  } else if (props.validationError){
     return (
       <React.Fragment>
           <Button

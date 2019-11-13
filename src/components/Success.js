@@ -12,7 +12,13 @@ export default class SuccessScreenContainer extends React.Component{
   }
 
   componentDidMount(){
-    this.props.sendToTransferWise()
+    this.props.validateBankDetails()
+  }
+
+  componentDidUpdate(prevProps){
+    if(prevProps.validationSuccess !== this.props.validationSuccess){
+      this.props.handleSubmit()
+    }
   }
 
   render(){
@@ -25,12 +31,14 @@ export default class SuccessScreenContainer extends React.Component{
 function SuccessScreen (props){  
   if (props.loading){
     return <CircularProgress/>
-  } else if(props.error){
+  } else if(props.validationError){
     return <Error {...props}/>
-  } else if (props.success){
+  } else if (props.submitSuccess){
     return <Success {...props}/> 
-  } else if (props.validated){
-    return <Validated {...props}/> 
+  } else if (props.submitError){
+    return <SubmitError {...props}/> 
+  } else if (props.validationSuccess){
+    return <ValidatedContainer {...props}/> 
   } else {
     return <Default {...props}/>
   }
@@ -39,10 +47,10 @@ function SuccessScreen (props){
 function Error (props){
   return (
     <div>
-    <h2>Incorrect information</h2>
+    <h2>Invalid bank details</h2>
       {
         props.response.errors ? props.response.errors.map(error => (
-          <div styles={{margin: 10, padding: 10}}>
+          <div key={error.message} styles={{margin: 10, padding: 10}}>
             <div>{error.message}</div>
             <br/>
           </div>
@@ -53,11 +61,32 @@ function Error (props){
 }
 
 
+
+function SubmitError (props){
+  return (
+    <div>
+    <h2>Failed to submit</h2>
+    Something went wrong when we tried to submit the data.
+  </div>
+  )      
+}
+
+
+class ValidatedContainer extends React.Component{
+  constructor(props){
+    super(props)
+  }
+
+  render(){
+    return <Validated {...this.props} />
+  }
+}
+
 function Validated (props) {
   return (
     <div>
       <h2>The bank details are valid</h2>
-      Verified by TransferWise, ID: {props.response.id}
+      Submitting data...
     </div>
   )
 }
