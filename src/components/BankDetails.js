@@ -25,9 +25,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-const sanboxApiToken = '157bca0a-e206-4593-af98-eb816d6eca11'
-
 export default class BankDetailsContainer extends React.Component{
     constructor(props){
         super(props);
@@ -355,13 +352,6 @@ function BankDetails(props){
             accountType={props.accountType}
             bankCode={props.bankCode}
             branchCode={props.branchCode}
-            onChange={props.onChange}
-          />
-        );
-    case 'BULGARIA':
-        return (
-          <IbanRecipient 
-            iban={props.iban} 
             onChange={props.onChange}
           />
         );
