@@ -641,14 +641,17 @@ class FormDropdown extends React.Component {
 
 
 function IbanRecipient (props){
+  const classes = useStyles();
   const iban = props.iban ? props.iban : ''
   return(
+    <FormControl className={classes.formControl}>
       <FormInput
           name="iban" value={iban} 
           description="IBAN" 
           onChange={props.onChange} 
 
       />
+    </FormControl>
   );
 }
 
