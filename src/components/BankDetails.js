@@ -358,6 +358,65 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
+    case 'BULGARIA':
+        return (
+          <IbanRecipient 
+            iban={props.iban} 
+            onChange={props.onChange}
+          />
+        );
+    case 'SRILANKA':
+        return (
+          <SriLankaRecipient 
+            bankCode={props.bankCode} 
+            accountNumber={props.accountNumber}
+            onChange={props.onChange}
+          />
+        );
+    case 'MOROCCO':
+        return (
+          <MoroccoRecipient 
+            bankCode={props.bankCode} 
+            accountNumber={props.accountNumber}
+            onChange={props.onChange}
+          />
+        );
+    case 'NIGERIA':
+        return (
+          <NigeriaRecipient 
+            bankCode={props.bankCode} 
+            accountNumber={props.accountNumber}
+            onChange={props.onChange}
+          />
+        );
+    case 'NEPAL':
+        return (
+          <NepalRecipient 
+            bankCode={props.bankCode} 
+            accountNumber={props.accountNumber}
+            onChange={props.onChange}
+          />
+        );
+    case 'PERU':
+        return (
+          <PeruRecipient 
+            bankCode={props.bankCode} 
+            accountNumber={props.accountNumber}
+            accountType={props.accountType}
+            idDocumentType={props.idDocumentType}
+            idDocumentNumber={props.idDocumentNumber}
+            phoneNumber={props.phoneNumber}
+            onChange={props.onChange}
+          />
+        );
+    case 'PHILIPPINES':
+        return (
+          <PhilippinesRecipient 
+            bankCode={props.bankCode} 
+            accountNumber={props.accountNumber}
+            onChange={props.onChange}
+          />
+        );
     default:  
         return (
           <NotAvaialableRecipient 
@@ -1425,6 +1484,231 @@ function JapaneseRecipient (props){
       </React.Fragment>
   );
 }
+
+
+function SriLankaRecipient (props){
+  const classes = useStyles();
+  const accountNumber = props.accountNumber ? props.accountNumber : '';
+  const bankCode = props.bankCode ? props.bankCode : '';
+  const branchCode = props.branchCode ? props.branchCode : '';
+  
+  return(
+      <React.Fragment>
+        <FormControl className={classes.formControl}>
+          <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <GetBankCode
+            country="JP"
+            name="bankCode"
+            onChange={props.onChange}
+            value={bankCode}
+            description={<Translate text="Bank code"/>}
+          />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <GetBranchCode
+            country="JP"
+            name="branchCode"
+            onChange={props.onChange}
+            value={branchCode}
+            bankCode={bankCode}
+            description={<Translate text="Branch code"/>}
+          />
+        </FormControl>
+      </React.Fragment>
+  );
+}
+
+
+function MoroccoRecipient (props){
+  const classes = useStyles();
+  const accountNumber = props.accountNumber ? props.accountNumber : '';
+  const bankCode = props.bankCode ? props.bankCode : '';
+  
+  return(
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange} 
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBankCode
+          country="MA"
+          name="bankCode"
+          description={<Translate text="Bank code"/>}
+          onChange={props.onChange}
+          value={bankCode}
+        />
+      </FormControl>
+    </React.Fragment>
+  );
+}
+
+
+function NigeriaRecipient (props){
+  const classes = useStyles();
+  const accountNumber = props.accountNumber ? props.accountNumber : '';
+  const bankCode = props.bankCode ? props.bankCode : '';
+  
+  return(
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange} 
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBankCode
+          country="NG"
+          name="bankCode"
+          description={<Translate text="Bank code"/>}
+          onChange={props.onChange}
+          value={bankCode}
+        />
+      </FormControl>
+    </React.Fragment>
+  );
+}
+
+function NepalRecipient (props){
+  const classes = useStyles();
+  const accountNumber = props.accountNumber ? props.accountNumber : '';
+  const bankCode = props.bankCode ? props.bankCode : '';
+  
+  return(
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange} 
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBankCode
+          country="NP"
+          name="bankCode"
+          description={<Translate text="Bank code"/>}
+          onChange={props.onChange}
+          value={bankCode}
+        />
+      </FormControl>
+    </React.Fragment>
+  );
+}
+
+
+
+function PeruRecipient (props){
+  const classes = useStyles();
+  const accountNumber = props.accountNumber ? props.accountNumber : '';
+  const bankCode = props.bankCode ? props.bankCode : '';
+  const accountType = props.accountType ? props.accountType : '';
+  const idDocumentType = props.idDocumentType ? idDocumentType : '';
+  const idDocumentNumber = props.idDocumentNumber ? idDocumentNumber : '';
+  const phoneNumber = props.phoneNumber ? phoneNumber : '';
+  
+  return(
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange} 
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBankCode
+          country="PE"
+          name="bankCode"
+          description={<Translate text="Bank code"/>}
+          onChange={props.onChange}
+          value={bankCode}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <FormDropdown 
+          name="accountType"
+          value={accountType}
+          description="Account type"
+          onChange={props.onChange}
+          items={[{'key': 'CHECKING', 'value': 'Checking account'}, {'key': 'SAVINGS', 'value': 'Savings account'}]} 
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <FormDropdown 
+          name="idDocumentType"
+          value={idDocumentType}
+          description={<Translate text="ID document type"/>}
+          onChange={props.onChange}
+          items={[
+            {'key': 'DNI', 'value': 'National Identity Document'},
+            {'key': 'RUC', 'value': 'Tax ID number (RUC)'},
+            {'key': 'C_EXT', 'value': 'Carnet de Extranjería'},
+            {'key': 'PASSP', 'value': 'Passport'}
+          ]} 
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="idDocumentNumber"
+          value={idDocumentNumber}
+          description={<Translate text="ID document number"/>}
+          onChange={props.onChange} 
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="phoneNumber"
+          value={phoneNumber}
+          description={<Translate text="Phone number"/>}
+          onChange={props.onChange} 
+        />
+      </FormControl>
+    </React.Fragment>
+  );
+}
+
+
+function PhilippinesRecipient (props){
+  const classes = useStyles();
+  const accountNumber = props.accountNumber ? props.accountNumber : '';
+  const bankCode = props.bankCode ? props.bankCode : '';
+  
+  return(
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange} 
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBankCode
+          country="PH"
+          name="bankCode"
+          description={<Translate text="Bank code"/>}
+          onChange={props.onChange}
+          value={bankCode}
+        />
+      </FormControl>
+    </React.Fragment>
+  );
+}
+
+
 
 function NotAvaialableRecipient(props){
   const classes = useStyles();

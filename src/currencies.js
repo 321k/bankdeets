@@ -330,6 +330,16 @@ const currencies = [
         "recipient_name": "IBAN"
     },
     {
+        "country": "Georgia",
+        "country_iso_2_char_code": "GE",
+        "country_iso_3_char_code": "GEO",
+        "un_m49": 268,
+        "currency_iso_3_char_code": "GEL",
+        "currency_name": "Georgian lari",
+        "recipient_type": "IBAN",
+        "recipient_name": "IBAN"
+    },
+    {
         "country": "Guadeloupe",
         "country_iso_2_char_code": "GP",
         "country_iso_3_char_code": "GLP",
