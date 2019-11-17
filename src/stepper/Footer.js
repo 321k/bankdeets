@@ -2,8 +2,8 @@ import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import { Translate } from 'react-translated';
 import Button from '@material-ui/core/Button';
-import useStyles from '../styles.js'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import useStyles from '../styles.js'
 
 
 export default function Footer(props){

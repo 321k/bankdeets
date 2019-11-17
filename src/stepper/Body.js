@@ -1,10 +1,10 @@
 import React from 'react';
 import PersonalOrBusiness from './PersonalOrBusiness.js'
-import CountrySelector from './CountrySelector.js'
-import Address from './Address.js'
-import CurrencySelector from './CurrencySelector.js'
-import RecipientSelector from './RecipientSelector.js';
-import BankDetailsSelector from './BankDetailsSelector.js'
+import CountrySelector from '../components/CountrySelector.js'
+import Address from '../components/Address.js'
+import CurrencySelector from '../components/CurrencySelector.js'
+import RecipientSelector from '../components/RecipientSelector.js';
+import BankDetailsSelector from '../components/BankDetailsSelector.js'
 import Success from './Success.js'
 
 export default function Body(props){
