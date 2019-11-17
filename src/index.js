@@ -6,7 +6,8 @@ import CountrySelector from './components/CountrySelector.js'
 import CurrencySelector from './components/CurrencySelector.js'
 import RecipientSelector from './components/RecipientSelector.js'
 import PersonalDetails from './components/PersonalDetails.js'
-import BankDetails from './components/BankDetails.js'
+import BankDetailsSelector from './components/BankDetailsSelector.js'
+import BankDeetsStepper from './components/BankDeetsStepper.js'
 
 class BankDeetsWrapper extends React.Component{
   constructor(props){
@@ -29,11 +30,11 @@ class BankDeetsWrapper extends React.Component{
         <Grid container direction="row" justify="flex-end">
           <LanguageSelector language={this.state.language} setLanguage={this.setLanguage} />
         </Grid>
-        <BankDeets language={this.state.language} {...this.props}/>
+        <BankDeets language={this.state.language} {...this.props} render={props => <BankDeetsStepper {...props}/>} />
       </div>
     )
   }
 }
 
 export default BankDeetsWrapper
-export {BankDeets, CountrySelector, CurrencySelector, RecipientSelector, PersonalDetails, BankDetails}
+export {BankDeets, CountrySelector, CurrencySelector, RecipientSelector, PersonalDetails, BankDetailsSelector}

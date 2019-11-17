@@ -1,27 +1,13 @@
 import React from 'react';
-import CountrySelector from './CountrySelector.js'
-import CurrencySelector from './CurrencySelector.js'
-import RecipientSelector from './RecipientSelector.js';
-import BankDetails from './BankDetails.js'
 import { Provider, Translate } from 'react-translated';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepButton from '@material-ui/core/StepButton';
-import PersonalOrBusiness from './PersonalOrBusiness.js'
-import Success from './Success.js'
-import StepLabel from '@material-ui/core/StepLabel';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Address from './Address.js'
 import currencies from '../currencies.js'
 import Footer from './Footer.js'
+import Body from './Body.js'
 import translation from '../translation.js';
 
 
 
-export default class BankDeetsContainer extends React.Component {
+export default class BankDeets extends React.Component {
   constructor(props){
     super(props)
     let home = window.location.href
@@ -192,38 +178,21 @@ export default class BankDeetsContainer extends React.Component {
     } else {
       console.log(payload);
       this.setState({submitSuccess: true, loading: false, submitError: false});
-    }
-    
-      
+    }  
   }
 
   render () {
+    let values = {...this.props, ...this.state}
+    values.handleCountryChange = this.handleCountryChange
+    values.handleChange = this.handleChange
+    values.handleBankDetailsChange = this.handleBankDetailsChange
+    values.clearBankDetails = this.clearBankDetails
+    values.validateBankDetails = this.validateBankDetails
+    values.handleSubmit = this.handleSubmit
+
     return (
       <Provider language={this.props.language} translation={translation}>
-        <BankDeetsStepper
-          handleChange={this.handleChange}
-          handleCountryChange={this.handleCountryChange}
-          handleBankDetailsChange={this.handleBankDetailsChange}
-          validateBankDetails={this.validateBankDetails}
-          firstName={this.state.beneficiaryDetails.firstName}
-          lastName={this.state.beneficiaryDetails.lastName}
-          email={this.state.beneficiaryDetails.email}
-          phoneNumber={this.state.beneficiaryDetails.phoneNumber}
-          country={this.state.beneficiaryDetails.country}
-          countryHelper={this.state.countryHelper}
-          currency={this.state.beneficiaryDetails.currency}
-          bankDetailsType={this.state.beneficiaryDetails.bankDetailsType}
-          bankDetails={this.state.bankDetails}
-          beneficiaryDetails={this.state.beneficiaryDetails}
-          clearBankDetails={this.clearBankDetails}
-          handleSubmit={this.handleSubmit}
-          response={this.state.response}
-          validationSuccess={this.state.validationSuccess}
-          validationError={this.state.validationError}
-          submitSuccess={this.state.submitSuccess}
-          submitError={this.state.submitError}
-          loading={this.state.loading}
-        />
+        {this.props.render(values)}
       </Provider>
     );
   }
@@ -231,150 +200,3 @@ export default class BankDeetsContainer extends React.Component {
 
 
 
-class BankDeetsStepper extends React.Component{
-  constructor(props){
-    super(props);
-    this.state={
-      activeStep: 0
-    }
-    this.handleNext = this.handleNext.bind(this);
-    this.handleBack = this.handleBack.bind(this);
-    this.handleReset = this.handleReset.bind(this);
-    this.setStep = this.setStep.bind(this);
-  }
-
-  handleNext(){
-    const step = this.state.activeStep + 1
-    this.setState({activeStep: step})
-  };
-
-  handleBack() {
-    const step = this.state.activeStep - 1
-    this.setState({activeStep:  step})
-  };
-
-  handleReset() {
-    this.setState({activeStep: 0})
-    this.props.clearBankDetails()
-  };
-
-  setStep(event) {
-    this.setState({activeStep: parseInt(event.currentTarget.value)})
-  };
-
-  render(){
-    const steps = ['Beneficiary', 'Country and currency', 'Bank details'];
-    return(
-      <div>
-        <CssBaseline />
-        <Container maxWidth="sm" style={{minHeight: 400}}>
-          <Stepper alternativeLabel activeStep={this.state.activeStep}>
-            {steps.map((label, index) => (
-              <Step key={label}>  
-                <StepButton value={index} onClick={this.setStep}>
-                  <StepLabel value={index} error={(this.state.activeStep===3 && index===2) ? this.props.error : false}>
-                    <Translate text={label}/>
-                  </StepLabel>
-                </StepButton>
-              </Step>
-            ))}
-          </Stepper>
-          <Grid container spacing={3} alignItems="center" justify="center" direction="column">
-            <Body
-              {...this.props} 
-              activeStep={this.state.activeStep} 
-              handleNext={this.handleNext} 
-              handleBack={this.handleBack} 
-              handleReset={this.handleReset}
-            />
-          </Grid>
-        </Container>
-        <Container maxWidth="sm">
-          <Grid container spacing={3} alignItems="flex-end" justify="center" direction="row">
-            <ButtonGroup>
-              <Footer 
-                {...this.props} 
-                activeStep={this.state.activeStep} 
-                handleNext={this.handleNext} 
-                handleBack={this.handleBack} 
-                handleReset={this.handleReset}
-              />
-            </ButtonGroup>
-          </Grid>
-        </Container>
-      </div>
-    )
-  }
-}
-
-
-function Body(props){
-  switch(props.activeStep){
-    case(0):
-      return (
-            <PersonalOrBusiness {...props}/>
-      )
-      break;
-    case(1):
-      return (
-        <React.Fragment>
-          <CountrySelector
-            onChange={props.handleChange}
-            value={props.country}
-            language={props.language}
-          />
-          <Address
-            onChange={props.handleChange}
-            cisty={props.city}
-            postCode={props.postCode}
-            addressLine1={props.addressLine1}
-            addressLine2={props.addressLine2}
-          />
-        </React.Fragment>
-      )
-      break;
-    case(2):
-      return (
-        <React.Fragment>
-            <CurrencySelector
-              onChange={props.handleChange}
-              value={props.currency}
-              country={props.country}
-            />
-            <RecipientSelector 
-              onChange={props.handleChange}
-              value={props.bankDetailsType}
-              country={props.country}
-              currency={props.currency}
-            />
-            <BankDetails
-              bankDetailsType={props.bankDetailsType}
-              onChange={props.handleBankDetailsChange}
-              clearBankDetails={props.clearBankDetails}
-              {...props.bankDetails}
-            />
-        </React.Fragment>
-      )
-      break;
-    case(3):
-      return (
-        <React.Fragment>
-            <Success
-              submitSuccess={props.submitSuccess}
-              validationSuccess={props.validationSuccess}
-              submitError={props.submitError}
-              validationError={props.validationError}
-              loading={props.loading}
-              response={props.response}
-              bankDetails={props.bankDetails}
-              beneficiaryDetails={props.beneficiaryDetails}
-              validateBankDetails={props.validateBankDetails}
-              handleSubmit={props.handleSubmit}
-            />
-        </React.Fragment>
-      )
-      break;
-    default:
-      return <div></div>
-  }
-}
