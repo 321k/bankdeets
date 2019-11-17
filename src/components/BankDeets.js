@@ -4,58 +4,21 @@ import CurrencySelector from './CurrencySelector.js'
 import RecipientSelector from './RecipientSelector.js';
 import BankDetails from './BankDetails.js'
 import { Provider, Translate } from 'react-translated';
-import translation from '../translation.js';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { green } from '@material-ui/core/colors';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
 import PersonalOrBusiness from './PersonalOrBusiness.js'
 import Success from './Success.js'
 import StepLabel from '@material-ui/core/StepLabel';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Address from './Address.js'
 import currencies from '../currencies.js'
+import Footer from './Footer.js'
+import translation from '../translation.js';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  wrapper: {
-    margin: theme.spacing(1),
-    position: 'relative',
-  },
-  buttonSuccess: {
-    backgroundColor: green[500],
-    '&:hover': {
-      backgroundColor: green[700],
-    },
-    margin: theme.spacing(1),
-  },
-  fabProgress: {
-    color: green[500],
-    position: 'absolute',
-    top: -6,
-    left: -6,
-    zIndex: 1,
-  },
-  buttonProgress: {
-    color: green[500],
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginTop: -12,
-    marginLeft: -12,
-  },
-  button: {
-    margin: theme.spacing(1),
-  },
-}));
 
 
 export default class BankDeetsContainer extends React.Component {
@@ -147,8 +110,6 @@ export default class BankDeetsContainer extends React.Component {
     const alpha2Country = currencies.filter(country => (
       country.country_iso_3_char_code === alpha3Country
     ))[0].country_iso_2_char_code
-
-    console.log(alpha2Country)
 
     details['legalType'] = this.state.beneficiaryDetails.legalType
     details['address'] = {
@@ -298,7 +259,6 @@ class BankDeetsStepper extends React.Component{
   };
 
   setStep(event) {
-    console.log(event.currentTarget.value)
     this.setState({activeStep: parseInt(event.currentTarget.value)})
   };
 
@@ -331,6 +291,7 @@ class BankDeetsStepper extends React.Component{
         </Container>
         <Container maxWidth="sm">
           <Grid container spacing={3} alignItems="flex-end" justify="center" direction="row">
+            <ButtonGroup>
               <Footer 
                 {...this.props} 
                 activeStep={this.state.activeStep} 
@@ -338,7 +299,8 @@ class BankDeetsStepper extends React.Component{
                 handleBack={this.handleBack} 
                 handleReset={this.handleReset}
               />
-            </Grid>
+            </ButtonGroup>
+          </Grid>
         </Container>
       </div>
     )
@@ -414,194 +376,5 @@ function Body(props){
       break;
     default:
       return <div></div>
-  }
-}
-
-
-
-
-
-
-function Footer(props){
-  const classes = useStyles();
-  switch(props.activeStep){
-    case(0):
-      return (
-            <Button
-              className={classes.button}
-              variant="contained"
-              onClick={props.handleNext}
-              color="primary"
-            >
-            <Translate text="Next"/>
-            </Button>
-      )
-      break;
-    case(1):
-      return (
-        <React.Fragment>
-            <Button
-              className={classes.button}
-              variant="outlined"
-              onClick={props.handleBack}
-              color="primary"
-            >
-            <Translate text="Previous"/>
-            </Button>
-            <Button
-              className={classes.button}
-              variant="contained"
-              onClick={props.handleNext}
-              color="primary"
-            >
-            <Translate text="Next"/>
-            </Button>
-        </React.Fragment>
-      )
-      break;
-    case(2):
-      return (
-        <React.Fragment>
-          <Button
-            className={classes.button}
-            variant="outlined"
-            onClick={props.handleBack}
-            color="primary"
-          >
-          <Translate text="Previous"/>
-          </Button>
-          <Button
-            className={classes.button}
-            variant="contained"
-            onClick={props.handleNext}
-            color="primary"
-          >
-          <Translate text="Submit"/>
-          </Button>
-        </React.Fragment>
-      )
-      break;
-    case(3):
-      return (
-            <SubmitButton
-              submitSuccess={props.submitSuccess}
-              loading={props.loading}
-              validationError={props.validationError}
-              submitError={props.submitError}
-              handleBack={props.handleBack}
-              handleReset={props.handleReset}
-            />
-      )
-      break;
-    default:
-      return <div></div>
-  }
-}
-
-
-function SubmitButton(props){
-  const classes = useStyles();
-
-  if(props.loading){
-    return(
-      <React.Fragment>
-        <Button
-          className={classes.button}
-          variant="outlined"
-          onClick={props.handleReset}
-          color="primary"
-        >
-          <Translate text="Start over"/>
-        </Button>
-        <Button
-          variant="contained"
-          className={classes.button}
-          onClick={props.handleSubmit}
-          color="primary"
-          disabled={true}
-        >
-          <Translate text="Submit"/>
-          <CircularProgress size={24} className={classes.buttonProgress}/>
-        </Button>
-      </React.Fragment>
-    )
-  } else if (props.submitSuccess){
-    return(
-      <React.Fragment>
-        <Button
-          variant="contained"
-          className={classes.buttonSuccess}
-          color="primary"
-          onClick={props.handleReset}
-          disabled={false}
-        >
-          <Translate text="Add another"/>
-        </Button>
-      </React.Fragment>
-    )
-  } else if (props.submitError){
-    return (
-      <React.Fragment>
-          <Button
-            className={classes.button}
-            variant="outlined"
-            onClick={props.handleBack}
-            color="primary"
-          >
-            <Translate text="Previous"/>
-          </Button>
-          <Button
-            className={classes.button}
-            variant="outlined"
-            onClick={props.handleReset}
-            color="primary"
-          >
-            <Translate text="Start over"/>
-          </Button>
-        </React.Fragment>
-    )
-  } else if (props.validationError){
-    return (
-      <React.Fragment>
-          <Button
-            className={classes.button}
-            variant="outlined"
-            onClick={props.handleBack}
-            color="primary"
-          >
-            <Translate text="Previous"/>
-          </Button>
-          <Button
-            className={classes.button}
-            variant="outlined"
-            onClick={props.handleReset}
-            color="primary"
-          >
-            <Translate text="Start over"/>
-          </Button>
-        </React.Fragment>
-    )
-  } else {
-    return(
-       <React.Fragment>
-        <Button
-          className={classes.button}
-          variant="outlined"
-          onClick={props.handleBack}
-          color="primary"
-        >
-          <Translate text="Previous"/>
-        </Button>
-        <Button
-          variant="contained"
-          className={classes.button}
-          onClick={props.handleSubmit}
-          color="primary"
-          disabled={false}
-        >
-          <Translate text="Submit"/>
-        </Button>
-      </React.Fragment>
-    )
   }
 }

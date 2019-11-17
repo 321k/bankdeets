@@ -1,29 +1,12 @@
 import React from "react";
 import { Translate } from 'react-translated';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
+import useStyles from '../styles.js'
 
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 200,
-    width: `80%`,
-  },
-  formInput: {
-    padding: theme.spacing(1),
-    minWidth: 200,
-    width: `100%`,
-  },
-}));
 
 export default class BankDetailsContainer extends React.Component{
     constructor(props){
@@ -61,7 +44,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'SWIFT_CODE':
         return (
           <SwiftRecipient 
@@ -70,7 +52,6 @@ function BankDetails(props){
              onChange={props.onChange}
           />
         );
-        break;
     case 'SORT_CODE':
         return (
           <SortCodeRecipient 
@@ -79,7 +60,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'SWEDEN_LOCAL':
         return (
           <SwedishLocalRecipient 
@@ -88,7 +68,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'ABA':
         return (
           <AbaRecipient 
@@ -98,7 +77,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'AUSTRALIAN':
         return (
           <AustralianLocalRecipient 
@@ -107,7 +85,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'AUSTRALIAN_BUSINESS':
         return (
           <AustralianBusinessRecipient 
@@ -117,7 +94,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'CANADIAN':
         return (
           <CanadianRecipient 
@@ -128,7 +104,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'POLISH':
         return (
           <PolishLocalRecipient 
@@ -137,7 +112,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'HUNGARIAN':
         return (
           <HungarianLocalRecipient 
@@ -145,7 +119,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'INDIAN':
         return (
           <IndianRecipient 
@@ -154,7 +127,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'SINGAPORE':
         return (
           <SingaporeanRecipient 
@@ -163,7 +135,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'HONGKONG':
         return (
           <HongkongRecipient 
@@ -172,7 +143,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'NEWZEALAND':
         return (
           <NewzealandRecipient 
@@ -180,7 +150,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'CZECH':
         return (
           <CzechLocalRecipient 
@@ -189,7 +158,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'BANGLADESH':
         return (
           <BangladeshRecipient 
@@ -198,7 +166,6 @@ function BankDetails(props){
             onChange={props.onChange} 
           />
         );
-        break;
     case 'CHINESE_CARD':
         return (
           <ChineseCardRecipient 
@@ -206,7 +173,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'VIETNAME_EARTHPORT':
         return (
           <VietnamEarthportRecipient 
@@ -215,7 +181,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'SWISS':
         return (
           <SwissLocalRecipient 
@@ -224,7 +189,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'MALAYSIAN':
         return (
           <MalaysianLocalRecipient 
@@ -233,7 +197,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'ISRAELI_LOCAL':
         return (
           <IbanRecipient 
@@ -241,7 +204,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'TURKISH_EARTHPORT':
         return (
           <IbanRecipient 
@@ -249,7 +211,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'EMIRATES':
         return (
           <IbanRecipient 
@@ -257,7 +218,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'ARGENTINA':
         return (
           <ArgentinaRecipient 
@@ -266,7 +226,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'BRAZIL':
         return (
           <BrazilRecipient 
@@ -278,7 +237,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'CHILE':
         return (
           <ChileRecipient 
@@ -290,7 +248,6 @@ function BankDetails(props){
             onChange={props.onChange}
           />
         );
-        break;
     case 'THAILAND':
         return (
           <ThailandRecipient 

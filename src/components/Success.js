@@ -1,8 +1,6 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
-import Divider from '@material-ui/core/Divider';
 
 
 
@@ -112,6 +110,7 @@ function Default (props){
         <TextField
           id={key}
           label={key}
+          key={i}
           value={beneficiaryDetails[key]}
           margin="normal"
         /> : ''
@@ -125,6 +124,7 @@ function Default (props){
         <TextField
           id={key}
           label={key}
+          key={i}
           value={bankDetails[key]}
           margin="normal"
         /> : ''

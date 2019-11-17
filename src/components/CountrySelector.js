@@ -1,23 +1,10 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
-import { makeStyles } from '@material-ui/core/styles';
 import { Translate } from 'react-translated';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
-import Grid from '@material-ui/core/Grid';
+import useStyles from '../styles.js'
 
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 200,
-    width: `80%`,
-  },
-  root: {
-    flexGrow: 1,
-    margin: theme.spacing(2)
-  },
-
-}));
 
 
 export default class CountriesDropdownContainer extends React.Component{

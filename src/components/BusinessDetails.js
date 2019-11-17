@@ -1,21 +1,8 @@
 import React from 'react';
 import { Translate } from 'react-translated';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
-
-const useStyles = makeStyles(theme => ({
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    minWidth: 200,
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 200,
-    width: `80%`,
-  },
-}));
+import useStyles from '../styles.js'
 
 
 export default function PersonalDetails(props) {

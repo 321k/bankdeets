@@ -1,19 +1,12 @@
 import React from 'react';
 import currencies from '../currencies.js'
-import { makeStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Translate } from 'react-translated';
-
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(3),
-  },
-}));
-
+import useStyles from '../styles.js'
 
 export default class RecipientSelector extends React.Component{
   constructor(props){
