@@ -46,7 +46,7 @@ export default function SubmitButton(props){
             onClick={props.handleReset}
             disabled={false}
           >
-            <Translate text="Thank you"/>
+            <Translate text="Add another one"/>
           </Button>
         </FormControl>
       </React.Fragment>
