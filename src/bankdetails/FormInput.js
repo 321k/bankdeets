@@ -1,5 +1,6 @@
 import React from "react";
 import TextField from '@material-ui/core/TextField';
+import useStyles from '../styles.js'
 
 export default function FormInput (props) {
     const classes = useStyles();
