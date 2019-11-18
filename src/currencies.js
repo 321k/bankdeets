@@ -1270,6 +1270,16 @@ const currencies = [
         "recipient_name": "Local bank details"
     },
     {
+        "country": "Botswana",
+        "country_iso_2_char_code": "BW",
+        "country_iso_3_char_code": "BWA",
+        "un_m49": 72,
+        "currency_iso_3_char_code": "BWP",
+        "currency_name": "Botswana pula",
+        "recipient_type": "BOTSWANA_LOCAL",
+        "recipient_name": "Botswana local"
+    },
+    {
         "country": "Aruba",
         "country_iso_2_char_code": "AW",
         "country_iso_3_char_code": "ABW",

@@ -44,7 +44,7 @@ export default function SubmitButton(props){
             variant="contained"
             className={classes.buttonSuccess}
             onClick={props.handleReset}
-            disabled={props.submitSuccess}
+            disabled={false}
           >
             <Translate text="Thank you"/>
           </Button>
