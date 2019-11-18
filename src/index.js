@@ -49,6 +49,8 @@ import {
   NepalRecipient,
   PeruRecipient,
   PhilippinesRecipient,
+  SouthAfricaRecipient,
+  BotswanaLocalRecipient,
   NotAvaialableRecipient
 } from './bankdetails/BankDetails.js'
 

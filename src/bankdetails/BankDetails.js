@@ -1174,6 +1174,72 @@ export function PhilippinesRecipient (props){
 }
 
 
+export function SouthAfricaRecipient (props){
+  const classes = useStyles();
+  const accountNumber = props.accountNumber ? props.accountNumber : '';
+  const swiftCode = props.swiftCode ? props.swiftCode : '';
+  
+  return(
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange} 
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBankCode
+          country="ZA"
+          name="swiftCode"
+          description={<Translate text="Bank code"/>}
+          onChange={props.onChange}
+          value={swiftCode}
+        />
+      </FormControl>
+    </React.Fragment>
+  );
+}
+
+export function BotswanaLocalRecipient (props){
+  const classes = useStyles();
+  const accountNumber = props.accountNumber ? props.accountNumber : '';
+  const bankCode = props.bankCode ? props.bankCode : '';
+  const branchCode = props.branchCode ? props.branchCode : '';
+  
+  return(
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="accountNumber"
+          value={accountNumber}
+          description={<Translate text="Account number"/>}
+          onChange={props.onChange} 
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBankCode
+          country="BW"
+          name="bankCode"
+          description={<Translate text="Bank code"/>}
+          onChange={props.onChange}
+          value={bankCode}
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <GetBranchCode
+          country="BW"
+          name="branchCode"
+          description={<Translate text="Branch code"/>}
+          onChange={props.onChange}
+          value={branchCode}
+          bankCode={bankCode}
+        />
+      </FormControl>
+    </React.Fragment>
+  );
+}
 
 export function NotAvaialableRecipient(props){
   const classes = useStyles();

@@ -387,6 +387,23 @@ function BankDetailsSelector(props){
             onChange={props.onChange}
           />
         );
+    case 'SOUTHAFRICA':
+        return (
+          <SouthAfricaRecipient 
+            swiftCode={props.swiftCode} 
+            accountNumber={props.accountNumber}
+            onChange={props.onChange}
+          />
+        );
+    case 'BOTSWANA_LOCAL':
+        return (
+          <BotswanaLocalRecipient 
+            bankCode={props.bankCode} 
+            branchCode={props.branchCode}
+            accountNumber={props.accountNumber}
+            onChange={props.onChange}
+          />
+        );
     default:  
         return (
           <NotAvaialableRecipient 
