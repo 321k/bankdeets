@@ -3,9 +3,10 @@ import { Translate } from 'react-translated';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import useStyles from '../styles.js'
+import PropTypes from 'prop-types';
 
 
-export default function PersonalDetails(props) {
+export default function BusinessDetails(props) {
   const classes = useStyles();
 
   return (
@@ -43,4 +44,10 @@ export default function PersonalDetails(props) {
       </FormControl>
     </React.Fragment>
   );
-}    
+}
+
+BusinessDetails.propTypes = {
+  businessName: PropTypes.string,
+  email: PropTypes.string,
+  phoneNumber: PropTypes.string
+};

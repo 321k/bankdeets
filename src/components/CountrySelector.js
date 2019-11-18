@@ -4,7 +4,7 @@ import { Translate } from 'react-translated';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
 import useStyles from '../styles.js'
-
+import PropTypes from 'prop-types';
 
 
 export default class CountriesDropdownContainer extends React.Component{
@@ -41,6 +41,15 @@ export default class CountriesDropdownContainer extends React.Component{
   }
 }
 
+
+CountriesDropdownContainer.propTypes = {
+  city: PropTypes.string,
+  postCode: PropTypes.string,
+  addressLine: PropTypes.string
+};
+
+
+
 function CountriesDropdown(props){
   const classes = useStyles();
 
@@ -62,3 +71,4 @@ function CountriesDropdown(props){
       </FormControl>
   )
 }
+

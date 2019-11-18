@@ -11,7 +11,7 @@ export default function Body(props){
   switch(props.activeStep){
     case(0):
       return (
-            <PersonalOrBusiness {...props}/>
+        <PersonalOrBusiness {...props}/>
       )
       break;
     case(1):

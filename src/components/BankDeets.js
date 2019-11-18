@@ -195,6 +195,3 @@ export default class BankDeets extends React.Component {
     );
   }
 }
-
-
-

@@ -484,6 +484,7 @@ export function CzechLocalRecipient (props){
 
 export function BangladeshRecipient (props){
   const classes = useStyles();
+  const accountNumber = props.accountNumber ? props.accountNumber : '';
   const bankCode = props.bankCode ? props.bankCode : '';
   const branchCode = props.branchCode ? props.branchCode : '';
 

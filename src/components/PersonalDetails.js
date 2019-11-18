@@ -52,4 +52,4 @@ export default function PersonalDetails(props) {
       </FormControl>
     </React.Fragment>
   );
-    }    
+}    

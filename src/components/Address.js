@@ -3,6 +3,8 @@ import { Translate } from 'react-translated';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import useStyles from '../styles.js'
+import PropTypes from 'prop-types';
+
 
 export default function Address (props){
   const classes = useStyles();
@@ -24,7 +26,7 @@ export default function Address (props){
           id="postCode"
           label={<Translate text='Post code'/>}
           className={classes.textField}
-          value={props.city}
+          value={props.postCode}
           onChange={props.onChange} 
           margin="normal"
         />
@@ -34,7 +36,7 @@ export default function Address (props){
           id="addressLine"
           label={<Translate text='Address'/>}
           className={classes.textField}
-          value={props.city}
+          value={props.addressLine}
           onChange={props.onChange} 
           margin="normal"
         />
@@ -42,3 +44,9 @@ export default function Address (props){
     </React.Fragment>
   )
 }
+
+Address.propTypes = {
+  city: PropTypes.string,
+  postCode: PropTypes.string,
+  addressLine: PropTypes.string
+};
