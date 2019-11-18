@@ -7,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import useStyles from '../styles.js'
 import GetBankCode from './GetBankCode.js'
 import GetBranchCode from './GetBranchCode.js'
-
+import FormInput from './FormInput.js'
 
 class FormDropdown extends React.Component {
 
