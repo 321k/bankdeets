@@ -89,7 +89,7 @@ export default class BankDeets extends React.Component {
 
   validateBankDetails(){
     this.setState({loading: true})
-    let details = this.state.bankDetails
+    let details = {...this.state.bankDetails}
     const alpha3Country = this.state.beneficiaryDetails.country
     const alpha2Country = currencies.filter(country => (
       country.country_iso_3_char_code === alpha3Country
