@@ -26,13 +26,13 @@ This can be useful if you are doing:
 <a href="bankdeets.co">bankdeets.co</a>
 
 ## Step 1: beneficiary information
-<img src="https://i.imgur.com/xSNaqVA.png" width="300">
+<img src="http://bankdeets.co/step1.png" width="300">
 
 ## Step 2: address
-<img src="https://i.imgur.com/IkBdqoE.png" width="300">
+<img src="http://bankdeets.co/step2.png" width="300">
 
 ## Step 3: bank information
-<img src="https://i.imgur.com/TDBow85.png" width="300">
+<img src="http://bankdeets.co/step3.png" width="300">
 
 # API
 * submitURL: Where to post the form data to. It can be left blank for testing and the data will be logged to the console.
