@@ -12,12 +12,12 @@ import BankDetailsSelector from './components/BankDetailsSelector.js'
 import BankDeetsStepper from './stepper/BankDeetsStepper.js'
 import {IbanFormContainer} from './simple/SimpleForm.js'
 import {BangladeshFormContainer} from './simple/SimpleForm.js'
+import SortCodeRecipient from './bankdetails/SortCodeRecipient.js'
+import IbanRecipient from  './bankdetails/IbanRecipient.js'
+import AbaRecipient from './bankdetails/AbaRecipient.js'
 import {
-  IbanRecipient,
   SwiftRecipient,
-  SortCodeRecipient,
   SwedishLocalRecipient,
-  AbaRecipient,
   AustralianLocalRecipient,
   AustralianBusinessRecipient,
   CanadianRecipient,

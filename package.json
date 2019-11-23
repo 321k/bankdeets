@@ -1,6 +1,6 @@
 {
   "name": "bankdeets",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "description": "Collect bank details in any country and currency",
   "main": "build/index.js",
   "scripts": {

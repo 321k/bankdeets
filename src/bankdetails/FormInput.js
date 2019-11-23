@@ -14,6 +14,9 @@ export default function FormInput (props) {
             onChange={props.onChange} 
             margin="normal"
             disabled={props.disable} 
+            onBlur={props.onBlur}
+            error={props.error}
+            helperText={props.error ? props.helperText : ''}
           />
     );
 }

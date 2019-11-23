@@ -1,7 +1,8 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import BankDeets from '../components/BankDeets.js'
-import {IbanRecipient, BangladeshRecipient} from '../bankdetails/BankDetails.js'
+import {BangladeshRecipient} from '../bankdetails/BankDetails.js'
+import IbanRecipient from '../bankdetails/IbanRecipient.js'
 import PersonalDetails from '../components/PersonalDetails.js'
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';

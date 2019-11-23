@@ -1,10 +1,11 @@
 import React from "react";
+import SortCodeRecipient from '../bankdetails/SortCodeRecipient.js'
+import IbanRecipient from '../bankdetails/IbanRecipient.js'
+import AbaRecipient from '../bankdetails/AbaRecipient.js'
+
 import {
-  IbanRecipient,
   SwiftRecipient,
-  SortCodeRecipient,
   SwedishLocalRecipient,
-  AbaRecipient,
   AustralianLocalRecipient,
   AustralianBusinessRecipient,
   CanadianRecipient,

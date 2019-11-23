@@ -8,46 +8,7 @@ import useStyles from '../styles.js'
 import GetBankCode from './GetBankCode.js'
 import GetBranchCode from './GetBranchCode.js'
 import FormInput from './FormInput.js'
-
-class FormDropdown extends React.Component {
-
-  componentDidMount(){
-    let event = {}
-    event.currentTarget = {name: this.props.name, value: this.props.items[0].key}
-    this.props.onChange(event)
-  }
-
-  render(){
-    return(
-      <React.Fragment>
-        <InputLabel shrink={true} htmlFor={this.props.name}>{this.props.description}</InputLabel>
-        <NativeSelect id={this.props.name} name={this.props.name} onChange={this.props.onChange} value={this.props.value}>
-          {
-            this.props.items.map((item) => 
-              <option value={item.key} key={item.key}>{item.value}</option>
-            )
-          }
-        </NativeSelect>
-      </React.Fragment>
-    );
-  }
-}
-
-
-export function IbanRecipient (props){
-  const classes = useStyles();
-  const iban = props.iban ? props.iban : ''
-  return(
-    <FormControl className={classes.formControl}>
-      <FormInput
-          name="iban" value={iban} 
-          description="IBAN" 
-          onChange={props.onChange} 
-
-      />
-    </FormControl>
-  );
-}
+import FormDropdown from './FormDropdown.js'
 
 export function SwiftRecipient (props){
   const classes = useStyles();
@@ -127,47 +88,6 @@ export function SwedishLocalRecipient (props){
         />
       </FormControl>
     </React.Fragment> 
-  );
-}
-
-export function AbaRecipient (props){
-  const classes = useStyles();
-  const abartn = props.abartn ? props.abartn : ''
-  const accountNumber = props.accountNumber ? props.accountNumber : ''
-  const accountType = props.accountType ? props.accountType : ''
-  return(
-    <React.Fragment>
-      <FormControl className={classes.formControl}>
-        <FormInput 
-          className={classes.formInput}
-          name="abartn" 
-          value={abartn} 
-          description="ACH routing number" 
-          onChange={props.onChange}
-          placeholder="111000025"
-        />
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <FormInput 
-          className={classes.formInput}
-          name="accountNumber"
-          value={accountNumber}
-          description={<Translate text="Account number"/>}
-          onChange={props.onChange}  
-          placeholder="12345678"
-        />
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <FormDropdown 
-          className={classes.formInput}
-          name="accountType"
-          value={accountType}
-          description="Account type"
-          onChange={props.onChange}
-          items={[{'key': 'CHECKING', 'value': 'Checking account'}, {'key': 'SAVINGS', 'value': 'Savings account'}]} 
-        />
-      </FormControl>
-    </React.Fragment>
   );
 }
 
