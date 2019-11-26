@@ -576,8 +576,8 @@ const currencies = [
         "un_m49": 826,
         "currency_iso_3_char_code": "GBP",
         "currency_name": "Pound sterling",
-        "recipient_type": "IBAN",
-        "recipient_name": "IBAN"
+        "recipient_type": "SORT_CODE",
+        "recipient_name": "UK sort code"
     },
     {
         "country": "United Kingdom",
@@ -586,8 +586,8 @@ const currencies = [
         "un_m49": 826,
         "currency_iso_3_char_code": "GBP",
         "currency_name": "Pound sterling",
-        "recipient_type": "SORT_CODE",
-        "recipient_name": "UK Sort"
+        "recipient_type": "IBAN",
+        "recipient_name": "IBAN"
     },
     {
         "country": "South Georgia and the South Sandwich Islands",

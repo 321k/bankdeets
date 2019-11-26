@@ -25,6 +25,7 @@ export default function Address (props){
           />
         </Tooltip>
       </FormControl>
+      {['CA', 'US', 'BR', 'AU'].includes(props.countryTwoCharCode) ? <StateContainer onChange={props.onChange} addressState={props.addressState} countryTwoCharCode={props.countryTwoCharCode}/> : ''}
       <FormControl className={classes.formControl}>
         <TextField
           id="city"
@@ -55,7 +56,6 @@ export default function Address (props){
           margin="normal"
         />
       </FormControl>
-      {['CA', 'US', 'BR', 'AU'].includes(props.countryTwoCharCode) ? <StateContainer onChange={props.onChange} addressState={props.addressState} countryTwoCharCode={props.countryTwoCharCode}/> : ''}
     </React.Fragment>
   )
 }
