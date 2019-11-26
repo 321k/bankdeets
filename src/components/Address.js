@@ -22,7 +22,6 @@ export default function Address (props){
             value={props.countryTwoCharCode}
             margin="normal"
             disabled={true}
-
           />
         </Tooltip>
       </FormControl>
@@ -56,7 +55,7 @@ export default function Address (props){
           margin="normal"
         />
       </FormControl>
-      {['CA', 'US', 'BR', 'AU'].includes(props.countryTwoCharCode) ? <StateContainer onChange={props.onChange} state={props.state} countryTwoCharCode={props.countryTwoCharCode}/> : ''}
+      {['CA', 'US', 'BR', 'AU'].includes(props.countryTwoCharCode) ? <StateContainer onChange={props.onChange} addressState={props.addressState} countryTwoCharCode={props.countryTwoCharCode}/> : ''}
     </React.Fragment>
   )
 }
@@ -99,7 +98,7 @@ class StateContainer extends React.Component{
       <State 
         onChange={this.props.onChange}
         states={this.state.states}
-        state={this.props.state}
+        addressState={this.props.addressState}
       />
     )
   }
@@ -107,14 +106,14 @@ class StateContainer extends React.Component{
 
 function State (props){
   const classes = useStyles();
-  const state = props.state ? props.state : '';
+  const addressState = props.addressState ? props.addressState : '';
 
   if(Array.isArray(props.states) && props.states[0] !== undefined){
     return (
       <FormControl className={classes.formControl}>
         <FormDropdown
-          name="state"
-          value={state}
+          name="addressState"
+          value={addressState}
           description={<Translate text="State"/>}
           onChange={props.onChange}
           items={props.states}
@@ -126,8 +125,8 @@ function State (props){
       <FormControl className={classes.formControl}>
         <FormInput 
           className={classes.formInput}
-          name="state" 
-          value={state} 
+          name="addressState" 
+          value={addressState} 
           description="State" 
           onChange={props.onChange}
           placeholder="TX"

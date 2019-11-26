@@ -72,8 +72,8 @@ function BankDetailsSelector(props){
     case 'SWIFT_CODE':
         return (
           <SwiftRecipient 
-            iban={props.iban} 
-             swift_code={props.swift_code}
+             accountNumber={props.accountNumber} 
+             bic={props.bic}
              onChange={props.onChange}
           />
         );

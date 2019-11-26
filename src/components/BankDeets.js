@@ -22,6 +22,7 @@ export default class BankDeets extends React.Component {
       beneficiaryDetails: {
         country: 'USA',
         countryTwoCharCode: 'US',
+        addressState: '',
         currency: 'USD',
         bankDetailsType: 'ABA',
         firstName: '',
@@ -109,11 +110,22 @@ export default class BankDeets extends React.Component {
     let details = {...this.state.bankDetails}
 
     details['legalType'] = this.state.beneficiaryDetails.legalType
-    details['address'] = {
-      country: this.getTwoCharCountryCode(),
-      city: this.state.beneficiaryDetails.city,
-      postCode: this.state.beneficiaryDetails.postCode,
-      firstLine: this.state.beneficiaryDetails.addressLine
+
+    if(this.state.beneficiaryDetails.addressState === ''){
+      details['address'] = {
+        country: this.getTwoCharCountryCode(),
+        city: this.state.beneficiaryDetails.city,
+        postCode: this.state.beneficiaryDetails.postCode,
+        firstLine: this.state.beneficiaryDetails.addressLine
+      }
+    } else {
+      details['address'] = {
+        country: this.getTwoCharCountryCode(),
+        city: this.state.beneficiaryDetails.city,
+        postCode: this.state.beneficiaryDetails.postCode,
+        firstLine: this.state.beneficiaryDetails.addressLine,
+        state: this.state.beneficiaryDetails.addressState
+      }
     }
 
     let accountHolderName = ''

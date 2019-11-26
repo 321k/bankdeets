@@ -12,22 +12,22 @@ import FormDropdown from '../components/FormDropdown.js'
 
 export function SwiftRecipient (props){
   const classes = useStyles();
-  const iban = props.iban ? props.iban : ''
-  const swift_code = props.swift_code ? props.swift_code : ''
+  const accountNumber = props.accountNumber ? props.accountNumber : ''
+  const bic = props.bic ? props.bic : ''
   return(
       <React.Fragment>
         <FormControl className={classes.formControl}>
           <FormInput 
-              name="iban" value={iban} 
-              description="IBAN" 
+              name="accountNumber" value={accountNumber} 
+              description="Account number" 
               onChange={props.onChange} 
 
           />
         </FormControl>
         <FormControl className={classes.formControl}>
           <FormInput
-              name="swift_code" value={swift_code} 
-              description="SWIFT Code" 
+              name="bic" value={bic} 
+              description="BIC/SWIFT Code" 
               onChange={props.onChange} 
           />
         </FormControl>
