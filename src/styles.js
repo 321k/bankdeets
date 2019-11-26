@@ -8,13 +8,11 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
   },
   textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
   },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 100,
-    width: `80%`,
+    width: `80%`
   },
   buttonSuccess: {
     backgroundColor: green[500],
@@ -44,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   tabPanel: {
     margin: theme.spacing(1),
     minWidth: 200,
-    width: `100%`,
+    width: `100%`
   }
 }));
 

@@ -6,7 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import useStyles from '../styles.js'
 
 
-export default function SubmitButton(props){
+export default function SuccessButtons(props){
   const classes = useStyles();
 
   if(props.loading){

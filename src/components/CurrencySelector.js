@@ -7,7 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Translate } from 'react-translated';
 import useStyles from '../styles.js'
-
+import Box from '@material-ui/core/Box';
 
 export default class CurrencySelector extends React.Component{
   constructor(props){
@@ -56,21 +56,22 @@ export default class CurrencySelector extends React.Component{
     
   render(){
     return(
-      <FormControl component="fieldset" className={useStyles.formControl}>
-        <FormLabel component="legend"><Translate text="Currency"/></FormLabel>
-        <RadioGroup aria-label="currency" name="currency" value={this.props.value} onChange={this.props.onChange}>
-          {
-            this.state.currencies.map(currency => 
-              <FormControlLabel
-                value={currency.key}
-                key={currency.key}
-                control={<Radio />}
-                label={currency.value}
-              />
-            )
-          }
-        </RadioGroup>
-      </FormControl>
+        <FormControl component="fieldset" className={useStyles.formControl}>
+
+          <FormLabel component="legend"><Translate text="Currency"/></FormLabel>
+          <RadioGroup aria-label="currency" name="currency" value={this.props.value} onChange={this.props.onChange}>
+            {
+              this.state.currencies.map(currency => 
+                <FormControlLabel
+                  value={currency.key}
+                  key={currency.key}
+                  control={<Radio />}
+                  label={currency.value}
+                />
+              )
+            }
+          </RadioGroup>
+        </FormControl>
     )
   }
 }

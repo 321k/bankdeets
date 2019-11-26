@@ -4,13 +4,28 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import useStyles from '../styles.js'
 import PropTypes from 'prop-types';
-
+import FormDropdown from './FormDropdown.js'
+import Tooltip from '@material-ui/core/Tooltip';
+import FormInput from './FormInput.js'
 
 export default function Address (props){
   const classes = useStyles();
 
   return (
     <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <Tooltip title="Go to previous step to edit">
+          <TextField
+            id="country"
+            label={<Translate text='Country'/>}
+            className={classes.textField}
+            value={props.countryTwoCharCode}
+            margin="normal"
+            disabled={true}
+
+          />
+        </Tooltip>
+      </FormControl>
       <FormControl className={classes.formControl}>
         <TextField
           id="city"
@@ -41,6 +56,7 @@ export default function Address (props){
           margin="normal"
         />
       </FormControl>
+      {['CA', 'US', 'BR', 'AU'].includes(props.countryTwoCharCode) ? <StateContainer onChange={props.onChange} state={props.state} countryTwoCharCode={props.countryTwoCharCode}/> : ''}
     </React.Fragment>
   )
 }
@@ -48,5 +64,75 @@ export default function Address (props){
 Address.propTypes = {
   city: PropTypes.string,
   postCode: PropTypes.string,
-  addressLine: PropTypes.string
+  addressLine: PropTypes.string,
 };
+
+
+class StateContainer extends React.Component{
+  constructor(props){
+    super(props)
+    this.state={
+      states: []
+    }
+    this.mapStates=this.mapStates.bind(this)
+  }
+
+  componentDidMount(){
+    fetch('http://payspresso.io/api/v1/states/' + this.props.countryTwoCharCode)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        const states = Array.isArray(result.values) ? result.values.map(item => this.mapStates(item)) : ''
+        this.setState({states: states})
+      },
+      (error) => {
+        console.log(error)
+      })
+  }
+
+    mapStates(item){
+      return {key: item.code, value: item.name}
+    }
+
+  render(){
+    return (
+      <State 
+        onChange={this.props.onChange}
+        states={this.state.states}
+        state={this.props.state}
+      />
+    )
+  }
+}
+
+function State (props){
+  const classes = useStyles();
+  const state = props.state ? props.state : '';
+
+  if(Array.isArray(props.states) && props.states[0] !== undefined){
+    return (
+      <FormControl className={classes.formControl}>
+        <FormDropdown
+          name="state"
+          value={state}
+          description={<Translate text="State"/>}
+          onChange={props.onChange}
+          items={props.states}
+        />
+      </FormControl>
+    )
+  } else {
+    return (
+      <FormControl className={classes.formControl}>
+        <FormInput 
+          className={classes.formInput}
+          name="state" 
+          value={state} 
+          description="State" 
+          onChange={props.onChange}
+          placeholder="TX"
+        />
+      </FormControl>
+    )
+  }  
+}

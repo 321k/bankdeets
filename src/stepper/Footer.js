@@ -4,7 +4,7 @@ import { Translate } from 'react-translated';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import useStyles from '../styles.js'
-import SubmitButton from './SubmitButton.js'
+import SuccessButtons from './SuccessButtons.js'
 
 export default function Footer(props){
   const classes = useStyles();
@@ -74,7 +74,7 @@ export default function Footer(props){
       )
     case(3):
       return (
-            <SubmitButton
+            <SuccessButtons
               submitSuccess={props.submitSuccess}
               loading={props.loading}
               validationError={props.validationError}

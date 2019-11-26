@@ -7,8 +7,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import useStyles from '../styles.js'
 import GetBankCode from './GetBankCode.js'
 import GetBranchCode from './GetBranchCode.js'
-import FormInput from './FormInput.js'
-import FormDropdown from './FormDropdown.js'
+import FormInput from '../components/FormInput.js'
+import FormDropdown from '../components/FormDropdown.js'
 
 export function SwiftRecipient (props){
   const classes = useStyles();
@@ -35,33 +35,6 @@ export function SwiftRecipient (props){
   );
 }
 
-export function SortCodeRecipient (props){
-  const classes = useStyles();
-  const sortCode = props.sortCode ? props.sortCode : '';
-  const accountNumber = props.accountNumber ? props.accountNumber : '';
-  return(
-      <React.Fragment>
-        <FormControl className={classes.formControl}>
-          <FormInput
-              name="sortCode"
-              placeholder="202020"
-              value={sortCode}
-              description={<Translate text="Sort code"/>}
-              onChange={props.onChange}
-          />
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <FormInput
-              placeholder="12345678"
-              description={<Translate text="Account number"/>}
-              name="accountNumber"
-              value={accountNumber}
-              onChange={props.onChange}
-          />
-        </FormControl>
-      </React.Fragment>
-  );
-}
 
 export function SwedishLocalRecipient (props){
   const classes = useStyles();
@@ -88,43 +61,6 @@ export function SwedishLocalRecipient (props){
         />
       </FormControl>
     </React.Fragment> 
-  );
-}
-
-export function AustralianLocalRecipient (props){
-  const classes = useStyles();
-  const bsbCode = props.abartn ? props.abartn : ''
-  const accountNumber = props.accountNumber ? props.accountNumber : ''
-  return(
-      <React.Fragment>
-        <FormControl className={classes.formControl}>
-          <FormInput name="bsbCode" value={bsbCode} description="BSB code" onChange={props.onChange}  />
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-        </FormControl>
-      </React.Fragment>
-  );
-}
-
-export function AustralianBusinessRecipient (props){
-  const classes = useStyles();
-  const bsbCode = props.abartn ? props.abartn : '';
-  const accountNumber = props.accountNumber ? props.accountNumber : '';
-  const businessNumber = props.businessNumber ? props.businessNumber : '';
-    
-  return(
-    <React.Fragment>
-      <FormControl className={classes.formControl}>
-        <FormInput name="bsbCode" value={bsbCode} description="BSB code" onChange={props.onChange}  />
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <FormInput name="businessNumber" value={businessNumber} description="Business number" onChange={props.onChange}  />
-      </FormControl>
-    </React.Fragment>
   );
 }
 
@@ -175,7 +111,8 @@ export function CanadianRecipient (props){
 }
 
 export function PolishLocalRecipient (props){
-  const classes = useStyles();  const accountNumber = props.accountNumber ? props.accountNumber : '';
+  const classes = useStyles();  
+  const accountNumber = props.accountNumber ? props.accountNumber : '';
   const bic = props.bic ? props.bic : '';
   return(
       <React.Fragment>
@@ -197,26 +134,6 @@ export function HungarianLocalRecipient (props){
         onChange={props.onChange}  
       />
     </FormControl>
-  );
-}
-
-export function IndianRecipient (props){
-  const classes = useStyles();
-  const ifscCode = props.ifscCode ? props.ifscCode : '';
-  const accountNumber = props.accountNumber ? props.accountNumber : '';
-  return(
-      <React.Fragment>
-          <FormInput
-            name="ifscCode"
-            value={ifscCode}
-            description="IFSC code"
-            onChange={props.onChange}  />
-          <FormInput
-            name="accountNumber"
-            value={accountNumber}
-            description={<Translate text="Account number"/>}
-            onChange={props.onChange}  />
-      </React.Fragment>
   );
 }
 

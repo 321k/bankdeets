@@ -1,7 +1,7 @@
 import React from "react";
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormInput from './FormInput.js'
+import FormInput from '../components/FormInput.js'
 
 
 export default class GetBankCode extends React.Component{

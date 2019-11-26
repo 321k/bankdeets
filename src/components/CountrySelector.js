@@ -5,7 +5,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
 import useStyles from '../styles.js'
 import PropTypes from 'prop-types';
-
+import Box from '@material-ui/core/Box';
 
 export default class CountriesDropdownContainer extends React.Component{
   constructor(props){
@@ -54,6 +54,8 @@ function CountriesDropdown(props){
   const classes = useStyles();
 
   return(
+    <React.Fragment>
+      <Box mt={5}/>
       <FormControl className={classes.formControl}>
         <InputLabel shrink={true} htmlFor="age-native-simple"><Translate text="Country"/></InputLabel>
         <NativeSelect
@@ -69,6 +71,8 @@ function CountriesDropdown(props){
           }
         </NativeSelect>
       </FormControl>
+      <Box mt={5}/>
+    </React.Fragment>
   )
 }
 

@@ -22,11 +22,22 @@ export default function Body(props){
             value={props.beneficiaryDetails.country}
             language={props.language}
           />
-          <Address
+          <CurrencySelector
             onChange={props.handleChange}
-            cisty={props.beneficiaryDetails.city}
-            postCode={props.beneficiaryDetails.postCode}
-            addressLine={props.beneficiaryDetails.addressLine}
+            value={props.beneficiaryDetails.currency}
+            country={props.beneficiaryDetails.country}
+          />
+          <RecipientSelector 
+            onChange={props.handleChange}
+            value={props.beneficiaryDetails.bankDetailsType}
+            country={props.beneficiaryDetails.country}
+            currency={props.beneficiaryDetails.currency}
+          />
+          <BankDetailsSelector
+            bankDetailsType={props.beneficiaryDetails.bankDetailsType}
+            onChange={props.handleBankDetailsChange}
+            clearBankDetails={props.clearBankDetails}
+            {...props.bankDetails}
           />
         </React.Fragment>
       )
@@ -34,23 +45,13 @@ export default function Body(props){
     case(2):
       return (
         <React.Fragment>
-            <CurrencySelector
-              onChange={props.handleChange}
-              value={props.beneficiaryDetails.currency}
-              country={props.beneficiaryDetails.country}
-            />
-            <RecipientSelector 
-              onChange={props.handleChange}
-              value={props.beneficiaryDetails.bankDetailsType}
-              country={props.beneficiaryDetails.country}
-              currency={props.beneficiaryDetails.currency}
-            />
-            <BankDetailsSelector
-              bankDetailsType={props.beneficiaryDetails.bankDetailsType}
-              onChange={props.handleBankDetailsChange}
-              clearBankDetails={props.clearBankDetails}
-              {...props.bankDetails}
-            />
+          <Address
+            onChange={props.handleChange}
+            countryTwoCharCode={props.beneficiaryDetails.countryTwoCharCode}
+            city={props.beneficiaryDetails.city}
+            postCode={props.beneficiaryDetails.postCode}
+            addressLine={props.beneficiaryDetails.addressLine}
+          />
         </React.Fragment>
       )
       break;

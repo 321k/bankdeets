@@ -1,6 +1,6 @@
 import React from "react";
 import FormControl from '@material-ui/core/FormControl';
-import FormInput from './FormInput.js'
+import FormInput from '../components/FormInput.js'
 import { Translate } from 'react-translated';
 import useStyles from '../styles.js'
 

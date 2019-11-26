@@ -2,16 +2,15 @@ import React from "react";
 import SortCodeRecipient from '../bankdetails/SortCodeRecipient.js'
 import IbanRecipient from '../bankdetails/IbanRecipient.js'
 import AbaRecipient from '../bankdetails/AbaRecipient.js'
-
+import IndianRecipient from '../bankdetails/IndianRecipient.js'
+import AustralianLocalRecipient from '../bankdetails/AustralianLocalRecipient.js'
+import AustralianBusinessRecipient from '../bankdetails/AustralianBusinessRecipient.js'
 import {
   SwiftRecipient,
   SwedishLocalRecipient,
-  AustralianLocalRecipient,
-  AustralianBusinessRecipient,
   CanadianRecipient,
   PolishLocalRecipient,
   HungarianLocalRecipient,
-  IndianRecipient,
   SingaporeanRecipient,
   HongkongRecipient,
   NewzealandRecipient,
