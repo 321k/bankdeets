@@ -7,7 +7,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Translate } from 'react-translated';
 import useStyles from '../styles.js'
-import Box from '@material-ui/core/Box';
+
 
 export default class CurrencySelector extends React.Component{
   constructor(props){

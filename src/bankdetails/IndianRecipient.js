@@ -51,11 +51,11 @@ function IndianRecipient (props){
           <FormInput
             name="ifscCode"
             value={ifscCode}
-            description="IFSC code"
+            description={<Translate text="IFSC code"/>}
             onChange={props.onChange}  
             onBlur={props.validateIfscCode}
             error={props.ifscError}
-            helperText="Incorrect IFSC code" 
+            helperText={<Translate text="Incorrect IFSC code" />}
           />
           <FormInput
             name="accountNumber"
@@ -64,7 +64,7 @@ function IndianRecipient (props){
             onChange={props.onChange}
             onBlur={props.validateAccountNumber}
             error={props.accountNumberError}
-            helperText="Incorrect account number"
+            helperText={<Translate text="Incorrect account number"/>}
           />
       </React.Fragment>
   );

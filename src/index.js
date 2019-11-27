@@ -18,15 +18,17 @@ import AbaRecipient from './bankdetails/AbaRecipient.js'
 import IndianRecipient from './bankdetails/IndianRecipient.js'
 import AustralianLocalRecipient from './bankdetails/AustralianLocalRecipient.js'
 import AustralianBusinessRecipient from './bankdetails/AustralianBusinessRecipient.js'
+import CanadianRecipient from './bankdetails/CanadianRecipient.js'
+import SwedishLocalRecipient from './bankdetails/SwedishLocalRecipient.js'
+import HungarianLocalRecipient from './bankdetails/HungarianLocalRecipient.js'
+import PolishLocalRecipient from './bankdetails/PolishLocalRecipient.js'
+import NewzealandRecipient from './bankdetails/NewzealandRecipient.js'
+import ThailandRecipient from './bankdetails/ThailandRecipient.js'
+
 import {
   SwiftRecipient,
-  SwedishLocalRecipient,
-  CanadianRecipient,
-  PolishLocalRecipient,
-  HungarianLocalRecipient,
   SingaporeanRecipient,
   HongkongRecipient,
-  NewzealandRecipient,
   CzechLocalRecipient,
   BangladeshRecipient,
   ChineseCardRecipient,
@@ -36,7 +38,6 @@ import {
   ArgentinaRecipient,
   BrazilRecipient,
   ChileRecipient,
-  ThailandRecipient,
   EgyptLocalRecipient,
   GhanaLocalRecipient,
   KenyaLocalRecipient,

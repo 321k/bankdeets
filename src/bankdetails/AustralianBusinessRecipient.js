@@ -53,11 +53,11 @@ function AustralianBusinessRecipient (props){
           <FormInput
             name="bsbCode"
             value={bsbCode}
-            description="BSB code"
+            description={<Translate text="BSB code"/>}
             onChange={props.onChange}
             onBlur={props.validateBsbCode}
             error={props.bsbCodeError}
-            helperText="Invalid BSB code"
+            helperText={<Translate text="Invalid BSB code"/>}
           />
         </FormControl>
         <FormControl className={classes.formControl}>
@@ -68,13 +68,13 @@ function AustralianBusinessRecipient (props){
             onChange={props.onChange}
             onBlur={props.validateAccountNumber}
             error={props.accountNumberError}
-            helperText="Invalid account number"
+            helperText={<Translate text="Invalid account number"/>}
           />
           <FormControl className={classes.formControl}>
             <FormInput
               name="businessNumber"
               value={businessNumber}
-              description="Business number"
+              description={<Translate text="Business number"/>}
               onChange={props.onChange}  
             />
           </FormControl>

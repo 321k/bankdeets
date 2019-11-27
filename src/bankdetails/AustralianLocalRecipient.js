@@ -51,11 +51,11 @@ function AustralianLocalRecipient (props){
           <FormInput
             name="bsbCode"
             value={bsbCode}
-            description="BSB code"
+            description={<Translate text="BSB code"/>}
             onChange={props.onChange}
             onBlur={props.validateBsbCode}
             error={props.bsbCodeError}
-            helperText="Invalid BSB code"
+            helperText={<Translate text="Invalid BSB code"/>}
           />
         </FormControl>
         <FormControl className={classes.formControl}>
@@ -66,7 +66,7 @@ function AustralianLocalRecipient (props){
             onChange={props.onChange}
             onBlur={props.validateAccountNumber}
             error={props.accountNumberError}
-            helperText="Invalid account number"
+            helperText={<Translate text="Invalid account number"/>}
           />
         </FormControl>
       </React.Fragment>

@@ -41,7 +41,7 @@ function IbanRecipient (props){
           onChange={props.onChange} 
           error={props.ibanError}
           onBlur={props.validateIban}
-          helperText="Invalid IBAN"
+          helperText={<Translate text="Invalid IBAN"/>}
       />
     </FormControl>
   );

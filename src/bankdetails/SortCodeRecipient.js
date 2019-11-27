@@ -55,7 +55,7 @@ function SortCodeRecipient (props){
               onChange={props.onChange}
               onBlur={props.validateSortCode}
               error={props.sortCodeError}
-              helperText="Incorrect sort code."
+              helperText={<Translate text="Incorrect sort code"/>}
           />
         </FormControl>
         <FormControl className={classes.formControl}>
@@ -67,7 +67,7 @@ function SortCodeRecipient (props){
               onBlur={props.validateAccountNumber}
               onChange={props.onChange}
               error={props.accountNumberError}
-              helperText="Incorrect account number."
+              helperText={<Translate text="Incorrect account number"/>}
           />
         </FormControl>
       </React.Fragment>
