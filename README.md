@@ -110,6 +110,16 @@ You will need to provide your own backend to store the data. If you're intereste
 * Nepal 🇳🇵
 * Nigeria 🇳🇬
 * Sri Lanka 🇱🇰
+* Botswana 🇧🇼
+* South Africa 🇿🇦
+* Côte d'Ivoire 🇨🇮
+* Benin 🇧🇯
+* Burkina Faso 🇧🇫
+* Guinea 🇬🇳
+* Mali 🇲🇱
+* Niger 🇳🇪
+* Senegal 🇸🇳
+* Togo 🇹🇬
 
 # Supported languages
 * English
