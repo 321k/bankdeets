@@ -1,7 +1,13 @@
 # <BankDeets/>
 A react component for collecting bank details in any country and currency. 
 
-Sample project here: https://github.com/321k/bankdeets, bankdeets.co
+## Sample project, front end only
+https://github.com/321k/bankdeets
+https://bankdeets.co
+
+## Sample project with backend
+https://payspresso.io
+https://github.com/321k/payspresso
 
 # Installation
 `npm install bankdeets`
