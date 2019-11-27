@@ -44,7 +44,7 @@ export default class BankDeetsStepper extends React.Component{
   };
 
   render(){
-    const steps = ['Beneficiary', 'Bank details', 'Address'];
+    const steps = ['Bank details', 'Beneficiary', 'Address'];
     return(
       <React.Fragment>
         <CssBaseline />

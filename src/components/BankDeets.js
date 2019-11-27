@@ -128,17 +128,22 @@ export default class BankDeets extends React.Component {
       }
     }
 
+
     let accountHolderName = ''
     if(this.state.beneficiaryDetails.legalType === 'PRIVATE'){
       accountHolderName = this.state.beneficiaryDetails.firstName + ' ' + this.state.beneficiaryDetails.lastName
     } else {
       accountHolderName = this.state.beneficiaryDetails.businessName
     } 
-    const payload = {
+    let payload = {
       currency: this.state.beneficiaryDetails.currency,
       type: this.state.beneficiaryDetails.bankDetailsType,
       accountHolderName: accountHolderName,
       details: details,
+    }
+
+    if(this.state.beneficiaryDetails.currency === 'XOF'){
+      payload['country'] = this.getTwoCharCountryCode()
     }
 
     this.setState({loading: true})

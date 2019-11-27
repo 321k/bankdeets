@@ -52,6 +52,7 @@ import {
   PhilippinesRecipient,
   SouthAfricaRecipient,
   BotswanaLocalRecipient,
+  WestAfricanLocal,
   NotAvaialableRecipient
 } from './bankdetails/BankDetails.js'
 
@@ -134,5 +135,6 @@ PeruRecipient,
 PhilippinesRecipient,
 SouthAfricaRecipient,
 BotswanaLocalRecipient,
+WestAfricanLocal,
 NotAvaialableRecipient
 }

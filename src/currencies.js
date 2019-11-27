@@ -1280,6 +1280,86 @@ const currencies = [
         "recipient_name": "Botswana local"
     },
     {
+        "country": "Côte d'Ivoire",
+        "country_iso_2_char_code": "CI",
+        "country_iso_3_char_code": "CIV",
+        "un_m49": 384,
+        "currency_iso_3_char_code": "XOF",
+        "currency_name": "West African franc",
+        "recipient_type": "UEMOA_LOCAL",
+        "recipient_name": "XOF local"
+    },
+    {
+        "country": "Benin",
+        "country_iso_2_char_code": "BJ",
+        "country_iso_3_char_code": "BEN",
+        "un_m49": 204,
+        "currency_iso_3_char_code": "XOF",
+        "currency_name": "West African franc",
+        "recipient_type": "UEMOA_LOCAL",
+        "recipient_name": "XOF local"
+    },
+    {
+        "country": "Burkina Faso",
+        "country_iso_2_char_code": "BF",
+        "country_iso_3_char_code": "BFA",
+        "un_m49": 854,
+        "currency_iso_3_char_code": "XOF",
+        "currency_name": "West African franc",
+        "recipient_type": "UEMOA_LOCAL",
+        "recipient_name": "XOF local"
+    },
+    {
+        "country": "Guinea",
+        "country_iso_2_char_code": "GN",
+        "country_iso_3_char_code": "GIN",
+        "un_m49": 324,
+        "currency_iso_3_char_code": "XOF",
+        "currency_name": "West African franc",
+        "recipient_type": "UEMOA_LOCAL",
+        "recipient_name": "XOF local"
+    },
+    {
+        "country": "Mali",
+        "country_iso_2_char_code": "ML",
+        "country_iso_3_char_code": "MLI",
+        "un_m49": 466,
+        "currency_iso_3_char_code": "XOF",
+        "currency_name": "West African franc",
+        "recipient_type": "UEMOA_LOCAL",
+        "recipient_name": "XOF local"
+    },
+    {
+        "country": "Niger",
+        "country_iso_2_char_code": "NE",
+        "country_iso_3_char_code": "NER",
+        "un_m49": 562,
+        "currency_iso_3_char_code": "XOF",
+        "currency_name": "West African franc",
+        "recipient_type": "UEMOA_LOCAL",
+        "recipient_name": "XOF local"
+    },
+    {
+        "country": "Senegal",
+        "country_iso_2_char_code": "SN",
+        "country_iso_3_char_code": "SEN",
+        "un_m49": 686,
+        "currency_iso_3_char_code": "XOF",
+        "currency_name": "West African franc",
+        "recipient_type": "UEMOA_LOCAL",
+        "recipient_name": "XOF local"
+    },
+    {
+        "country": "Togo",
+        "country_iso_2_char_code": "TG",
+        "country_iso_3_char_code": "TGO",
+        "un_m49": 768,
+        "currency_iso_3_char_code": "XOF",
+        "currency_name": "West African franc",
+        "recipient_type": "UEMOA_LOCAL",
+        "recipient_name": "XOF local"
+    },
+    {
         "country": "Aruba",
         "country_iso_2_char_code": "AW",
         "country_iso_3_char_code": "ABW",

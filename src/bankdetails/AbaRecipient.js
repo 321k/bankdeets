@@ -38,6 +38,7 @@ export default class AbaRecipientContainer extends React.Component{
         validateAccountNumber={this.validateAccountNumber}
         abartnError={this.state.abartnError}
         accountNumberError={this.state.accountNumberError}
+        accountType={this.props.accountType}
       />
     )
   }

@@ -35,42 +35,18 @@ export function SwiftRecipient (props){
   );
 }
 
-
-export function PolishLocalRecipient (props){
-  const classes = useStyles();  
-  const accountNumber = props.accountNumber ? props.accountNumber : '';
-  const bic = props.bic ? props.bic : '';
-  return(
-      <React.Fragment>
-          <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
-          <FormInput name="bic" value={bic} description={<Translate text="BIC (optional)"/>} onChange={props.onChange}  />
-      </React.Fragment>
-  );
-}
-
-export function HungarianLocalRecipient (props){
-  const classes = useStyles();
-  const accountNumber = props.accountNumber ? props.accountNumber : '';
-  return(
-    <FormControl className={classes.formControl}>
-      <FormInput
-        name="accountNumber"
-        value={accountNumber}
-        description={<Translate text="Account number"/>}
-        onChange={props.onChange}  
-      />
-    </FormControl>
-  );
-}
-
 export function SingaporeanRecipient (props){
   const classes = useStyles();
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const bankCode = props.bankCode ? props.bankCode : '';
   return(
       <React.Fragment>
+        <FormControl className={classes.formControl}>
           <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
+        </FormControl>
+        <FormControl className={classes.formControl}>
           <GetBankCode country="SG" name="bankCode" onChange={props.onChange} value={bankCode}/>
+        </FormControl>
       </React.Fragment>
   );
 }
@@ -80,29 +56,22 @@ export function HongkongRecipient (props){
   const accountNumber = props.accountNumber ? props.accountNumber : '';
   const bankCode = props.bankCode ? props.bankCode : '';
   return(
-      <React.Fragment>
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
         <FormInput
           name="accountNumber"
           value={accountNumber}
           description={<Translate text="Account number"/>}
-          onChange={props.onChange}  />
+          onChange={props.onChange}  
+        />
+      </FormControl>
+      <FormControl className={classes.formControl}>
         <GetBankCode country="HK" name="bankCode" onChange={props.onChange} value={bankCode}/>
-      </React.Fragment>
+      </FormControl>
+    </React.Fragment>
   );
 }
 
-export function NewzealandRecipient (props) {
-  const classes = useStyles();
-  const accountNumber = props.accountNumber ? props.accountNumber : '';
-  return(
-      <FormInput
-        name="accountNumber"
-        value={accountNumber}
-        description={<Translate text="Account number"/>}
-        onChange={props.onChange}
-      />
-  );
-}
 
 export function CzechLocalRecipient (props){
   const classes = useStyles();
@@ -110,8 +79,12 @@ export function CzechLocalRecipient (props){
   const bankCode = props.bankCode ? props.bankCode : '';
   return(
       <React.Fragment>
+        <FormControl className={classes.formControl}>
           <FormInput name="accountNumber" value={accountNumber} description={<Translate text="Account number"/>} onChange={props.onChange}  />
+        </FormControl>
+        <FormControl className={classes.formControl}>
           <FormInput name="bankCode" value={bankCode} description="Bank code" onChange={props.onChange}  />
+        </FormControl>
       </React.Fragment>
   );
 }
@@ -382,33 +355,6 @@ export function ChileRecipient (props){
   );
 }
 
-export function ThailandRecipient (props){
-  const classes = useStyles();
-  const accountNumber = props.accountNumber ? props.accountNumber : '';
-  const bankCode = props.bankCode ? props.bankCode : '';
-  
-  return(
-    <React.Fragment>
-      <FormControl className={classes.formControl}>
-        <FormInput
-          name="accountNumber"
-          value={accountNumber}
-          description={<Translate text="Account number"/>}
-          onChange={props.onChange} 
-        />
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <GetBankCode
-          country="TH"
-          name="bankCode"
-          description={<Translate text="Bank code"/>}
-          onChange={props.onChange}
-          value={bankCode}
-        />
-      </FormControl>
-    </React.Fragment>
-  );
-}
 
 export function EgyptLocalRecipient (props){
   const classes = useStyles();
@@ -874,6 +820,27 @@ export function BotswanaLocalRecipient (props){
     </React.Fragment>
   );
 }
+
+
+export function WestAfricanLocal (props){
+  const classes = useStyles();
+  const bban = props.bban ? props.bban : '';
+  
+  return(
+    <React.Fragment>
+      <FormControl className={classes.formControl}>
+        <FormInput
+          name="bban"
+          value={bban}
+          description={<Translate text="BBAN"/>}
+          onChange={props.onChange} 
+        />
+      </FormControl>
+    </React.Fragment>
+  );
+}
+
+
 
 export function NotAvaialableRecipient(props){
   const classes = useStyles();

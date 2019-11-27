@@ -11,11 +11,6 @@ export default function Body(props){
   switch(props.activeStep){
     case(0):
       return (
-        <PersonalOrBusiness {...props}/>
-      )
-      break;
-    case(1):
-      return (
         <React.Fragment>
           <CountrySelector
             onChange={props.handleChange}
@@ -40,6 +35,11 @@ export default function Body(props){
             {...props.bankDetails}
           />
         </React.Fragment>
+      )
+      break;
+    case(1):
+      return (
+        <PersonalOrBusiness {...props}/>
       )
       break;
     case(2):

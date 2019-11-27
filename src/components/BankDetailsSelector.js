@@ -39,6 +39,7 @@ import {
   PhilippinesRecipient,
   SouthAfricaRecipient,
   BotswanaLocalRecipient,
+  WestAfricanLocal,
   NotAvaialableRecipient
 } from '../bankdetails/BankDetails.js'
 
@@ -403,6 +404,13 @@ function BankDetailsSelector(props){
             bankCode={props.bankCode} 
             branchCode={props.branchCode}
             accountNumber={props.accountNumber}
+            onChange={props.onChange}
+          />
+        );
+    case 'UEMOA_LOCAL':
+        return (
+          <WestAfricanLocal 
+            bban={props.bban} 
             onChange={props.onChange}
           />
         );

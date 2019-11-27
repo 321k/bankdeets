@@ -54,6 +54,7 @@ function Error (props){
           </div>
         )) : ''
     }
+    <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfq8MQgdbNuPB6o-Y0_6eQcUEAaHd90PyRE_qlTqiN1mzb5Zg/viewform?usp=sf_link">Report a problem with the form</a></p>
   </div>
   )      
 }
