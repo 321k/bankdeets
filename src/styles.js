@@ -9,10 +9,12 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
   },
+  box: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
+  },
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 100,
-    width: `80%`
+    width: `100%`,
   },
   buttonSuccess: {
     backgroundColor: green[500],
@@ -43,6 +45,8 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     minWidth: 200,
     width: `100%`
+  },
+  formLabel: {
   }
 }));
 

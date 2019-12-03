@@ -17,7 +17,7 @@ export default class GetBankCode extends React.Component{
 
   componentDidMount(){
     this.setState({loading: true})
-    fetch('http://payspresso.io/api/v1/bank-codes?country=' + this.props.country)
+    fetch('https://payspresso.io/api/v1/bank-codes?country=' + this.props.country)
     .then(res => res.json())
     .then(
       (res) => {

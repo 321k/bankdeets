@@ -54,10 +54,9 @@ function CountriesDropdown(props){
   const classes = useStyles();
 
   return(
-    <React.Fragment>
-      <Box mt={5}/>
+    <Box className={classes.box}>
       <FormControl className={classes.formControl}>
-        <InputLabel shrink={true} htmlFor="age-native-simple"><Translate text="Country"/></InputLabel>
+        <InputLabel shrink={true} htmlFor="country"><Translate text="Country"/></InputLabel>
         <NativeSelect
           value={props.value} 
           onChange={props.onChange}
@@ -71,8 +70,7 @@ function CountriesDropdown(props){
           }
         </NativeSelect>
       </FormControl>
-      <Box mt={5}/>
-    </React.Fragment>
+    </Box>
   )
 }
 

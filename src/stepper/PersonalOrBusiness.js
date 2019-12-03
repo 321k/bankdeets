@@ -70,20 +70,20 @@ function PersonalOrBusiness (props){
         </AppBar>
         <TabPanel name="personalDetails" value={props.value} index={0} className={classes.tabPanel}>
           <PersonalDetails
-              onChange={props.handleChange} 
-              firstName={props.firstName}
-              lastName={props.lastName}
-              email={props.email}
-              phoneNumber={props.phoneNumber}
-            />
+            onChange={props.handleChange} 
+            firstName={props.firstName}
+            lastName={props.lastName}
+            email={props.email}
+            phoneNumber={props.phoneNumber}
+          />
         </TabPanel>
         <TabPanel name="businessDetails" value={props.value} index={1} className={classes.tabPanel}>
           <BusinessDetails
-              onChange={props.handleChange} 
-              businessName={props.businessName}
-              email={props.email}
-              phoneNumber={props.phoneNumber}
-            />
+            onChange={props.handleChange} 
+            businessName={props.businessName}
+            email={props.email}
+            phoneNumber={props.phoneNumber}
+          />
         </TabPanel>
       </React.Fragment>
   )

@@ -28,7 +28,7 @@ export default class GetBranchCode extends React.Component{
 
   fetchData(){
     this.setState({loading: true})
-    fetch('http://payspresso.io/api/v1/bank-codes?country=' + this.props.country + '&bankCode=' + this.props.bankCode)
+    fetch('https://payspresso.io/api/v1/bank-codes?country=' + this.props.country + '&bankCode=' + this.props.bankCode)
     .then(res => res.json())
     .then(
       (res) => {

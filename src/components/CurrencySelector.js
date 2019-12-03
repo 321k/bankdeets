@@ -7,9 +7,12 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Translate } from 'react-translated';
 import useStyles from '../styles.js'
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 
-export default class CurrencySelector extends React.Component{
+export default class CurrencySelectorContainer extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -56,12 +59,28 @@ export default class CurrencySelector extends React.Component{
     
   render(){
     return(
-        <FormControl component="fieldset" className={useStyles.formControl}>
+        <CurrencySelector
+          currencies={this.state.currencies}
+          value={this.props.value}
+          onChange={this.props.onChange}
+        />
+    )
+  }
+}
 
-          <FormLabel component="legend"><Translate text="Currency"/></FormLabel>
-          <RadioGroup aria-label="currency" name="currency" value={this.props.value} onChange={this.props.onChange}>
+function CurrencySelector (props){
+  const classes = useStyles();
+
+  if(props.currencies.length > 1){
+    return (
+      <Box className={classes.box}>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel component="legend" className={classes.formLabel}><Translate text="Currency"/></FormLabel>
+        </FormControl>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <RadioGroup aria-label="currency" name="currency" value={props.value} onChange={props.onChange}>
             {
-              this.state.currencies.map(currency => 
+              props.currencies.map(currency => 
                 <FormControlLabel
                   value={currency.key}
                   key={currency.key}
@@ -72,8 +91,28 @@ export default class CurrencySelector extends React.Component{
             }
           </RadioGroup>
         </FormControl>
+      </Box>
+    )
+  } else if (props.currencies.length === 1){
+    return (
+      <Box className={classes.box}>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel component="legend" className={classes.formLabel}><Translate text="Currency"/></FormLabel>
+        </FormControl>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <Typography variant="body1" gutterBottom>
+            {props.currencies[0].value} ({props.currencies[0].key})
+          </Typography>
+        </FormControl>
+      </Box>
+    )
+  } else {
+    return (
+      <Box className={classes.box}>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <div>No currency available</div>
+        </FormControl>
+      </Box>
     )
   }
 }
-
-

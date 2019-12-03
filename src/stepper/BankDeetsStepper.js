@@ -44,11 +44,11 @@ export default class BankDeetsStepper extends React.Component{
   };
 
   render(){
-    const steps = ['Bank details', 'Beneficiary', 'Address'];
+    const steps = ['Beneficiary', 'Bank details', 'Address'];
     return(
       <React.Fragment>
         <CssBaseline />
-        <Container maxWidth="sm" style={{minHeight: 400}}>
+        <Container maxWidth="sm">
           <Stepper alternativeLabel activeStep={this.state.activeStep}>
             {steps.map((label, index) => (
               <Step key={label}>  
@@ -60,7 +60,7 @@ export default class BankDeetsStepper extends React.Component{
               </Step>
             ))}
           </Stepper>
-          <Grid container spacing={3} alignItems="center" justify="center" direction="column">
+          <Grid container direction="column">
             <Body
               {...this.props} 
               activeStep={this.state.activeStep} 
@@ -69,9 +69,7 @@ export default class BankDeetsStepper extends React.Component{
               handleReset={this.handleReset}
             />
           </Grid>
-        </Container>
-        <Container maxWidth="sm">
-          <Grid container spacing={3} alignItems="flex-end" justify="center" direction="row">
+          <Grid container direction="row">
             <ButtonGroup>
               <Footer 
                 {...this.props} 

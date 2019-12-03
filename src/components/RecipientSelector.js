@@ -7,8 +7,12 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { Translate } from 'react-translated';
 import useStyles from '../styles.js'
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
-export default class RecipientSelector extends React.Component{
+
+export default class RecipientSelectorContainer extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -53,20 +57,58 @@ export default class RecipientSelector extends React.Component{
 
   render(){
     return(
-      <FormControl component="fieldset" className={useStyles.formControl}>
-        <FormLabel component="legend"><Translate text="Recipient type"/></FormLabel>
-        <RadioGroup aria-label="Bank details type" name="bankDetailsType" value={this.props.value} onChange={this.props.onChange}>
-          {
-            this.state.recipients.map(recipient => 
-              <FormControlLabel
-                value={recipient.key}
-                key={recipient.key}
-                control={<Radio />}
-                label={recipient.value} 
-              />
-            )
-          }
-        </RadioGroup>
-      </FormControl>
+      <CurrencySelector
+        value={this.props.value}
+        onChange={this.props.onChange}
+        recipients={this.state.recipients}
+      />
     )}
+}
+
+
+function CurrencySelector(props){
+  const classes = useStyles();
+
+  if(props.recipients.length > 1){
+    return (
+      <Box className={classes.box}>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel component="legend" className={classes.formLabel}><Translate text="Bank details format"/></FormLabel>
+          <RadioGroup aria-label="Bank details type" name="bankDetailsType" value={props.value} onChange={props.onChange}>
+            {
+              props.recipients.map(recipient => 
+                <FormControlLabel
+                  value={recipient.key}
+                  key={recipient.key}
+                  control={<Radio />}
+                  label={recipient.value} 
+                />
+              )
+            }
+          </RadioGroup>
+        </FormControl>
+      </Box>
+    )
+  } else if (props.recipients.length === 1){
+    return (
+      <Box className={classes.box}>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel component="legend" className={classes.formLabel}><Translate text="Bank details format"/></FormLabel>
+        </FormControl>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <Typography variant="body1" gutterBottom>
+            {props.recipients[0].value}
+          </Typography>
+        </FormControl>
+      </Box>
+    )
+  } else {
+    return (
+      <Box>
+        <FormControl className={classes.box}>
+          No recipient avialable
+        </FormControl>
+      </Box>
+    )
+  }
 }

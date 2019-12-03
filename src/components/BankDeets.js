@@ -147,7 +147,7 @@ export default class BankDeets extends React.Component {
     }
 
     this.setState({loading: true})
-    fetch('http://payspresso.io/api/v1/validate-bank-details', {
+    fetch('https://payspresso.io/api/v1/validate-bank-details', {
       mode: 'cors',
       method: 'POST',
       headers: {

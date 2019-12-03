@@ -11,6 +11,8 @@ import HungarianLocalRecipient from '../bankdetails/HungarianLocalRecipient.js'
 import PolishLocalRecipient from '../bankdetails/PolishLocalRecipient.js'
 import NewzealandRecipient from '../bankdetails/NewzealandRecipient.js'
 import ThailandRecipient from '../bankdetails/ThailandRecipient.js'
+import Box from '@material-ui/core/Box';
+import useStyles from '../styles.js'
 
 import {
   SwiftRecipient,
@@ -56,7 +58,9 @@ export default class BankDetailsSelectorContainer extends React.Component{
 
     render(){
         return (
-          <BankDetailsSelector {...this.props} />
+          <Box className={useStyles.box}>
+            <BankDetailsSelector {...this.props} />
+          </Box>
         );
     }
 }

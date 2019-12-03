@@ -9,7 +9,7 @@ import Success from './Success.js'
 
 export default function Body(props){
   switch(props.activeStep){
-    case(0):
+    case(1):
       return (
         <React.Fragment>
           <CountrySelector
@@ -37,7 +37,7 @@ export default function Body(props){
         </React.Fragment>
       )
       break;
-    case(1):
+    case(0):
       return (
         <PersonalOrBusiness {...props}/>
       )
