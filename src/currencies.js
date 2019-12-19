@@ -2390,16 +2390,6 @@ const currencies = [
         "recipient_name": "SWIFT code"
     },
     {
-        "country": "India",
-        "country_iso_2_char_code": "IN",
-        "country_iso_3_char_code": "IND",
-        "un_m49": 356,
-        "currency_iso_3_char_code": "USD",
-        "currency_name": "United States dollar",
-        "recipient_type": "SWIFT_CODE",
-        "recipient_name": "SWIFT code"
-    },
-    {
         "country": "British Indian Ocean Territory",
         "country_iso_2_char_code": "IO",
         "country_iso_3_char_code": "IOT",
