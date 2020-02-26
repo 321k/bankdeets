@@ -1070,6 +1070,16 @@ const currencies = [
         "recipient_name": "PrivatBank"
     },
     {
+        "country": "Ukraine",
+        "country_iso_2_char_code": "UA",
+        "country_iso_3_char_code": "UKR",
+        "un_m49": 804,
+        "currency_iso_3_char_code": "UAH",
+        "currency_name": "Ukrainian hryvnia",
+        "recipient_type": "IBAN",
+        "recipient_name": "IBAN"
+    },
+    {
         "country": "Viet Nam",
         "country_iso_2_char_code": "VN",
         "country_iso_3_char_code": "VNM",

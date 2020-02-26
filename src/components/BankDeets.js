@@ -1,23 +1,20 @@
-import React from 'react';
-import { Provider, Translate } from 'react-translated';
+import React from 'react'
+import { Provider, Translate } from 'react-translated'
 import currencies from '../currencies.js'
-import translation from '../translation.js';
-
-
+import translation from '../translation.js'
 
 export default class BankDeets extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     let home = window.location.href
-    if(home.includes("home")){
+    if (home.includes('home')) {
       home = home.split('home')
-      home = home[home.length-1]
+      home = home[home.length - 1]
       home = home.substring(1, home.length)
     } else {
       home = undefined
     }
-    
-    
+
     this.state = {
       beneficiaryDetails: {
         country: 'USA',
@@ -30,7 +27,7 @@ export default class BankDeets extends React.Component {
         email: '',
         phoneNumber: '',
         businessName: '',
-        legalType: 'PRIVATE',
+        legalType: 'PRIVATE'
       },
       bankDetails: {},
       response: '',
@@ -43,43 +40,40 @@ export default class BankDeets extends React.Component {
       home: home
     }
 
-    this.handleCountryChange = this.handleCountryChange.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleBankDetailsChange = this.handleBankDetailsChange.bind(this);
-    this.clearBankDetails = this.clearBankDetails.bind(this);
-    this.validateBankDetails = this.validateBankDetails.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.getTwoCharCountryCode = this.getTwoCharCountryCode.bind(this);
+    this.handleCountryChange = this.handleCountryChange.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleBankDetailsChange = this.handleBankDetailsChange.bind(this)
+    this.clearBankDetails = this.clearBankDetails.bind(this)
+    this.validateBankDetails = this.validateBankDetails.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.getTwoCharCountryCode = this.getTwoCharCountryCode.bind(this)
   }
 
-  handleCountryChange (newVal, actionMeta) {
+  handleCountryChange(newVal, actionMeta) {
     let name = 'country'
-    let beneficiaryDetails = this.state.beneficiaryDetails;
-    beneficiaryDetails[name] = newVal.value;
+    let beneficiaryDetails = this.state.beneficiaryDetails
+    beneficiaryDetails[name] = newVal.value
     this.setState({
       beneficiaryDetails: beneficiaryDetails,
       countryHelper: newVal
-    });
+    })
   }
 
-  handleChange(event){
+  handleChange(event) {
     const target = event.target ? event.target : event.currentTarget
     const name = target.name ? target.name : target.id
     let beneficiaryDetails = this.state.beneficiaryDetails
     beneficiaryDetails[name] = target.value
 
-    if (name==='country'){
-      beneficiaryDetails['countryTwoCharCode'] = this.getTwoCharCountryCode()
+    if (name === 'country') {
+      beneficiaryDetails.countryTwoCharCode = this.getTwoCharCountryCode()
     }
-
-
     this.setState({
       beneficiaryDetails: beneficiaryDetails
     })
-
   }
 
-  handleBankDetailsChange(event){
+  handleBankDetailsChange(event) {
     const target = event.currentTarget ? event.currentTarget : event.target
     const name = target.name ? target.name : target.id
     let bankDetails = this.state.bankDetails
@@ -89,14 +83,14 @@ export default class BankDeets extends React.Component {
     })
   }
 
-  clearBankDetails(){
+  clearBankDetails() {
     this.setState({
       bankDetails: {},
       success: false
     })
   }
 
-  getTwoCharCountryCode(){
+  getTwoCharCountryCode() {
     const alpha3Country = this.state.beneficiaryDetails.country
     const alpha2Country = currencies.filter(country => (
       country.country_iso_3_char_code === alpha3Country
@@ -105,21 +99,21 @@ export default class BankDeets extends React.Component {
   }
 
 
-  validateBankDetails(){
-    this.setState({loading: true})
-    let details = {...this.state.bankDetails}
+  validateBankDetails() {
+    this.setState({ loading: true })
+    let details = { ...this.state.bankDetails }
 
-    details['legalType'] = this.state.beneficiaryDetails.legalType
+    details.legalType = this.state.beneficiaryDetails.legalType
 
-    if(this.state.beneficiaryDetails.addressState === ''){
-      details['address'] = {
+    if (this.state.beneficiaryDetails.addressState === '') {
+      details.address = {
         country: this.getTwoCharCountryCode(),
         city: this.state.beneficiaryDetails.city,
         postCode: this.state.beneficiaryDetails.postCode,
         firstLine: this.state.beneficiaryDetails.addressLine
       }
     } else {
-      details['address'] = {
+      details.address = {
         country: this.getTwoCharCountryCode(),
         city: this.state.beneficiaryDetails.city,
         postCode: this.state.beneficiaryDetails.postCode,
@@ -130,23 +124,23 @@ export default class BankDeets extends React.Component {
 
 
     let accountHolderName = ''
-    if(this.state.beneficiaryDetails.legalType === 'PRIVATE'){
+    if (this.state.beneficiaryDetails.legalType === 'PRIVATE') {
       accountHolderName = this.state.beneficiaryDetails.firstName + ' ' + this.state.beneficiaryDetails.lastName
     } else {
       accountHolderName = this.state.beneficiaryDetails.businessName
-    } 
+    }
     let payload = {
       currency: this.state.beneficiaryDetails.currency,
       type: this.state.beneficiaryDetails.bankDetailsType,
       accountHolderName: accountHolderName,
-      details: details,
+      details: details
     }
 
-    if(this.state.beneficiaryDetails.currency === 'XOF'){
-      payload['country'] = this.getTwoCharCountryCode()
+    if (this.state.beneficiaryDetails.currency === 'XOF') {
+      payload.country = this.getTwoCharCountryCode()
     }
 
-    this.setState({loading: true})
+    this.setState({ loading: true })
     fetch('https://payspresso.io/api/v1/validate-bank-details', {
       mode: 'cors',
       method: 'POST',
@@ -155,28 +149,27 @@ export default class BankDeets extends React.Component {
       },
       body: JSON.stringify(payload)
     })
- 
-    .then(res => {
-      this.setState({
-        validationSuccess: res.ok,
-        loading: false,
-        validationError: !res.ok
-      });
-      return res;
-    })
-    .then(res => res.json())
-    .then(
-      (res) => {
-        this.setState({response: res});
-      },
-      (error) => {
-        console.log(error)
-      }
-    )
+      .then(res => {
+        this.setState({
+          validationSuccess: res.ok,
+          loading: false,
+          validationError: !res.ok
+        })
+        return res
+      })
+      .then(res => res.json())
+      .then(
+        (res) => {
+          this.setState({ response: res })
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
   }
 
-  handleSubmit(){
-    this.setState({loading: true})
+  handleSubmit() {
+    this.setState({ loading: true })
 
     const payload = {
       beneficiaryDetails: this.state.beneficiaryDetails,
@@ -185,7 +178,7 @@ export default class BankDeets extends React.Component {
       home: this.state.home
     }
 
-    if(this.props.submitURL !== undefined){
+    if (this.props.submitURL !== undefined) {
       fetch(this.props.submitURL, {
         mode: 'cors',
         method: 'POST',
@@ -194,23 +187,40 @@ export default class BankDeets extends React.Component {
         },
         body: JSON.stringify(payload)
       })
-      .then(
-        res => {
-          if(res.ok){
-            this.setState({submitSuccess: true, loading: false, submitError: false});
-          } else {
-            this.setState({submitSuccess: false, loading: false, submitError: true});
+        .then(
+          res => {
+            if (res.ok) {
+              this.setState(
+                {
+                  submitSuccess: true,
+                  loading: false, submitError: false
+                }
+              )
+            } else {
+              this.setState(
+                {
+                  submitSuccess: false,
+                  loading: false,
+                  submitError: true
+                }
+              )
+            }
           }
+        )
+    } else {
+      console.log(payload)
+      this.setState(
+        {
+          submitSuccess: true,
+          loading: false,
+          submitError: false
         }
       )
-    } else {
-      console.log(payload);
-      this.setState({submitSuccess: true, loading: false, submitError: false});
-    }  
+    }
   }
 
-  render () {
-    let values = {...this.props, ...this.state}
+  render() {
+    let values = { ...this.props, ...this.state }
     values.handleCountryChange = this.handleCountryChange
     values.handleChange = this.handleChange
     values.handleBankDetailsChange = this.handleBankDetailsChange
@@ -222,6 +232,6 @@ export default class BankDeets extends React.Component {
       <Provider language={this.props.language} translation={translation}>
         {this.props.render(values)}
       </Provider>
-    );
+    )
   }
 }
