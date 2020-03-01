@@ -1,11 +1,10 @@
 import React from 'react'
-import { linkTo } from '@storybook/addon-links'
 import { Welcome } from '@storybook/react/demo'
 import BankDeetsStepper from '../src/stepper/BankDeetsStepper.js'
 import BankDeets from '../src/components/BankDeets.js'
 
 export default {
-  title: 'Welcome',
+  title: 'Main component',
   component: Welcome
 }
 
