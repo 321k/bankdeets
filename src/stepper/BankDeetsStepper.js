@@ -2,6 +2,7 @@ import React from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
+import Paper from '@material-ui/core/Paper'
 import StepButton from '@material-ui/core/StepButton'
 import StepLabel from '@material-ui/core/StepLabel'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
@@ -31,7 +32,7 @@ export default class BankDeetsStepper extends React.Component {
 
   handleBack() {
     const step = this.state.activeStep - 1
-    this.setState({ activeStep:  step })
+    this.setState({ activeStep: step })
   }
 
   handleReset() {
@@ -40,7 +41,7 @@ export default class BankDeetsStepper extends React.Component {
   }
 
   setStep(event) {
-    this.setState({ activeStep: parseInt(event.currentTarget.value) })
+    this.setState({ activeStep: parseInt(event.currentTarget.value, 10) })
   }
 
   render() {

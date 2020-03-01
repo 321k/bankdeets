@@ -23,7 +23,10 @@ export default class AbaRecipientContainer extends React.Component {
   }
 
   validateAccountNumber(event) {
-    fetch('https://api.transferwise.com/v1/validators/aba-account-number?accountNumber=' + event.target.value)
+    fetch(
+      'https://api.transferwise.com/v1/validators/aba-account-number?accountNumber=' +
+      event.target.value
+    )
       .then(res => this.setState({ accountNumberError: !res.ok }))
   }
 

@@ -1,25 +1,28 @@
-import React from "react";
-import FormControl from '@material-ui/core/FormControl';
+import React from 'react'
+import FormControl from '@material-ui/core/FormControl'
 import FormInput from '../components/FormInput.js'
-import { Translate } from 'react-translated';
+import { Translate } from 'react-translated'
 import useStyles from '../styles.js'
 
-export default class IbanRecipientContainer extends React.Component{
-  constructor(props){
-    super(props);
-    this.validateIban = this.validateIban.bind(this);
-    this.state={
-      ibanError: false,
+export default class IbanRecipientContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.validateIban = this.validateIban.bind(this)
+    this.state = {
+      ibanError: false
     }
   }
 
-  validateIban(event){
-    fetch('https://api.transferwise.com/v1/validators/iban?iban=' + event.target.value)
-    .then(res => this.setState({ibanError: !res.ok}))
+  validateIban(event) {
+    fetch(
+      'https://api.transferwise.com/v1/validators/iban?iban=' +
+      event.target.value
+    )
+      .then(res => this.setState({ ibanError: !res.ok }))
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <IbanRecipient
         iban={this.props.iban}
         onChange={this.props.onChange}
@@ -30,19 +33,19 @@ export default class IbanRecipientContainer extends React.Component{
   }
 }
 
-function IbanRecipient (props){
-  const classes = useStyles();
+function IbanRecipient(props) {
+  const classes = useStyles()
   const iban = props.iban ? props.iban : ''
-  return(
+  return (
     <FormControl className={classes.formControl}>
       <FormInput
-          name="iban" value={iban} 
-          description="IBAN" 
-          onChange={props.onChange} 
-          error={props.ibanError}
-          onBlur={props.validateIban}
-          helperText={<Translate text="Invalid IBAN"/>}
+        name='iban' value={iban}
+        description='IBAN'
+        onChange={props.onChange}
+        error={props.ibanError}
+        onBlur={props.validateIban}
+        helperText={<Translate text='Invalid IBAN'/>}
       />
     </FormControl>
-  );
+  )
 }

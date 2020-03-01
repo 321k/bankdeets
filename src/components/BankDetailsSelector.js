@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import SortCodeRecipient from '../bankdetails/SortCodeRecipient.js'
 import IbanRecipient from '../bankdetails/IbanRecipient.js'
 import AbaRecipient from '../bankdetails/AbaRecipient.js'
@@ -11,7 +11,8 @@ import HungarianLocalRecipient from '../bankdetails/HungarianLocalRecipient.js'
 import PolishLocalRecipient from '../bankdetails/PolishLocalRecipient.js'
 import NewzealandRecipient from '../bankdetails/NewzealandRecipient.js'
 import ThailandRecipient from '../bankdetails/ThailandRecipient.js'
-import Box from '@material-ui/core/Box';
+import PhilippinesMobileRecipient from '../bankdetails/PhilippinesMobileRecipient.js'
+import Box from '@material-ui/core/Box'
 import useStyles from '../styles.js'
 
 import {
@@ -415,6 +416,14 @@ function BankDetailsSelector(props) {
     return (
       <WestAfricanLocal
         bban={props.bban}
+        onChange={props.onChange}
+      />
+    )
+  case 'PHILIPPINESMOBILE':
+    return (
+      <PhilippinesMobileRecipient
+        accountNumber={props.accountNumber}
+        bankCode={props.bankCode}
         onChange={props.onChange}
       />
     )
