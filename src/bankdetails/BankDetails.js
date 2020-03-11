@@ -86,7 +86,7 @@ export function CzechLocalRecipient(props) {
           name='accountNumber'
           value={ accountNumber }
           description={<Translate text='Account number'/>}
-          onChange={ props.onChange } 
+          onChange={ props.onChange }
         />
       </FormControl>
       <FormControl className={ classes.formControl }>
@@ -94,7 +94,7 @@ export function CzechLocalRecipient(props) {
           name='bankCode'
           value={ bankCode }
           description='Bank code'
-          onChange={ props.onChange } 
+          onChange={ props.onChange }
         />
       </FormControl>
     </React.Fragment>
@@ -115,7 +115,7 @@ export function BangladeshRecipient(props) {
           name='accountNumber'
           value={ accountNumber }
           description={<Translate text='Account number'/>}
-          onChange={ props.onChange } 
+          onChange={ props.onChange }
         />
       </FormControl>
       <FormControl className={ classes.formControl }>
@@ -233,7 +233,7 @@ export function MalaysianLocalRecipient(props) {
           name='accountNumber'
           value={ accountNumber }
           description={<Translate text='Account number'/>}
-          onChange={ props.onChange } 
+          onChange={ props.onChange }
         />
       </FormControl>
       <FormControl className={ classes.formControl }>
@@ -287,10 +287,19 @@ export function BrazilRecipient(props) {
   return (
     <React.Fragment>
       <FormControl className={ classes.formControl }>
-        <FormInput name='accountNumber' value={ accountNumber } description={<Translate text='Account number'/>} onChange={ props.onChange }  />
+        <FormInput
+          name='accountNumber'
+          value={ accountNumber }
+          description={<Translate text='Account number'/>}
+          onChange={ props.onChange }
+        />
       </FormControl>
       <FormControl className={ classes.formControl }>
-        <FormInput name='cpf' value={ cpf } description={<Translate text='Tax registration number'/>} onChange={ props.onChange }  />
+        <FormInput
+          name='cpf'
+          value={ cpf }
+          description={<Translate text='Tax registration number'/>}
+          onChange={ props.onChange } />
       </FormControl>
       <FormControl className={ classes.formControl }>
         <GetBankCode
@@ -312,7 +321,7 @@ export function BrazilRecipient(props) {
         />
       </FormControl>
       <FormControl className={ classes.formControl }>
-        <FormDropdown 
+        <FormDropdown
           name='accountType'
           value={ accountType }
           description='Account type'
@@ -377,7 +386,13 @@ export function ChileRecipient(props) {
           value={ accountType }
           description={<Translate text='Account type'/>}
           onChange={ props.onChange }
-          items={[{ key: 'CHECKING', value: 'Checking account'}, { key: 'SAVINGS', value: 'Savings account'}, { key: 'CUENTA_VISTA', value: 'Cuenta vista'}]} 
+          items={
+            [
+              { key: 'CHECKING', value: 'Checking account' },
+              { key: 'SAVINGS', value: 'Savings account' },
+              { key: 'CUENTA_VISTA', value: 'Cuenta vista' }
+            ]
+          }
         />
       </FormControl>
     </React.Fragment>
@@ -397,7 +412,7 @@ export function EgyptLocalRecipient(props) {
           name='accountNumber'
           value={ accountNumber }
           description={<Translate text='Account number'/>}
-          onChange={ props.onChange } 
+          onChange={ props.onChange }
         />
       </FormControl>
       <FormControl className={ classes.formControl }>
@@ -453,7 +468,7 @@ export function KenyaLocalRecipient(props) {
           name='accountNumber'
           value={ accountNumber }
           description={<Translate text='Account number'/>}
-          onChange={ props.onChange } 
+          onChange={ props.onChange }
         />
       </FormControl>
       <FormControl className={ classes.formControl }>
@@ -480,7 +495,7 @@ export function MexicanRecipient(props) {
           name='clabe'
           value={ clabe }
           description={<Translate text='Clabe'/>}
-          onChange={ props.onChange } 
+          onChange={ props.onChange }
         />
       </FormControl>
     </React.Fragment>
@@ -499,7 +514,7 @@ export function IndonesianRecipient(props) {
           name='accountNumber'
           value={ accountNumber }
           description={<Translate text='Account number'/>}
-          onChange={ props.onChange } 
+          onChange={ props.onChange }
         />
       </FormControl>
       <FormControl className={ classes.formControl }>
@@ -578,7 +593,11 @@ export function SriLankaRecipient(props) {
   return (
     <React.Fragment>
       <FormControl className={ classes.formControl }>
-        <FormInput name='accountNumber' value={ accountNumber } description={<Translate text='Account number'/>} onChange={ props.onChange }  />
+        <FormInput
+          name='accountNumber'
+          value={ accountNumber }
+          description={<Translate text='Account number'/>}
+          onChange={ props.onChange } />
       </FormControl>
       <FormControl className={ classes.formControl }>
         <GetBankCode

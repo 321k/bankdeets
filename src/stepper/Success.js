@@ -1,51 +1,50 @@
-import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import TextField from '@material-ui/core/TextField';
+import React from 'react'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import TextField from '@material-ui/core/TextField'
 
 
-
-export default class SuccessScreenContainer extends React.Component{
-  constructor(props){
-    super(props);
+export default class SuccessScreenContainer extends React.Component {
+  constructor(props) {
+    super(props)
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.validateBankDetails()
   }
 
-  componentDidUpdate(prevProps){
-    if(prevProps.validationSuccess !== this.props.validationSuccess){
+  componentDidUpdate(prevProps) {
+    if(prevProps.validationSuccess !== this.props.validationSuccess) {
       this.props.handleSubmit()
     }
   }
 
-  render(){
+  render() {
     return (
       <SuccessScreen {...this.props}/>
     )
   }
 }
 
-function SuccessScreen (props){  
-  if (props.loading){
+function SuccessScreen(props) {
+  if (props.loading) {
     return <CircularProgress/>
-  } else if(props.validationError){
+  } else if (props.validationError) {
     return <Error {...props}/>
-  } else if (props.submitSuccess){
+  } else if (props.submitSuccess) {
     return <Success {...props}/> 
-  } else if (props.submitError){
+  } else if (props.submitError) {
     return <SubmitError {...props}/> 
-  } else if (props.validationSuccess){
-    return <ValidatedContainer {...props}/> 
+  } else if (props.validationSuccess) {
+    return <ValidatedContainer {...props}/>
   } else {
     return <Default {...props}/>
   }
 }
 
-function Error (props){
+function Error(props) {
   return (
     <div>
-    <h2>Invalid bank details</h2>
+      <h2>Invalid bank details</h2>
       {
         props.response.errors ? props.response.errors.map(error => (
           <div key={error.message} styles={{margin: 10, padding: 10}}>
@@ -53,35 +52,38 @@ function Error (props){
             <br/>
           </div>
         )) : ''
-    }
-    <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfq8MQgdbNuPB6o-Y0_6eQcUEAaHd90PyRE_qlTqiN1mzb5Zg/viewform?usp=sf_link">Report a problem with the form</a></p>
-  </div>
-  )      
+      }
+      <p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfq8MQgdbNuPB6o-Y0_6eQcUEAaHd90PyRE_qlTqiN1mzb5Zg/viewform?usp=sf_link">
+          Report a problem with the form
+        </a>
+      </p>
+    </div>
+  )
 }
 
 
-
-function SubmitError (props){
+function SubmitError() {
   return (
     <div>
-    <h2>Failed to submit</h2>
-    Something went wrong when we tried to submit the data.
-  </div>
-  )      
+      <h2>Failed to submit</h2>
+      Something went wrong when we tried to submit the data.
+    </div>
+  )
 }
 
 
-class ValidatedContainer extends React.Component{
-  constructor(props){
+class ValidatedContainer extends React.Component {
+  constructor(props) {
     super(props)
   }
 
-  render(){
+  render() {
     return <Validated {...this.props} />
   }
 }
 
-function Validated (props) {
+function Validated() {
   return (
     <div>
       <h2>The bank details are valid</h2>
@@ -90,7 +92,7 @@ function Validated (props) {
   )
 }
 
-function Success (props) {
+function Success() {
   return (
     <div>
       <h2>Bank details submitted</h2>
@@ -99,38 +101,38 @@ function Success (props) {
   )
 }
 
-function Default (props){
+function Default(props) {
   const beneficiaryDetails = props.beneficiaryDetails
   const bankDetails = props.bankDetails
-  return(
+  return (
     <div>
-    <h2>Beneficiary</h2>
-    {
-      Object.keys(beneficiaryDetails).map((key, i) => (
-        beneficiaryDetails[key] !== '' ?
-        <TextField
-          id={key}
-          label={key}
-          key={i}
-          value={beneficiaryDetails[key]}
-          margin="normal"
-        /> : ''
-      ))
-    }
+      <h2>Beneficiary</h2>
+      {
+        Object.keys(beneficiaryDetails).map((key, i) => (
+          beneficiaryDetails[key] !== '' ?
+            <TextField
+              id={key}
+              label={key}
+              key={i}
+              value={beneficiaryDetails[key]}
+              margin='normal'
+            /> : ''
+        ))
+      }
 
-    <h2>Bank information</h2>
-    {
-      Object.keys(bankDetails).map((key, i) => (
-        bankDetails[key] !== '' ?
-        <TextField
-          id={key}
-          label={key}
-          key={i}
-          value={bankDetails[key]}
-          margin="normal"
-        /> : ''
-      ))
-    }
+      <h2>Bank information</h2>
+      {
+        Object.keys(bankDetails).map((key, i) => (
+          bankDetails[key] !== '' ?
+            <TextField
+              id={key}
+              label={key}
+              key={i}
+              value={bankDetails[key]}
+              margin='normal'
+            /> : ''
+        ))
+      }
     </div>
   )
 }
